@@ -12,6 +12,7 @@ members = db.Table(
 class Server(db.Model):
    __tablename__ = 'servers'
 
+   # Columns
    id = db.Column(db.Integer, primary_key=True)
    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
    name = db.Column(db.String(255), nullable=False, unique=True)
@@ -19,3 +20,20 @@ class Server(db.Model):
    server_image_url = db.Column(db.String(1000), nullable=True)
    created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now())
    updated_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
+
+   # relationships
+   channels = db.relationship('Channel', back_populates='servers', cascade="all, delete-orphan")
+   users = db.relationship(
+      "User",
+      secondary=members,
+      back_populates="servers",
+      cascade="all, delete-orphan"
+   )
+
+   def to_dict(self):
+      return {
+         'id': self.id,
+         'owner_id': self.owner_id,
+         'name': self.name,
+         'server_image_url': self.server_image_url
+      }
