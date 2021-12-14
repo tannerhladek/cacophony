@@ -2,6 +2,13 @@ from enum import unique
 from .db import db
 
 
+members = db.Table(
+   "members",
+   db.Column("server_id", db.Integer,  db.ForeignKey("servers.id"), nullable=False),
+   db.Column("user_id", db.Integer, db.ForeignKey("users.id"), nullable=False)
+)
+
+
 class Server(db.Model):
    __tablename__ = 'servers'
 
