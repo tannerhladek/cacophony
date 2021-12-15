@@ -17,11 +17,11 @@ class User(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
 
     # relationships
-    messages = db.relationship('Message', back_populates='users', cascade="all, delete-orphan")
+    messages = db.relationship('Message', back_populates='user', cascade="all, delete-orphan")
     servers = db.relationship(
         "Server",
         secondary=members,
-        back_populates="users"
+        back_populates="users",
     )
 
     @property

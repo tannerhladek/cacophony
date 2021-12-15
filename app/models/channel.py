@@ -12,5 +12,5 @@ class Channel(db.Model):
    updated_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
 
    # relationships
-   server = db.relationship('Server', back_populates='channels', cascade="all, delete-orphan")
+   server = db.relationship('Server', back_populates='channels')
    messages = db.relationship('Message', back_populates='channel', cascade="all, delete-orphan")

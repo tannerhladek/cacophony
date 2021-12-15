@@ -1,6 +1,4 @@
-from enum import unique
 from .db import db
-
 
 members = db.Table(
    "members",
@@ -22,12 +20,11 @@ class Server(db.Model):
    updated_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
 
    # relationships
-   channels = db.relationship('Channel', back_populates='servers', cascade="all, delete-orphan")
+   channels = db.relationship('Channel', back_populates='server', cascade="all, delete-orphan")
    users = db.relationship(
       "User",
       secondary=members,
       back_populates="servers",
-      cascade="all, delete-orphan"
    )
 
    def to_dict(self):
