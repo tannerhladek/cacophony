@@ -3,3 +3,21 @@
    display: flex;
    justify-content: space-evenly;
 }
+
+.login-form-container {
+   height: 250px;
+   width: 600px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   border-radius: 5px;
+}
+
+.signup-form-container {
+   height: 600px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
