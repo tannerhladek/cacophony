@@ -1,5 +1,7 @@
 from app.models import db, User
+from faker import Faker
 
+fake = Faker()
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
@@ -14,8 +16,20 @@ def seed_users():
     db.session.add(marnie)
     db.session.add(bobbie)
 
-    db.session.commit()
+    # creating additional users with Faker
+    users = []
+    for _ in range(17):
+        user = User(
+            username=fake.simple_profile()['username'],
+            email=fake.simple_profile()['mail'],
+            password=fake.simple_profile()['mail']
+        )
+        db.session.add(user)
 
+    # for user in users:
+    #     db.session.add(user)
+
+    db.session.commit()
 
 # Uses a raw SQL query to TRUNCATE the users table.
 # SQLAlchemy doesn't have a built in function to do this
