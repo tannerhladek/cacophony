@@ -17,5 +17,7 @@ class Channel(db.Model):
 
    def to_dict(self):
       return {
-         ''
+         'id': self.id,
+         'server_id': self.server_id,
+         'name': self.name
       }

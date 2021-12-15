@@ -3,7 +3,6 @@ from random import randint
 
 
 def seed_channels():
-
    for i in range(15):
       for j in range(3):
          channel = Channel(

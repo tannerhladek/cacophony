@@ -32,5 +32,6 @@ class Server(db.Model):
          'id': self.id,
          'owner_id': self.owner_id,
          'name': self.name,
-         'server_image_url': self.server_image_url
+         'server_image_url': self.server_image_url,
+         'members': {user.to_dict_for_servers()['id']:user.to_dict_for_servers() for user in self.users}
       }
