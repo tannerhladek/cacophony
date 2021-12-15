@@ -15,7 +15,7 @@ class Server(db.Model):
    owner_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
    name = db.Column(db.String(255), nullable=False, unique=True)
    private = db.Column(db.Boolean, nullable=False, default=False)
-   server_image_url = db.Column(db.String(1000))
+   server_image_url = db.Column(db.String(1000), nullable=False, default='https://cdn.discordapp.com/attachments/920424165415223356/920525286800490546/default_server_image.png')
    created_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now())
    updated_at = db.Column(db.DateTime(timezone=True), nullable=False, default=db.func.now(), onupdate=db.func.now())
 

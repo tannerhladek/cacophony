@@ -18,7 +18,7 @@ def seed_users():
 
     # creating additional users with Faker
     users = []
-    for _ in range(27):
+    for _ in range(17):
         user = User(
             username=fake.simple_profile()['username'],
             email=fake.simple_profile()['mail'],
