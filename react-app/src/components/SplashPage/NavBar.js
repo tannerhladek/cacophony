@@ -1,20 +1,15 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+import LogoutButton from '../auth/LogoutButton';
+
 
 const NavBar = () => {
   return (
-    <nav>
+    <nav className='splash-nav-bar'>
       <ul>
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
-            Home
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
-            Login
+            Cacophony Logo
           </NavLink>
         </li>
         <li>
@@ -22,13 +17,21 @@ const NavBar = () => {
             Sign Up
           </NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
+        </li> */}
+        {/* <li>
+          <LogoutButton />
+        </li> */}
+        <li>
+          {/* TO DO: insert demo button */}
         </li>
         <li>
-          <LogoutButton />
+          <NavLink to='/login' exact={true} activeClassName='active'>
+            Login
+          </NavLink>
         </li>
       </ul>
     </nav>
