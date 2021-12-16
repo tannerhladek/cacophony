@@ -1,12 +1,16 @@
-
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import LogoutButton from './auth/LogoutButton';
+
+// component import
+import NavBar from './NavBar';
+
+//import styles
+import './SplashPage.css'
 
 const SplashPage = () => {
    return (
       <div>
-         <h1>Here is the Splash Page!</h1>
+         <NavBar />
       </div>
    );
 }

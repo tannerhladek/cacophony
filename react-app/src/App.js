@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import LoginForm from './components/auth/LoginForm';
+import { BrowserRouter, Route, Switch, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import SignUpForm from './components/auth/SignUpForm';
-import NavBar from './components/NavBar';
+import LoginForm from './components/auth/LoginForm';
+import SplashPage from './components/SplashPage/SplashPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import UsersList from './components/UsersList';
-import User from './components/User';
+// import UsersList from './components/UsersList';
+// import User from './components/User';
 import { authenticate } from './store/session';
+import LogoutButton from './components/auth/LogoutButton';
 
-function App() {
-  const [loaded, setLoaded] = useState(false);
+
+const App = () => {
+  const history = useHistory();
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
-    (async() => {
+    (async () => {
       await dispatch(authenticate());
       setLoaded(true);
     })();
@@ -22,30 +26,38 @@ function App() {
 
   if (!loaded) {
     return null;
-  }
+  };
 
-  return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
-        <Route path='/sign-up' exact={true}>
-          <SignUpForm />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList/>
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <User />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
-  );
+  if (sessionUser?.id) {
+    return (
+      <BrowserRouter>
+        <LogoutButton />
+        <Switch>
+          {/* TO DO: insert logged in home page component */}
+        </Switch>
+      </BrowserRouter>
+    )
+
+  } else {
+    history.push('/');
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route path='/' exact={true}>
+            <SplashPage />
+          </Route>
+          <Route path='/signup' exact={true}>
+            <SignUpForm />
+          </Route>
+          <Route path='/login' exact={true}>
+            <LoginForm />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    )
+
+  };
 }
 
 export default App;

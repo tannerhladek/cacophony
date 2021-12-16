@@ -1,0 +1,41 @@
+.splash-nav-bar ul {
+   list-style: none;
+   display: flex;
+   justify-content: space-evenly;
+}
+
+.login-form-page-container {
+   display: flex;
+   justify-content: center;
+}
+
+.login-form-container {
+   position: fixed;
+   top: 200px;
+   height: 250px;
+   width: 600px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: left;
+   border-radius: 5px;
+}
+
+.signup-form-page-container {
+   display: flex;
+   justify-content: center;
+}
+
+.signup-form-container {
+   position: fixed;
+   top: 100px;
+   height: 400px;
+   width: 425px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: left;
+   border-radius: 5px;
+}
