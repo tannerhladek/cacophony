@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton'
 import ServerListComponent from './ServerListComponent';
 
+// import styles
+import './HomePage.css'
+
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 

@@ -1,3 +1,16 @@
 .create-server-btn {
-   
+   height: 50px;
+   width: 50px;
+};
+
+.create-server-image-container {
+   height: 50px;
+   width: 50px;
+}
+
+.create-server-image {
+   height: 50px;
+   width: 50px;
+   object-fit: fill;
+   border-radius: 25px;
 }

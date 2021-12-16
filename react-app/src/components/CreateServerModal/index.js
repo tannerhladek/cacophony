@@ -9,10 +9,10 @@ function CreateServerModal() {
    const hideForm = () => setShowModal(false)
 
    return (
-      <div>
-         <a onClick={() => setShowModal(true)} className='create-server-btn'>
-            <img src='https://cdn.discordapp.com/attachments/920424165415223356/921079799642992740/server_add_btn.png' alt='create-server-link' />
-         </a>
+      <div className='create-server-btn'>
+         <div onClick={() => setShowModal(true)} className='create-server-image-container'>
+            <img src='https://cdn.discordapp.com/attachments/920424165415223356/921079799642992740/server_add_btn.png' alt='create-server-link' className='create-server-image' />
+         </div>
          {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                <CreateServerForm hideForm={hideForm} />
