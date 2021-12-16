@@ -8,3 +8,9 @@
 html {
    background-color: rgb(90, 100, 234);
 }
+
+input {
+   background-color: rgb(48, 51, 55);
+   border: black solid 1px;
+   border-radius: 3px;
+}
