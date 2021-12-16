@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+
+// component imports
+import CreateServerModal from '../CreateServerModal'
 
 // thunk imports
 import { getServersThunk } from '../../store/servers';
@@ -29,18 +32,21 @@ const ServerListComponent = () => {
    } else {
       return (
          <div>
-            <h1>ServerList</h1>
             <div>
                {serversArr.map(server => {
                   return (
                      <div key={server.id}>
                         {server.name}
                      </div>
+                     // TO DO:
                      // <NavLink key={server.id} to={``}>
                      //    {server.name}
                      // </NavLink>
                   )
                })}
+            </div>
+            <div>
+               <CreateServerModal />
             </div>
          </div>
       )
