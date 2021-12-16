@@ -41,7 +41,7 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_image_url': self.profile_image_url,
-            'servers': {server.to_dict()['id']: server.to_dict() for server in self.servers}
+            # 'servers': {server.to_dict()['id']: server.to_dict() for server in self.servers}
         }
 
     def to_dict_for_servers(self):
@@ -50,4 +50,5 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email,
             'profile_image_url': self.profile_image_url,
+            'servers': {server.to_dict()['id']: server.to_dict() for server in self.servers}
         }
