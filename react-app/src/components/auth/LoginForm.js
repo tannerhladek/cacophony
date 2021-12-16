@@ -31,41 +31,45 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='login-form-container'>
-      <div>Welcome Back</div>
-      <div>We're so excited to see you again :)</div>
-      <form onSubmit={onLogin}>
+    <div className='login-form-page-container'>
+      <div className='login-form-container'>
+        <div>Welcome Back</div>
+        <div>We're so excited to see you again :)</div>
+        <form onSubmit={onLogin}>
+          <div>
+            {errors.map((error, ind) => (
+              <div key={ind}>{error}</div>
+            ))}
+          </div>
+          <div>
+            <div>EMAIL</div>
+            <input
+              name='email'
+              type='text'
+              value={email}
+              onChange={updateEmail}
+            />
+          </div>
+          <div>
+            <div>PASSWORD</div>
+            <input
+              name='password'
+              type='password'
+              value={password}
+              onChange={updatePassword}
+            />
+          </div>
+          <div>
+            <button type='submit'>Login</button>
+          </div>
+        </form>
         <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
+          <span>Need an account?</span>
+          <span>
+            <NavLink to='/signup' exact={true} activeClassName='active'>Register</NavLink>
+          </span>
         </div>
-        <div>
-          <div>Email</div>
-          <input
-            name='email'
-            type='text'
-            value={email}
-            onChange={updateEmail}
-          />
-        </div>
-        <div>
-          <div>Password</div>
-          <input
-            name='password'
-            type='password'
-            value={password}
-            onChange={updatePassword}
-          />
-        </div>
-        <div>
-          <button type='submit'>Login</button>
-        </div>
-      </form>
-      <span>Need an account?</span>
-      <span>
-        <NavLink to='/signup' exact={true} activeClassName='active'>Register</NavLink>
-      </span>
+      </div>
     </div>
   );
 };
