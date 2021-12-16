@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import SignUpForm from './components/auth/SignUpForm';
 import LoginForm from './components/auth/LoginForm';
 import SplashPage from './components/SplashPage/SplashPage';
+import HomePage from './components/HomePage/HomePage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 import { authenticate } from './store/session';
-import LogoutButton from './components/auth/LogoutButton';
 
 
 const App = () => {
@@ -30,12 +30,17 @@ const App = () => {
 
   if (sessionUser?.id) {
     return (
-      <BrowserRouter>
-        <LogoutButton />
-        <Switch>
-          {/* TO DO: insert logged in home page component */}
-        </Switch>
-      </BrowserRouter>
+
+      <div>
+        <HomePage />
+      </div>
+      // <BrowserRouter>
+      //   <Switch>
+      //     <Route path='/' exact={true}>
+      //       <SplashPage />
+      //     </Route>
+      //   </Switch>
+      // </BrowserRouter>
     )
 
   } else {

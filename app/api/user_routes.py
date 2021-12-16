@@ -21,7 +21,7 @@ def user(id):
 
 # get servers a user is a member of
 @user_routes.route('/<int:id>/servers')
-# @login_required
+@login_required
 def getUserServers(id):
     user = User.query.get(id)
     return {
