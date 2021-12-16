@@ -69,6 +69,11 @@ const LoginForm = () => {
             <NavLink to='/signup' exact={true} activeClassName='active'>Register</NavLink>
           </span>
         </div>
+        <div>
+          <NavLink to='/' exact={true} activeClassName='active'>
+            Cancel
+          </NavLink>
+        </div>
       </div>
     </div>
   );
