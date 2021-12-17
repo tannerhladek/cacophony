@@ -93,3 +93,13 @@ def deleteServer(id):
       }
    else:
       return {'errors': [f'Not authorized to delete {server.name}']}, 401
+
+
+# get server channels route
+@server_routes.route('<int:id>/channels')
+# @login_required
+def getServerChannels(id):
+   channels = Channel.query.filter(Channel.server_id == int(id)).all()
+   return {
+      'channels': {channel.to_dict()['id']:channel.to_dict() for channel in channels}
+   }

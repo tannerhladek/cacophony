@@ -19,5 +19,5 @@ class Channel(db.Model):
       return {
          'id': self.id,
          'server_id': self.server_id,
-         'name': self.name
+         'name': self.name,
       }
