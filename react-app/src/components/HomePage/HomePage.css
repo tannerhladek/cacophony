@@ -1,16 +1,7 @@
-.server-btn {
-   height: 50px;
-   width: 50px;
-}
-
-.server-image-container {
-   height: 50px;
-   width: 50px;
-}
-
-.server-image {
-   height: 50px;
-   width: 50px;
-   object-fit: fill;
-   border-radius: 25px;
+.main-container {
+   display: grid;
+   grid-template-columns: 72px 240px calc(100% - 312px);
+   width: 100%;
+   height: 100%;
+   color: rgb(142, 146, 151);
 }

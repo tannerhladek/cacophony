@@ -10,7 +10,7 @@ import ServerLinkTile from './ServerTile';
 import { getServersThunk } from '../../store/servers';
 
 // style imports
-import './HomePage.css'
+import './ServerListComponent.css'
 
 const ServerListComponent = () => {
    const history = useHistory();
@@ -33,16 +33,9 @@ const ServerListComponent = () => {
    } else {
       return (
          <div>
-            <div>
+            <div className='server-list-container'>
                {serversArr.map(server => {
                   return (
-                     // <div key={server.id}>
-                     //    {server.name}
-                     // </div>
-                     // TO DO:
-                     // <NavLink key={server.id} to={``}>
-                     //    {server.name}
-                     // </NavLink>
                      <ServerLinkTile server={server} />
                   )
                })}

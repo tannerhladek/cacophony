@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Switch, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // component imports
 import LogoutButton from '../auth/LogoutButton'
-import ServerListComponent from './ServerListComponent';
+import ServerListComponent from '../ServerListComponent/ServerListComponent';
 
 // import styles
 import './HomePage.css'
@@ -28,10 +28,15 @@ const HomePage = () => {
       return null;
    } else {
       return (
-         <div>
-            <h1>Home PAGE!!!</h1>
-            <ServerListComponent />
-            <LogoutButton />
+         <div className='main-container'>
+            <div className='server-list-container'>
+               <ServerListComponent />
+            </div>
+            <div className='server-info-container'>
+               <Switch>
+                  <LogoutButton />
+               </Switch>
+            </div>
          </div>
       )
 
