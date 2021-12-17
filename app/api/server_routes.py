@@ -55,3 +55,14 @@ def createServer():
       return new_server.to_dict()
    else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# server delete route
+@server_routes.route('/<int:id>/delete', methods=['DELETE'])
+# @login_required
+def deleteServer(id):
+   server = Server.query.get(id)
+   # if server.owner_id == current_user.get_id():
+   db.session.delete(server)
+   db.session.commit()
+   return "success"

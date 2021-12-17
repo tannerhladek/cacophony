@@ -20,7 +20,7 @@ const removeServers = () => ({
 
 // thunk declarations
 export const getServersThunk = (userId) => async (dispatch) => {
-   const response = await fetch(`api/users/${userId}/servers`);
+   const response = await fetch(`/api/users/${userId}/servers`);
 
    if (response.ok) {
       const servers = await response.json()
@@ -30,11 +30,11 @@ export const getServersThunk = (userId) => async (dispatch) => {
 };
 
 export const addServerThunk = (payload) => async (dispatch) => {
-   const res = await fetch(`api/servers/new`, {
+   const res = await fetch('/api/servers/new', {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
-   })
+   });
 
    if (res.ok) {
       const data = await res.json();

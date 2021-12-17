@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import LogoutButton from '../auth/LogoutButton'
 import ServerListComponent from '../ServerListComponent/ServerListComponent';
 import ServerChannelList from '../ServerChannelListComponent/ServerChannelListComponent';
+import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComponent';
 
 // thunk import
 
@@ -26,6 +27,7 @@ const HomePage = () => {
             <Switch>
                <Route exact path={["/servers/:serverId", "/servers/:serverId/:channelId"]}>
                   {/* TO DO: insert div for server info/editing/deleting */}
+                  <ServerDetailsComponent />
                   <ServerChannelList />
                </Route>
             </Switch>
