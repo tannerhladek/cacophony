@@ -1,19 +1,12 @@
-import { useState } from 'react';
-import { Redirect } from 'react-router-dom';
-
-// component import
+import { NavLink } from 'react-router-dom';
 
 function ServerLinkTile({server}) {
 
-   const handleRedirect = (e) => {
-      return
-   }
-
    return (
       <div className='server-btn'>
-         <div onClick={handleRedirect} className='server-image-container'>
+         <NavLink to={`/servers/${server.id}`} className='server-image-container'>
             <img src={server.server_image_url} alt='server-link' className='server-image' />
-         </div>
+         </NavLink>
       </div>
    );
 }

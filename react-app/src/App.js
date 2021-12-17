@@ -8,8 +8,9 @@ import HomePage from './components/HomePage/HomePage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
-import { authenticate } from './store/session';
 
+// thunk import
+import { authenticate } from './store/session';
 
 const App = () => {
   const history = useHistory();
@@ -30,22 +31,13 @@ const App = () => {
 
   if (sessionUser?.id) {
     return (
-
       <div>
         <HomePage />
       </div>
-      // <BrowserRouter>
-      //   <Switch>
-      //     <Route path='/' exact={true}>
-      //       <SplashPage />
-      //     </Route>
-      //   </Switch>
-      // </BrowserRouter>
     )
-
   } else {
     history.push('/');
-
+    
     return (
       <BrowserRouter>
         <Switch>
@@ -61,7 +53,6 @@ const App = () => {
         </Switch>
       </BrowserRouter>
     )
-
   };
 }
 
