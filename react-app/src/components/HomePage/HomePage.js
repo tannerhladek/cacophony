@@ -7,6 +7,7 @@ import LogoutButton from '../auth/LogoutButton'
 import ServerListComponent from '../ServerListComponent/ServerListComponent';
 import ServerChannelList from '../ServerChannelListComponent/ServerChannelListComponent';
 import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComponent';
+import HeaderRightComponent from '../HeaderRightComponent/HeaderRightComponent';
 
 // thunk import
 
@@ -25,12 +26,20 @@ const HomePage = () => {
          </div>
          <div className='server-info-container'>
             <Switch>
-               <Route exact path={["/servers/:serverId", "/servers/:serverId/:channelId"]}>
+               <Route exact path={["/servers/:serverId", "/servers/:serverId/channels/:channelId"]}>
                   <ServerDetailsComponent />
                   <ServerChannelList />
                </Route>
             </Switch>
             <LogoutButton />
+         </div>
+         <div>
+            <Switch>
+               <Route exact path={["/servers/:serverId", "/servers/:serverId/channels/:channelId"]}>
+                  <HeaderRightComponent />
+                  {/* <ChannelMessagesComponent /> */}
+               </Route>
+            </Switch>
          </div>
       </div>
    )

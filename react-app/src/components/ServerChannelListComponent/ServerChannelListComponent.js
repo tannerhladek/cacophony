@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useParams, NavLink } from "react-router-dom";
 
 // thunk import
 // import { getChannelsThunk } from "../../store/servers";
 
 const ServerChannelList = () => {
-   const dispatch = useDispatch();
    const { serverId } = useParams();
    const serverChannels = useSelector(state => state.servers[serverId]?.channels);
 
@@ -14,10 +12,12 @@ const ServerChannelList = () => {
 
    return (
       <div>
-         <h3>Server's channel List</h3>
+         <h4>Channels...</h4>
          {serverChannelsArr.map(channel => (
             <div key={channel.id}>
-               {channel.name}
+               <NavLink to={`/servers/${serverId}/channels/${channel.id}`}>
+                  {channel.name}
+               </NavLink>
             </div>
          ))}
       </div>
