@@ -37,10 +37,11 @@ const removeServers = () => ({
 });
 
 // channel action creators
-const getChannels = (data) => ({
-   type: GET_CHANNELS,
-   payload: data
-})
+// CURRENTLY NOT IN USE
+// const getChannels = (data) => ({
+//    type: GET_CHANNELS,
+//    payload: data
+// })
 
 
 // THUNK DECLARATIONS
@@ -121,15 +122,16 @@ export const removeServersThunk = () => (dispatch) => {
    return null
 };
 
-// channel thunks
-export const getChannelsThunk = (serverId) => async (dispatch) => {
-   const response = await fetch(`/api/servers/${serverId}/channels`);
-   if (response.ok) {
-      const data = await response.json()
-      dispatch(getChannels(data));
-      return null;
-   }
-};
+// CURRENTLY NOT IN USE
+// // channel thunks
+// export const getChannelsThunk = (serverId) => async (dispatch) => {
+//    const response = await fetch(`/api/servers/${serverId}/channels`);
+//    if (response.ok) {
+//       const data = await response.json()
+//       dispatch(getChannels(data));
+//       return null;
+//    }
+// };
 
 
 // reducer
@@ -167,14 +169,15 @@ const serverReducer = (state = inistialState, action) => {
       case REMOVE_SERVERS: {
          return {};
       }
-      case GET_CHANNELS: {
-         console.log('========== IN REDUCER', action.payload)
-         const newState = {
-            ...state,
-            [action.payload.server_id]: {...state[action.payload.server_id], 'channels': action.payload.channels}
-         }
-         return newState
-      }
+      // CURRENTLY NOT IN USE
+      // case GET_CHANNELS: {
+      //    console.log('========== IN REDUCER', action.payload)
+      //    const newState = {
+      //       ...state,
+      //       [action.payload.server_id]: {...state[action.payload.server_id], 'channels': action.payload.channels}
+      //    }
+      //    return newState
+      // }
       default:
          return state
    }

@@ -6,7 +6,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import EditServerModal from "../EditServerModal";
 
 // thunk import
-import { deleteServerThunk } from "../../store/servers";
+import { deleteServerThunk, getChannelsThunk } from "../../store/servers";
 
 const ServerDetailsComponent = () => {
    const dispatch = useDispatch();
@@ -14,7 +14,6 @@ const ServerDetailsComponent = () => {
    const { serverId } = useParams();
    const server = useSelector(state => state.servers[serverId]);
    const sessionUser = useSelector(state => state.session.user)
-   const [loaded, setLoaded] = useState(false);
 
    const handleServerDeletion = async () => {
       const data = await dispatch(deleteServerThunk(serverId));

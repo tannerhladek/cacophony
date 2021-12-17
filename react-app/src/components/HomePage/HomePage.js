@@ -26,7 +26,6 @@ const HomePage = () => {
          <div className='server-info-container'>
             <Switch>
                <Route exact path={["/servers/:serverId", "/servers/:serverId/:channelId"]}>
-                  {/* TO DO: insert div for server info/editing/deleting */}
                   <ServerDetailsComponent />
                   <ServerChannelList />
                </Route>
