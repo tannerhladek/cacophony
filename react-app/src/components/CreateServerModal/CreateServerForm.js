@@ -3,20 +3,31 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 
 // thunk import
+import { addServerThunk } from '../../store/servers';
 
 // styles imports
 
 const CreateServerForm = ({ hideForm }) => {
+   const dispatch = useDispatch();
+   const sessionUser = useSelector(state => state.session.user);
+   const servers = useSelector(state => state.servers);
+
    const [errors, setErrors] = useState([]);
    const [serverName, setServerName] = useState('');
    const [serverImageUrl, setServerImageUrl] = useState('');
-   const sessionUser = useSelector(state => state.session.user);
-   const servers = useSelector(state => state.servers)
-   const dispatch = useDispatch();
 
    const createServer = async (e) => {
       e.preventDefault();
-
+      const new_server = {
+         name: serverName,
+         server_image_url: serverImageUrl
+      }
+      const data = await dispatch(addServerThunk(new_server));
+      if (!data) {
+         hideForm()
+      } else {
+         setErrors(data)
+      }
    };
 
    return (

@@ -27,7 +27,7 @@ def getAllServers():
 
 # create new server route
 @server_routes.route('/new', methods =['POST'])
-# @ login_required
+@ login_required
 def createServer():
    form = CreateServerForm()
    form['csrf_token'].data = request.cookies['csrf_token']
@@ -36,12 +36,12 @@ def createServer():
          new_server = Server(
             name = form.data['name'],
             server_image_url = form.data['server_image_url'],
-            owner_id = '1'
+            owner_id = current_user.get_id()
          )
       else:
          new_server = Server(
             name = form.data['name'],
-            owner_id = '1'
+            owner_id = current_user.get_id()
          )
       user = User.query.get(1)
       new_server.users.append(user)

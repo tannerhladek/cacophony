@@ -69,7 +69,7 @@ const serverReducer = (state = inistialState, action) => {
       case ADD_SERVER: {
          const newState = {
             ...state,
-            ...action.payload.server
+            [action.payload.id]: action.payload
          };
          return newState;
       }
