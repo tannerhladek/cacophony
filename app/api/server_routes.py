@@ -1,7 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Server
+from app.models import db, Server, members, Channel
 from app.forms import CreateServerForm
+from app.models.user import User
 
 server_routes = Blueprint('servers', __name__)
 
@@ -42,7 +43,14 @@ def createServer():
             name = form.data['name'],
             owner_id = '1'
          )
+      user = User.query.get(1)
+      new_server.users.append(user)
       db.session.add(new_server)
+      db.session.commit()
+      default_channel = Channel(
+         server_id = new_server.id
+      )
+      db.session.add(default_channel)
       db.session.commit()
       return new_server.to_dict()
    else:

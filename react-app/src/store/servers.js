@@ -1,11 +1,17 @@
 // const declarations
-const GET_SERVERS = 'servers/GET_SERVERS'
-const REMOVE_SERVERS = 'servers/REMOVE_SERVERS'
+const GET_SERVERS = 'servers/GET_SERVERS';
+const REMOVE_SERVERS = 'servers/REMOVE_SERVERS';
+const ADD_SERVER = 'servers/ADD_SERVER';
 
 // action creators
 const getServers = (servers) => ({
    type: GET_SERVERS,
    payload: servers
+});
+
+const addServer = (server) => ({
+   type: ADD_SERVER,
+   payload: server
 });
 
 const removeServers = () => ({
@@ -19,27 +25,57 @@ export const getServersThunk = (userId) => async (dispatch) => {
    if (response.ok) {
       const servers = await response.json()
       dispatch(getServers(servers));
-      return servers
+      return null;
+   }
+};
+
+export const addServerThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`api/servers/new`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+   })
+
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(addServer(data));
+      return null;
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
    }
 };
 
 export const removeServersThunk = () => (dispatch) => {
    dispatch(removeServers());
-   return
+   return null
 };
 
 // reducer
 const inistialState = {}
 const serverReducer = (state = inistialState, action) => {
    switch (action.type) {
-      case GET_SERVERS:
+      case GET_SERVERS: {
          const newState = {
             ...state,
             ...action.payload.servers
          }
          return newState;
-      case REMOVE_SERVERS:
+      }
+      case ADD_SERVER: {
+         const newState = {
+            ...state,
+            ...action.payload.server
+         };
+         return newState;
+      }
+      case REMOVE_SERVERS: {
          return {};
+      }
       default:
          return state
    }
