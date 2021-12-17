@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from 'react-router-dom';
 
+// component import
+import EditServerModal from "../EditServerModal";
+
 // thunk import
 import { deleteServerThunk } from "../../store/servers";
 
@@ -16,7 +19,7 @@ const ServerDetailsComponent = () => {
    const handleServerDeletion = async () => {
       const data = await dispatch(deleteServerThunk(serverId));
       return history.push('/');
-   }
+   };
 
    if (!server) {
       return null;
@@ -26,8 +29,8 @@ const ServerDetailsComponent = () => {
       if (server.owner_id === sessionUser.id) {
          buttons = (
             <>
+               <EditServerModal />
                <button onClick={handleServerDeletion}>Delete</button>
-               <button>Edit</button>
             </>
          )
       }
