@@ -1,40 +1,47 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 // thunk import
-import { addServerThunk } from '../../store/servers';
+// import { addServerThunk } from '../../store/servers';
 
 // styles imports
 
-const CreateServerForm = ({ hideForm }) => {
+const EditServerForm = ({ hideForm }) => {
+   const { serverId } = useParams();
    const dispatch = useDispatch();
    const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
-
    const [errors, setErrors] = useState([]);
-   const [serverName, setServerName] = useState('');
-   const [serverImageUrl, setServerImageUrl] = useState('');
 
-   const createServer = async (e) => {
+   const server = servers[serverId]
+   const [serverName, setServerName] = useState(server['name']);
+   let server_image_url = server.server_image_url;
+   let url;
+   if (server_image_url === 'https://cdn.discordapp.com/attachments/920424165415223356/920525286800490546/default_server_image.png') url = ''
+   else url = server_image_url
+   const [serverImageUrl, setServerImageUrl] = useState(url);
+
+
+   const editServer = async (e) => {
       e.preventDefault();
-      const new_server = {
-         name: serverName,
-         server_image_url: serverImageUrl
-      }
-      const data = await dispatch(addServerThunk(new_server));
-      if (!data) {
-         hideForm()
-      } else {
-         setErrors(data)
-      }
+      // const data = {
+      //    name: serverName,
+      //    server_image_url: serverImageUrl
+      // }
+      // const data = await dispatch(editServerThunk({data, serverId}));
+      // if (!data) {
+      //    hideForm()
+      // } else {
+      //    setErrors(data)
+      // }
    };
 
    return (
       <div className='server-form-modal-container'>
          <div className='server-form-container'>
-            <div>Create a Server</div>
-            <form onSubmit={createServer}>
+            <div>Edit this server</div>
+            <form onSubmit={editServer}>
                <div>
                   {errors.map((error, ind) => (
                      <div key={ind}>{error}</div>
@@ -67,4 +74,4 @@ const CreateServerForm = ({ hideForm }) => {
 
 };
 
-export default CreateServerForm;
+export default EditServerForm;
