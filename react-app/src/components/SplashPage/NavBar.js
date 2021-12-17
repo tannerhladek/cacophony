@@ -12,7 +12,6 @@ const NavBar = () => {
   const demoLogin = async () => {
     const email = 'demo@aa.io';
     const password = 'password';
-    console.log('YOU ARE HERE!!')
     await dispatch(login(email, password));
     return history.push('/');
     ;

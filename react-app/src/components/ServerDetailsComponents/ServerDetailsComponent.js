@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from 'react-router-dom';
-import { getServersThunk } from "../../store/servers";
+import { useHistory, useParams } from 'react-router-dom';
 
 // thunk import
+import { deleteServerThunk } from "../../store/servers";
 
 const ServerDetailsComponent = () => {
    const dispatch = useDispatch();
+   const history = useHistory();
    const { serverId } = useParams();
    const server = useSelector(state => state.servers[serverId]);
    const [loaded, setLoaded] = useState(false);
 
-   console.log(server);
-
-   const handleServerDeletion = () => {
-
+   const handleServerDeletion = async () => {
+      const data = await dispatch(deleteServerThunk(serverId));
+      return history.push('/');
    }
 
    if (!server) {

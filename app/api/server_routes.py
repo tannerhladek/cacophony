@@ -13,7 +13,7 @@ def validation_errors_to_error_messages(validation_errors):
    errorMessages = []
    for field in validation_errors:
       for error in validation_errors[field]:
-         errorMessages.append(f'{field} : {error}')
+         errorMessages.append(f'{error}')
    return errorMessages
 
 
@@ -59,10 +59,16 @@ def createServer():
 
 # server delete route
 @server_routes.route('/<int:id>/delete', methods=['DELETE'])
-# @login_required
+@login_required
 def deleteServer(id):
    server = Server.query.get(id)
-   # if server.owner_id == current_user.get_id():
-   db.session.delete(server)
-   db.session.commit()
-   return "success"
+   if server.owner_id == int(current_user.get_id()):
+      serverId = server.id
+      db.session.delete(server)
+      db.session.commit()
+      return {
+         'message': f'server deletion success',
+         'server_id': serverId
+      }
+   else:
+      return {'errors': [f'Not authorized to delete {server.name}']}, 401
