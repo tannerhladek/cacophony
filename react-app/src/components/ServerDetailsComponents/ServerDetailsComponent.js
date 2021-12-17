@@ -10,6 +10,7 @@ const ServerDetailsComponent = () => {
    const history = useHistory();
    const { serverId } = useParams();
    const server = useSelector(state => state.servers[serverId]);
+   const sessionUser = useSelector(state => state.session.user)
    const [loaded, setLoaded] = useState(false);
 
    const handleServerDeletion = async () => {
@@ -20,11 +21,21 @@ const ServerDetailsComponent = () => {
    if (!server) {
       return null;
    } else {
+
+      let buttons;
+      if (server.owner_id === sessionUser.id) {
+         buttons = (
+            <>
+               <button onClick={handleServerDeletion}>Delete</button>
+               <button>Edit</button>
+            </>
+         )
+      }
+
       return (
          <div>
             <h4>{server.name}</h4>
-            <button onClick={handleServerDeletion}>Delete</button>
-            <button>Edit</button>
+            {buttons}
          </div>
       )
    };
