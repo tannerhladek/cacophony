@@ -60,7 +60,7 @@ const CreateServerForm = ({ hideForm }) => {
                </div>
                <button type='submit'>Create</button>
             </form>
-            <button onClick={hideForm}>Canel</button>
+            <button onClick={hideForm}>Cancel</button>
          </div>
       </div>
    );

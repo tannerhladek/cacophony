@@ -36,7 +36,7 @@ const ServerListComponent = () => {
             <div className='server-list-container'>
                {serversArr.map(server => {
                   return (
-                     <ServerLinkTile server={server} />
+                     <ServerLinkTile key={server.id} server={server} />
                   )
                })}
             </div>

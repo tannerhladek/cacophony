@@ -4,6 +4,7 @@ const GET_SERVERS = 'servers/GET_SERVERS';
 const REMOVE_SERVERS = 'servers/REMOVE_SERVERS';
 const ADD_SERVER = 'servers/ADD_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
+const EDIT_SERVER = 'servers/EDIT_SERVER'
 
 
 // ACTION CREATORS
@@ -17,6 +18,11 @@ const addServer = (server) => ({
    type: ADD_SERVER,
    payload: server
 });
+
+const editServer = (server) => ({
+   type: EDIT_SERVER,
+   payload: server
+})
 
 const deleteServer = (data) => ({
    type: DELETE_SERVER,
@@ -50,6 +56,27 @@ export const addServerThunk = (payload) => async (dispatch) => {
    if (res.ok) {
       const data = await res.json();
       dispatch(addServer(data));
+      return null;
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
+
+export const editServerThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`/api/servers/${payload.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+   });
+
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(editServer(data));
       return null;
    } else if (res.status < 500) {
       const data = await res.json();
@@ -101,6 +128,13 @@ const serverReducer = (state = inistialState, action) => {
          const newState = {
             ...state,
             [action.payload.id]: action.payload
+         };
+         return newState;
+      }
+      case EDIT_SERVER: {
+         const newState = {
+            ...state,
+            [action.payload.id]: {...state[action.payload.id], ...action.payload}
          };
          return newState;
       }

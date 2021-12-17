@@ -1,8 +1,9 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Server, members, Channel
-from app.forms import CreateServerForm
+from app.forms import CreateServerForm, EditServerForm
 from app.models.user import User
+from sqlalchemy import ColumnDefault
 
 server_routes = Blueprint('servers', __name__)
 
@@ -53,6 +54,26 @@ def createServer():
       db.session.add(default_channel)
       db.session.commit()
       return new_server.to_dict()
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# edit server route
+@server_routes.route('/<int:id>', methods =['PUT'])
+@ login_required
+def editServer(id):
+   form = EditServerForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      server = Server.query.get(id)
+      if form.data['server_image_url']:
+         server.name = form.data['name']
+         server.server_image_url = form.data['server_image_url']
+      else:
+         server.name = form.data['name']
+         server.server_image_url = ColumnDefault
+      db.session.commit()
+      return server.to_dict()
    else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
