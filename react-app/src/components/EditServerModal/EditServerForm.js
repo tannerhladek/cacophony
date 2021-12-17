@@ -3,14 +3,13 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
 // thunk import
-// import { addServerThunk } from '../../store/servers';
+import { editServerThunk } from '../../store/servers';
 
 // styles imports
 
 const EditServerForm = ({ hideForm }) => {
    const { serverId } = useParams();
    const dispatch = useDispatch();
-   const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
    const [errors, setErrors] = useState([]);
 
@@ -25,16 +24,17 @@ const EditServerForm = ({ hideForm }) => {
 
    const editServer = async (e) => {
       e.preventDefault();
-      // const data = {
-      //    name: serverName,
-      //    server_image_url: serverImageUrl
-      // }
-      // const data = await dispatch(editServerThunk({data, serverId}));
-      // if (!data) {
-      //    hideForm()
-      // } else {
-      //    setErrors(data)
-      // }
+      const payload = {
+         id: serverId,
+         name: serverName,
+         server_image_url: serverImageUrl
+      }
+      const data = await dispatch(editServerThunk(payload));
+      if (!data) {
+         hideForm()
+      } else {
+         setErrors(data)
+      }
    };
 
    return (
@@ -65,9 +65,9 @@ const EditServerForm = ({ hideForm }) => {
                      value={serverImageUrl}
                   ></input>
                </div>
-               <button type='submit'>Create</button>
+               <button type='submit'>Submit Edits</button>
             </form>
-            <button onClick={hideForm}>Canel</button>
+            <button onClick={hideForm}>Cacnel</button>
          </div>
       </div>
    );

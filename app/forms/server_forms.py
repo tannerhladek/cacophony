@@ -22,3 +22,8 @@ def servername_exists(form, field):
 class CreateServerForm(FlaskForm):
    name = StringField('name', validators=[DataRequired(), servername_exists])
    server_image_url = StringField('server_image_url', validators=[URL(require_tld=True, message='Please provide a valid image URL'), Optional()])
+
+
+class EditServerForm(FlaskForm):
+   name = StringField('name', validators=[DataRequired(), servername_exists])
+   server_image_url = StringField('server_image_url', validators=[URL(require_tld=True, message='Please provide a valid image URL'), Optional()])
