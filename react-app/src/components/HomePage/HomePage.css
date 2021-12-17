@@ -1,14 +1,14 @@
-.create-server-btn {
-   height: 50px;
-   width: 50px;
-};
-
-.create-server-image-container {
+.server-btn {
    height: 50px;
    width: 50px;
 }
 
-.create-server-image {
+.server-image-container {
+   height: 50px;
+   width: 50px;
+}
+
+.server-image {
    height: 50px;
    width: 50px;
    object-fit: fill;

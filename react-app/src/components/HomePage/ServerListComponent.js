@@ -3,7 +3,8 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // component imports
-import CreateServerModal from '../CreateServerModal'
+import CreateServerModal from '../CreateServerModal';
+import ServerLinkTile from './ServerTile';
 
 // thunk imports
 import { getServersThunk } from '../../store/servers';
@@ -35,13 +36,14 @@ const ServerListComponent = () => {
             <div>
                {serversArr.map(server => {
                   return (
-                     <div key={server.id}>
-                        {server.name}
-                     </div>
+                     // <div key={server.id}>
+                     //    {server.name}
+                     // </div>
                      // TO DO:
                      // <NavLink key={server.id} to={``}>
                      //    {server.name}
                      // </NavLink>
+                     <ServerLinkTile server={server} />
                   )
                })}
             </div>
