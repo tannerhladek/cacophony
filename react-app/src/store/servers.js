@@ -66,7 +66,7 @@ export const addServerThunk = (payload) => async (dispatch) => {
    if (res.ok) {
       const data = await res.json();
       dispatch(addServer(data));
-      return null;
+      return data.id;
    } else if (res.status < 500) {
       const data = await res.json();
       if (data.errors) {
