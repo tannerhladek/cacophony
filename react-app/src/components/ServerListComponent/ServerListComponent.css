@@ -1,10 +1,19 @@
-.server-list-container {
+.server-list-div {
    display: flex;
    flex-direction: column;
    align-items: center;
    gap: 5px;
    background-color: rgb(32, 34, 37);
    height: 100vh;
+   overflow: scroll;
+   padding-top: 5px;
+}
+
+.server-list-container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 5px;
    overflow: scroll;
    padding-top: 5px;
 }

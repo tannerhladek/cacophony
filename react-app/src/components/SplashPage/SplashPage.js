@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 // component import
-import NavBar from './NavBar';
+import SplashNavBar from './SplashNavBar';
 
 //import styles
 import './SplashPage.css'
@@ -10,7 +10,7 @@ import './SplashPage.css'
 const SplashPage = () => {
    return (
       <div>
-         <NavBar />
+         <SplashNavBar />
       </div>
    );
 }

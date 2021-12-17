@@ -20,7 +20,7 @@ const HomePage = () => {
 
    return (
       <div className='main-container'>
-         <div className='server-list-container'>
+         <div>
             <ServerListComponent />
          </div>
          <div className='server-info-container'>

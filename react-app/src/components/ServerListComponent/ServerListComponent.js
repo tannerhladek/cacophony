@@ -32,7 +32,7 @@ const ServerListComponent = () => {
       return null;
    } else {
       return (
-         <div>
+         <div className='server-list-div'>
             <div className='server-list-container'>
                {serversArr.map(server => {
                   return (

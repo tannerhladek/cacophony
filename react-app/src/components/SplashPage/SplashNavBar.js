@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 // thunk import
 import { login } from '../../store/session';
 
-const NavBar = () => {
+const SplashNavBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -29,7 +29,7 @@ const NavBar = () => {
           <button onClick={demoLogin}>Demo</button>
         </li>
         <li>
-          <NavLink to='/signup' exact={true} activeClassName='active'>
+          <NavLink to='/signup' exact={true} activeClassName='active' id='splash-nav-btn'>
             Sign Up
           </NavLink>
         </li>
@@ -39,7 +39,7 @@ const NavBar = () => {
           </NavLink>
         </li> */}
         <li>
-          <NavLink to='/login' exact={true} activeClassName='active'>
+          <NavLink to='/login' exact={true} activeClassName='active' id='splash-nav-btn'>
             Login
           </NavLink>
         </li>
@@ -48,4 +48,4 @@ const NavBar = () => {
   );
 }
 
-export default NavBar;
+export default SplashNavBar;
