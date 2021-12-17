@@ -4,7 +4,10 @@ const GET_SERVERS = 'servers/GET_SERVERS';
 const REMOVE_SERVERS = 'servers/REMOVE_SERVERS';
 const ADD_SERVER = 'servers/ADD_SERVER';
 const DELETE_SERVER = 'servers/DELETE_SERVER';
-const EDIT_SERVER = 'servers/EDIT_SERVER'
+const EDIT_SERVER = 'servers/EDIT_SERVER';
+
+// channel consts
+const GET_CHANNELS = 'servers/GET_CHANNELS';
 
 
 // ACTION CREATORS
@@ -32,6 +35,12 @@ const deleteServer = (data) => ({
 const removeServers = () => ({
    type: REMOVE_SERVERS,
 });
+
+// channel action creators
+const getChannels = (data) => ({
+   type: GET_CHANNELS,
+   payload: data
+})
 
 
 // THUNK DECLARATIONS
@@ -107,11 +116,21 @@ export const deleteServerThunk = (serverId) => async (dispatch) => {
    }
 };
 
-
 export const removeServersThunk = () => (dispatch) => {
    dispatch(removeServers());
    return null
 };
+
+// channel thunks
+export const getChannelsThunk = (serverId) => async (dispatch) => {
+   const response = await fetch(`/api/servers/${serverId}/channels`);
+   if (response.ok) {
+      const data = await response.json()
+      dispatch(getChannels(data));
+      return null;
+   }
+};
+
 
 // reducer
 const inistialState = {}
@@ -147,6 +166,14 @@ const serverReducer = (state = inistialState, action) => {
       }
       case REMOVE_SERVERS: {
          return {};
+      }
+      case GET_CHANNELS: {
+         console.log('========== IN REDUCER', action.payload)
+         const newState = {
+            ...state,
+            [action.payload.server_id]: {...state[action.payload.server_id], 'channels': action.payload.channels}
+         }
+         return newState
       }
       default:
          return state

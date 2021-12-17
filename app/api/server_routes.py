@@ -101,5 +101,6 @@ def deleteServer(id):
 def getServerChannels(id):
    channels = Channel.query.filter(Channel.server_id == int(id)).all()
    return {
-      'channels': {channel.to_dict()['id']:channel.to_dict() for channel in channels}
+      'channels': {channel.to_dict()['id']:channel.to_dict() for channel in channels},
+      'server_id': id
    }
