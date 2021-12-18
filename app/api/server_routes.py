@@ -1,8 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Server, members, Channel
+from app.models import db, Server, members, Channel, User
 from app.forms import CreateServerForm, EditServerForm
-from app.models.user import User
 from sqlalchemy import ColumnDefault
 
 server_routes = Blueprint('servers', __name__)
@@ -71,6 +70,7 @@ def editServer(id):
          server.server_image_url = form.data['server_image_url']
       else:
          server.name = form.data['name']
+         # TO DO: FIX THIS to insert default value from model file
          server.server_image_url = ColumnDefault
       db.session.commit()
       return server.to_dict()
