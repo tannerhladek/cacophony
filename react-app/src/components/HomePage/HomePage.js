@@ -8,6 +8,7 @@ import ServerListComponent from '../ServerListComponent/ServerListComponent';
 import ServerChannelList from '../ServerChannelListComponent/ServerChannelListComponent';
 import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComponent';
 import HeaderRightComponent from '../HeaderRightComponent/HeaderRightComponent';
+import MessagesComponent from '../MessagesComponent/MessagesComponent';
 
 // thunk import
 
@@ -35,9 +36,12 @@ const HomePage = () => {
          </div>
          <div>
             <Switch>
-               <Route exact path={["/servers/:serverId", "/servers/:serverId/channels/:channelId"]}>
+               <Route exact path={["/servers/:serverId"]}>
                   <HeaderRightComponent />
-                  {/* <ChannelMessagesComponent /> */}
+               </Route>
+               <Route exact path={["/servers/:serverId/channels/:channelId", "/servers/:serverId/channels/:channelId"]}>
+                  <HeaderRightComponent />
+                  <MessagesComponent />
                </Route>
             </Switch>
          </div>

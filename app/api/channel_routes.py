@@ -22,5 +22,6 @@ def validation_errors_to_error_messages(validation_errors):
 def getChannelMessages(id):
    messages = Message.query.filter(int(id) == Message.channel_id).order_by(Message.created_at).all()
    return {
+      'channel_id': id,
       'messages': {message.to_dict()['id']:message.to_dict() for message in messages}
    }
