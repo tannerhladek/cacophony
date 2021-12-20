@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Server, members, Channel, User
-from app.forms import CreateServerForm, EditServerForm
+from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
 from sqlalchemy import ColumnDefault
 
 server_routes = Blueprint('servers', __name__)
@@ -95,13 +95,19 @@ def deleteServer(id):
       return {'errors': [f'Not authorized to delete {server.name}']}, 401
 
 
-# CURRENTLY NOT IN USE!!
-# # get server channels route
-# @server_routes.route('<int:id>/channels')
-# # @login_required
-# def getServerChannels(id):
-#    channels = Channel.query.filter(Channel.server_id == int(id)).all()
-#    return {
-#       'channels': {channel.to_dict()['id']:channel.to_dict() for channel in channels},
-#       'server_id': id
-#    }
+# get server channels route
+@server_routes.route('<int:id>/channels/new', methods=["POST"])
+@login_required
+def addServerChannel(id):
+   form = CreateChannelForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      channel = Channel(
+         name = form.data['name'],
+         server_id = id
+      )
+      db.session.add(channel)
+      db.session.commit()
+      return channel.to_dict()
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401

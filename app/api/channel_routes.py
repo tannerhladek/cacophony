@@ -18,10 +18,17 @@ def validation_errors_to_error_messages(validation_errors):
 
 # get messages for a given channel
 @channel_routes.route('/<int:id>/messages')
-# @login_required
+@login_required
 def getChannelMessages(id):
    messages = Message.query.filter(int(id) == Message.channel_id).order_by(Message.created_at).all()
    return {
       'channel_id': id,
       'messages': {message.to_dict()['id']:message.to_dict() for message in messages}
    }
+
+
+# edit channel information route
+@channel_routes.route('/<int:id>', methods=['PUT'])
+# @login_required
+def editChannelInfo(id):
+   return 'you hit the route'
