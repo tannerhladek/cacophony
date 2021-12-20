@@ -7,6 +7,7 @@ const DELETE_SERVER = 'servers/DELETE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 
 // channel consts
+const ADD_CHANNEL = 'servers/ADD_CHANNEL';
 const DELETE_CHANNEL = 'servers/DELETE_CHANNEL';
 
 
@@ -37,6 +38,11 @@ const removeServers = () => ({
 });
 
 // channel action creators
+const addChannel = (data) => ({
+   type: ADD_CHANNEL,
+   payload: data
+})
+
 const deleteChannel = (data) => ({
    type: DELETE_CHANNEL,
    payload: data
@@ -122,6 +128,26 @@ export const removeServersThunk = () => (dispatch) => {
 };
 
 // channel thunks
+export const addChannelThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`/api/servers/${payload.serverId}/channels/new`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+   });
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(addChannel(data));
+      return null;
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
+
 export const deleteChannelThunk = (channelId) => async (dispatch) => {
    const res = await fetch(`/api/channels/${channelId}/delete`, {
       method: "DELETE"
@@ -162,7 +188,7 @@ const serverReducer = (state = inistialState, action) => {
       case EDIT_SERVER: {
          const newState = {
             ...state,
-            [action.payload.id]: {...state[action.payload.id], ...action.payload}
+            [action.payload.id]: { ...state[action.payload.id], ...action.payload }
          };
          return newState;
       }
@@ -175,6 +201,15 @@ const serverReducer = (state = inistialState, action) => {
       }
       case REMOVE_SERVERS: {
          return {};
+      }
+      case ADD_CHANNEL: {
+         const serverId = action.payload.server_id;
+         const channelId = action.payload.id
+         const newState = {
+            ...state,
+            [serverId]: {...state[serverId], 'channels':{...state[serverId].channels, [channelId]: {...action.payload}}}
+         }
+         return newState;
       }
       case DELETE_CHANNEL: {
          // const newState = {

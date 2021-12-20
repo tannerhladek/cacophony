@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 
 // component import
+import CreateChannelModal from "../CreateChannelModal";
 import EditChannelModal from "../EditChannelModal";
 
 // thunk import
@@ -36,6 +37,7 @@ const ServerChannelList = () => {
    return (
       <div>
          <h4>Channels...</h4>
+         <CreateChannelModal />
          {serverChannelsArr.map(channel => (
             <div key={channel.id}>
                <span>

@@ -95,7 +95,7 @@ def deleteServer(id):
       return {'errors': [f'Not authorized to delete {server.name}']}, 401
 
 
-# get server channels route
+# add channel route
 @server_routes.route('<int:id>/channels/new', methods=["POST"])
 @login_required
 def addServerChannel(id):
