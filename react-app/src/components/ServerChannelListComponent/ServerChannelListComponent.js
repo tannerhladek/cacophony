@@ -14,7 +14,11 @@ const ServerChannelList = () => {
    const servers = useSelector(state => state.servers);
    const serverChannels = useSelector(state => state.servers[serverId]?.channels);
 
-   const serverChannelsArr = Object.assign([], serverChannels)
+   const serverChannelsArr = Object.assign([], serverChannels);
+   // const serverChannelsArrSorted = serverChannelsArr.sort((a,b) => {
+   //    if (b.owner_id === sessionUser.id) return -1
+   //    else return 1
+   // });
 
    const handleEdit = () => {
 
@@ -24,7 +28,6 @@ const ServerChannelList = () => {
 
    }
 
-   // if (sessionUser.id === servers[serverId]?.owner_id)
 
    return (
       <div>
