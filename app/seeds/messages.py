@@ -8,7 +8,7 @@ fake = Faker()
 
 def seed_messages():
 
-   for _ in range(600):
+   for _ in range(300):
       message = Message(
          user_id=randint(1,20),
          channel_id=randint(1,60),

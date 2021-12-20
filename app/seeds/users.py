@@ -20,7 +20,6 @@ def seed_users():
     # creating additional users with Faker
     users = RandomUser.generate_users(17)
     for user in users:
-        print(user.get_username(), '==========')
         new_user = User(
             username=user.get_username(),
             email=user.get_email(),
