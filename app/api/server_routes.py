@@ -83,7 +83,7 @@ def editServer(id):
 @login_required
 def deleteServer(id):
    server = Server.query.get(id)
-   if server.owner_id == int(current_user.get_id()):
+   if int(server.owner_id) == int(current_user.get_id()):
       serverId = server.id
       db.session.delete(server)
       db.session.commit()

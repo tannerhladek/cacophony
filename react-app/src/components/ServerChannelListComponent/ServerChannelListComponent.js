@@ -1,18 +1,20 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams, NavLink } from "react-router-dom";
 
 // component import
 import EditChannelModal from "../EditChannelModal";
 
 // thunk import
-
+import { deleteChannelThunk } from "../../store/servers";
 
 const ServerChannelList = () => {
+   const dispatch = useDispatch();
    const { serverId } = useParams();
    const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
    const serverChannels = useSelector(state => state.servers[serverId]?.channels);
+   const [errors, setErrors] = useState([]);
 
    const serverChannelsArr = Object.assign([], serverChannels);
    // const serverChannelsArrSorted = serverChannelsArr.sort((a,b) => {
@@ -20,12 +22,14 @@ const ServerChannelList = () => {
    //    else return 1
    // });
 
-   const handleEdit = () => {
-
+   const handleEdit = async (e) => {
    }
 
-   const handleDelete = () => {
-
+   const handleDelete = async (e) => {
+      const data = await dispatch(deleteChannelThunk(e.target.value));
+      if (data) {
+         setErrors(data);
+      }
    }
 
 
@@ -42,7 +46,7 @@ const ServerChannelList = () => {
                {sessionUser.id === servers[serverId].owner_id && (
                   <>
                      <EditChannelModal channelId={channel?.id} />
-                     <button onClick={handleDelete}>
+                     <button onClick={handleDelete} value={channel?.id}>
                         Delete
                      </button>
                   </>

@@ -7,7 +7,7 @@ const DELETE_SERVER = 'servers/DELETE_SERVER';
 const EDIT_SERVER = 'servers/EDIT_SERVER';
 
 // channel consts
-const GET_CHANNELS = 'servers/GET_CHANNELS';
+const DELETE_CHANNEL = 'servers/DELETE_CHANNEL';
 
 
 // ACTION CREATORS
@@ -37,11 +37,10 @@ const removeServers = () => ({
 });
 
 // channel action creators
-// CURRENTLY NOT IN USE
-// const getChannels = (data) => ({
-//    type: GET_CHANNELS,
-//    payload: data
-// })
+const deleteChannel = (data) => ({
+   type: DELETE_CHANNEL,
+   payload: data
+})
 
 
 // THUNK DECLARATIONS
@@ -122,16 +121,24 @@ export const removeServersThunk = () => (dispatch) => {
    return null
 };
 
-// CURRENTLY NOT IN USE
-// // channel thunks
-// export const getChannelsThunk = (serverId) => async (dispatch) => {
-//    const response = await fetch(`/api/servers/${serverId}/channels`);
-//    if (response.ok) {
-//       const data = await response.json()
-//       dispatch(getChannels(data));
-//       return null;
-//    }
-// };
+// channel thunks
+export const deleteChannelThunk = (channelId) => async (dispatch) => {
+   const res = await fetch(`/api/channels/${channelId}/delete`, {
+      method: "DELETE"
+   });
+   if (res.ok) {
+      const data = await res.json()
+      dispatch(deleteChannel(data));
+      return null;
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
 
 
 // reducer
@@ -169,15 +176,17 @@ const serverReducer = (state = inistialState, action) => {
       case REMOVE_SERVERS: {
          return {};
       }
-      // CURRENTLY NOT IN USE
-      // case GET_CHANNELS: {
-      //    console.log('========== IN REDUCER', action.payload)
-      //    const newState = {
-      //       ...state,
-      //       [action.payload.server_id]: {...state[action.payload.server_id], 'channels': action.payload.channels}
-      //    }
-      //    return newState
-      // }
+      case DELETE_CHANNEL: {
+         // const newState = {
+         //    ...state,
+         //    [action.payload.server_id]: {...state[action.payload.server_id], 'channels': action.payload.channels}
+         // }
+         const newState = {
+            ...state
+         }
+         delete newState[action.payload.server_id].channels[action.payload.channel_id]
+         return newState
+      }
       default:
          return state
    }

@@ -1,7 +1,9 @@
 from logging import log
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from app.forms import channel_forms
 from app.models import db, Server, members, Channel, Message
+from app.models.user import User
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -25,6 +27,26 @@ def getChannelMessages(id):
       'channel_id': id,
       'messages': {message.to_dict()['id']:message.to_dict() for message in messages}
    }
+
+
+# delete a channel route
+@channel_routes.route('/<int:id>/delete', methods=['DELETE'])
+@login_required
+def deleteChannel(id):
+   channel = Channel.query.get(id)
+   serverId = channel.server_id
+   user = User.query.get(int(current_user.get_id()))
+   if channel.server in user.servers:
+      channelId = channel.id
+      db.session.delete(channel)
+      db.session.commit()
+      return {
+         'message': f'channel deletion success',
+         'channel_id': channelId,
+         'server_id': serverId
+      }
+   else:
+      return {'errors': [f'Not authorized to delete {channel.name}']}, 401
 
 
 # edit channel information route
