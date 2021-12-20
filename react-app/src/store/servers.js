@@ -8,6 +8,7 @@ const EDIT_SERVER = 'servers/EDIT_SERVER';
 
 // channel consts
 const ADD_CHANNEL = 'servers/ADD_CHANNEL';
+const EDIT_CHANNEL = 'servers/EDIT_CHANNEL';
 const DELETE_CHANNEL = 'servers/DELETE_CHANNEL';
 
 
@@ -41,12 +42,17 @@ const removeServers = () => ({
 const addChannel = (data) => ({
    type: ADD_CHANNEL,
    payload: data
-})
+});
+
+const editChannel = (data) => ({
+   type: EDIT_CHANNEL,
+   payload: data
+});
 
 const deleteChannel = (data) => ({
    type: DELETE_CHANNEL,
    payload: data
-})
+});
 
 
 // THUNK DECLARATIONS
@@ -148,6 +154,27 @@ export const addChannelThunk = (payload) => async (dispatch) => {
    }
 };
 
+export const editChannelThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`/api/channels/${payload.id}/edit`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+   });
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(editChannel(data));
+      return null;
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+}
+
+
 export const deleteChannelThunk = (channelId) => async (dispatch) => {
    const res = await fetch(`/api/channels/${channelId}/delete`, {
       method: "DELETE"
@@ -211,11 +238,16 @@ const serverReducer = (state = inistialState, action) => {
          }
          return newState;
       }
+      case EDIT_CHANNEL: {
+         const serverId = action.payload.server_id;
+         const channelId = action.payload.id
+         const newState = {
+            ...state,
+            [serverId]: {...state[serverId], 'channels':{...state[serverId].channels, [channelId]: {...action.payload}}}
+         }
+         return newState;
+      }
       case DELETE_CHANNEL: {
-         // const newState = {
-         //    ...state,
-         //    [action.payload.server_id]: {...state[action.payload.server_id], 'channels': action.payload.channels}
-         // }
          const newState = {
             ...state
          }

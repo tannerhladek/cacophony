@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
 // thunk import
-// import { editServerThunk } from '../../store/servers';
+import { editChannelThunk } from '../../store/servers';
 
 // styles imports
 
@@ -18,16 +18,17 @@ const EditChannelForm = ({ hideForm, channelId }) => {
 
    const editChannel = async (e) => {
       e.preventDefault();
-      // const payload = {
-      //    id: channelId,
-      //    name: channelName,
-      // }
-      // // const data = await dispatch(editServerThunk(payload));
-      // if (!data) {
-      //    hideForm()
-      // } else {
-      //    setErrors(data)
-      // }
+      const payload = {
+         id: channelId,
+         name: channelName,
+      };
+      console.log(payload, '===========')
+      const data = await dispatch(editChannelThunk(payload));
+      if (!data) {
+         hideForm()
+      } else {
+         setErrors(data)
+      }
    };
 
    return (

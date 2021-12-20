@@ -1,7 +1,7 @@
 from logging import log
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms import channel_forms
+from app.forms import EditChannelForm
 from app.models import db, Server, members, Channel, Message
 from app.models.user import User
 
@@ -50,7 +50,15 @@ def deleteChannel(id):
 
 
 # edit channel information route
-@channel_routes.route('/<int:id>', methods=['PUT'])
-# @login_required
-def editChannelInfo(id):
-   return 'you hit the route'
+@channel_routes.route('/<int:id>/edit', methods=["PUT"])
+@login_required
+def editChannel(id):
+   form = EditChannelForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      channel = Channel.query.get(id)
+      channel.name = form.data['name']
+      db.session.commit()
+      return channel.to_dict()
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
