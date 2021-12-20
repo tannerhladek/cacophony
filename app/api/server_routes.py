@@ -1,8 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Server, members, Channel
-from app.forms import CreateServerForm, EditServerForm
-from app.models.user import User
+from app.models import db, Server, members, Channel, User
+from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
 from sqlalchemy import ColumnDefault
 
 server_routes = Blueprint('servers', __name__)
@@ -71,6 +70,7 @@ def editServer(id):
          server.server_image_url = form.data['server_image_url']
       else:
          server.name = form.data['name']
+         # TO DO: FIX THIS to insert default value from model file
          server.server_image_url = ColumnDefault
       db.session.commit()
       return server.to_dict()
@@ -83,7 +83,7 @@ def editServer(id):
 @login_required
 def deleteServer(id):
    server = Server.query.get(id)
-   if server.owner_id == int(current_user.get_id()):
+   if int(server.owner_id) == int(current_user.get_id()):
       serverId = server.id
       db.session.delete(server)
       db.session.commit()
@@ -93,3 +93,21 @@ def deleteServer(id):
       }
    else:
       return {'errors': [f'Not authorized to delete {server.name}']}, 401
+
+
+# add channel route for given server
+@server_routes.route('<int:id>/channels/new', methods=["POST"])
+@login_required
+def addServerChannel(id):
+   form = CreateChannelForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      channel = Channel(
+         name = form.data['name'],
+         server_id = id
+      )
+      db.session.add(channel)
+      db.session.commit()
+      return channel.to_dict()
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401

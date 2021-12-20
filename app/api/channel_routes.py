@@ -1,0 +1,64 @@
+from logging import log
+from flask import Blueprint, request
+from flask_login import login_required, current_user
+from app.forms import EditChannelForm
+from app.models import db, Server, members, Channel, Message
+from app.models.user import User
+
+channel_routes = Blueprint('channels', __name__)
+
+def validation_errors_to_error_messages(validation_errors):
+   """
+   Simple function that turns the WTForms validation errors into a simple list
+   """
+   errorMessages = []
+   for field in validation_errors:
+      for error in validation_errors[field]:
+         errorMessages.append(f'{error}')
+   return errorMessages
+
+
+# get messages for a given channel
+@channel_routes.route('/<int:id>/messages')
+@login_required
+def getChannelMessages(id):
+   messages = Message.query.filter(int(id) == Message.channel_id).order_by(Message.created_at).all()
+   return {
+      'channel_id': id,
+      'messages': {message.to_dict()['id']:message.to_dict() for message in messages}
+   }
+
+
+# delete a channel route
+@channel_routes.route('/<int:id>/delete', methods=['DELETE'])
+@login_required
+def deleteChannel(id):
+   channel = Channel.query.get(id)
+   serverId = channel.server_id
+   user = User.query.get(int(current_user.get_id()))
+   if channel.server in user.servers:
+      channelId = channel.id
+      db.session.delete(channel)
+      db.session.commit()
+      return {
+         'message': f'channel deletion success',
+         'channel_id': channelId,
+         'server_id': serverId
+      }
+   else:
+      return {'errors': [f'Not authorized to delete {channel.name}']}, 401
+
+
+# edit channel information route
+@channel_routes.route('/<int:id>/edit', methods=["PUT"])
+@login_required
+def editChannel(id):
+   form = EditChannelForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      channel = Channel.query.get(id)
+      channel.name = form.data['name']
+      db.session.commit()
+      return channel.to_dict()
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 
 // thunk import
@@ -9,8 +9,7 @@ import { addServerThunk } from '../../store/servers';
 
 const CreateServerForm = ({ hideForm }) => {
    const dispatch = useDispatch();
-   const sessionUser = useSelector(state => state.session.user);
-   const servers = useSelector(state => state.servers);
+   const history = useHistory();
 
    const [errors, setErrors] = useState([]);
    const [serverName, setServerName] = useState('');
@@ -23,8 +22,9 @@ const CreateServerForm = ({ hideForm }) => {
          server_image_url: serverImageUrl
       }
       const data = await dispatch(addServerThunk(new_server));
-      if (!data) {
+      if (typeof(data) === 'number') {
          hideForm()
+         return history.push(`/servers/${data}`)
       } else {
          setErrors(data)
       }

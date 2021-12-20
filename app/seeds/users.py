@@ -1,5 +1,6 @@
 from app.models import db, User
 from faker import Faker
+from randomuser import RandomUser
 
 fake = Faker()
 
@@ -17,17 +18,15 @@ def seed_users():
     db.session.add(bobbie)
 
     # creating additional users with Faker
-    users = []
-    for _ in range(17):
-        user = User(
-            username=fake.simple_profile()['username'],
-            email=fake.simple_profile()['mail'],
-            password=fake.simple_profile()['mail']
+    users = RandomUser.generate_users(17)
+    for user in users:
+        new_user = User(
+            username=user.get_username(),
+            email=user.get_email(),
+            password=user.get_password(),
+            profile_image_url=user.get_picture()
         )
-        db.session.add(user)
-
-    # for user in users:
-    #     db.session.add(user)
+        db.session.add(new_user)
 
     db.session.commit()
 

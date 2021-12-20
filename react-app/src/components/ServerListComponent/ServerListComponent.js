@@ -19,7 +19,9 @@ const ServerListComponent = () => {
    const servers = useSelector(state => state.servers)
    const [loaded, setLoaded] = useState(true);
 
-   const serversArr = Object.values(servers)
+   const serversArr = Object.values(servers).sort((a,b) => {
+      if (b.owner_id === sessionUser.id) return 
+   })
 
    useEffect(() => {
       (async () => {

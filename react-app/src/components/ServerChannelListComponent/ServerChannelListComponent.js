@@ -1,30 +1,63 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams, NavLink } from "react-router-dom";
+
+// component import
+import CreateChannelModal from "../CreateChannelModal";
+import EditChannelModal from "../EditChannelModal";
 
 // thunk import
+import { deleteChannelThunk } from "../../store/servers";
 
 const ServerChannelList = () => {
    const dispatch = useDispatch();
+   const { serverId } = useParams();
+   const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
-   const [loaded, setLoaded] = useState(false);
+   const serverChannels = useSelector(state => state.servers[serverId]?.channels);
+   const [errors, setErrors] = useState([]);
 
-   // useEffect(() => {
-   //    (async () => {
-   //       await
-   //    })
-   // })
+   const serverChannelsArr = Object.assign([], serverChannels);
+   // const serverChannelsArrSorted = serverChannelsArr.sort((a,b) => {
+   //    if (b.owner_id === sessionUser.id) return -1
+   //    else return 1
+   // });
 
-   // TO DO: invert boolean
-   if (loaded) {
-      return null
-   } else {
-
-      return (
-         <div>
-            <h3>Server's channel List</h3>
-         </div>
-      )
+   const handleEdit = async (e) => {
    }
+
+   const handleDelete = async (e) => {
+      const data = await dispatch(deleteChannelThunk(e.target.value));
+      if (data) {
+         setErrors(data);
+      }
+   }
+
+
+   return (
+      <div>
+         <h4>Channels...</h4>
+         <CreateChannelModal />
+         {serverChannelsArr.map(channel => (
+            <div key={channel.id}>
+               <span>
+                  <NavLink to={`/servers/${serverId}/channels/${channel.id}`}>
+                     {channel.name}
+                  </NavLink>
+               </span>
+               {sessionUser.id === servers[serverId].owner_id && (
+                  <>
+                     <EditChannelModal channelId={channel?.id} />
+                     <button onClick={handleDelete} value={channel?.id}>
+                        Delete
+                     </button>
+                  </>
+               )}
+            </div>
+         ))}
+      </div>
+   )
+
 };
 
 export default ServerChannelList;
