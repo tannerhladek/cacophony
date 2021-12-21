@@ -1,8 +1,8 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
+from sqlalchemy.sql.schema import ColumnDefault
 from app.models import db, Server, members, Channel, User
 from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
-from sqlalchemy import ColumnDefault
 
 server_routes = Blueprint('servers', __name__)
 
@@ -71,7 +71,7 @@ def editServer(id):
       else:
          server.name = form.data['name']
          # TO DO: FIX THIS to insert default value from model file
-         server.server_image_url = ColumnDefault
+         server.server_image_url = 'https://cdn.discordapp.com/attachments/920424165415223356/920525286800490546/default_server_image.png'
       db.session.commit()
       return server.to_dict()
    else:
