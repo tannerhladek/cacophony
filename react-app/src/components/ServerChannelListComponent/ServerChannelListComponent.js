@@ -23,21 +23,21 @@ const ServerChannelList = () => {
    //    else return 1
    // });
 
-   const handleEdit = async (e) => {
-   }
-
    const handleDelete = async (e) => {
       const data = await dispatch(deleteChannelThunk(e.target.value));
       if (data) {
          setErrors(data);
       }
-   }
-
+   };
 
    return (
       <div>
          <h4>Channels...</h4>
-         <CreateChannelModal />
+         {sessionUser?.id === servers[serverId]?.owner_id && (
+            <>
+               <CreateChannelModal />
+            </>
+         )}
          {serverChannelsArr.map(channel => (
             <div key={channel.id}>
                <span>
@@ -45,7 +45,7 @@ const ServerChannelList = () => {
                      {channel.name}
                   </NavLink>
                </span>
-               {sessionUser.id === servers[serverId].owner_id && (
+               {sessionUser?.id === servers[serverId]?.owner_id && (
                   <>
                      <EditChannelModal channelId={channel?.id} />
                      <button onClick={handleDelete} value={channel?.id}>
