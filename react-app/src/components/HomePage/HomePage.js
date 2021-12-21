@@ -22,7 +22,7 @@ const HomePage = () => {
 
    return (
       <div className='main-container'>
-         <div>
+         <div className='left-pane'>
             <ServerListComponent />
          </div>
          <div className='server-info-container'>
@@ -34,7 +34,7 @@ const HomePage = () => {
             </Switch>
             <LogoutButton />
          </div>
-         <div>
+         <div className='right-pane'>
             <Switch>
                <Route exact path={["/servers/:serverId"]}>
                   <HeaderRightComponent />
