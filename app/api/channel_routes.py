@@ -1,9 +1,7 @@
-from logging import log
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import EditChannelForm, CreateMessageForm
-from app.models import db, Server, members, Channel, Message
-from app.models.user import User
+from app.models import db, Server, members, Channel, Message, User
 
 channel_routes = Blueprint('channels', __name__)
 
