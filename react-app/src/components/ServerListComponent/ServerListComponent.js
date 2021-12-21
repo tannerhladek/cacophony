@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 // component imports
@@ -13,7 +12,6 @@ import { getServersThunk } from '../../store/servers';
 import './ServerListComponent.css'
 
 const ServerListComponent = () => {
-   const history = useHistory();
    const dispatch = useDispatch();
    const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers)

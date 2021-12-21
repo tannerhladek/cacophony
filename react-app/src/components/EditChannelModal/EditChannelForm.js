@@ -22,7 +22,6 @@ const EditChannelForm = ({ hideForm, channelId }) => {
          id: channelId,
          name: channelName,
       };
-      console.log(payload, '===========')
       const data = await dispatch(editChannelThunk(payload));
       if (!data) {
          hideForm()
