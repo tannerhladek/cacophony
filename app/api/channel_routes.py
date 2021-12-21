@@ -1,7 +1,7 @@
 from logging import log
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.forms import EditChannelForm
+from app.forms import EditChannelForm, CreateMessageForm
 from app.models import db, Server, members, Channel, Message
 from app.models.user import User
 
@@ -16,17 +16,6 @@ def validation_errors_to_error_messages(validation_errors):
       for error in validation_errors[field]:
          errorMessages.append(f'{error}')
    return errorMessages
-
-
-# get messages for a given channel
-@channel_routes.route('/<int:id>/messages')
-@login_required
-def getChannelMessages(id):
-   messages = Message.query.filter(int(id) == Message.channel_id).order_by(Message.created_at).all()
-   return {
-      'channel_id': id,
-      'messages': {message.to_dict()['id']:message.to_dict() for message in messages}
-   }
 
 
 # delete a channel route
@@ -60,5 +49,35 @@ def editChannel(id):
       channel.name = form.data['name']
       db.session.commit()
       return channel.to_dict()
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# get messages for a given channel
+@channel_routes.route('/<int:id>/messages')
+@login_required
+def getChannelMessages(id):
+   messages = Message.query.filter(int(id) == Message.channel_id).order_by(Message.created_at).all()
+   return {
+      'channel_id': id,
+      'messages': {message.to_dict()['id']:message.to_dict() for message in messages}
+   }
+
+
+# create message for a given channel
+@channel_routes.route('/<int:id>/messages/new', methods=["POST"])
+@login_required
+def createMessage(id):
+   form = CreateMessageForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      message = Message(
+         user_id = int(current_user.get_id()),
+         channel_id = id,
+         content = form.data['content']
+      )
+      db.session.add(message)
+      db.session.commit()
+      return message.to_dict()
    else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401

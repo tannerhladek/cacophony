@@ -5,3 +5,9 @@
    height: 100%;
    color: rgb(142, 146, 151);
 }
+
+.right-pane {
+   height: 100vh;
+   display: grid;
+   grid-template-rows: 50px 20fr;
+}
