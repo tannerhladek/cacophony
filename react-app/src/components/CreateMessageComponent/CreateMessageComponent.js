@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
 // thunk import
-// import { addChannelThunk } from '../../store/servers'
+import { addChannelMessageThunk } from '../../store/messages';
 
 // styles imports
 import './CreateMessageComponent.css'
@@ -21,12 +21,12 @@ const CreateMessageForm = () => {
          content: messageContent,
          channelId
       }
-      // const data = await dispatch(addChannelThunk(payload));
-      // if (!data) {
-      //    hideForm()
-      // } else {
-      //    setErrors(data)
-      // }
+      const data = await dispatch(addChannelMessageThunk(payload));
+      if (data) {
+         setErrors(data);
+      } else {
+         setMessageContent('')
+      }
    };
 
    return (

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 // component imports
-import CreateMessageForm from "../CreateMessageComponent";
+import CreateMessageForm from "../CreateMessageComponent/CreateMessageComponent";
 
 // thunk import
 import { getChannelMessagesThunk } from "../../store/messages";
