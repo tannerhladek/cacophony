@@ -18,10 +18,6 @@ const ServerChannelList = () => {
    const [errors, setErrors] = useState([]);
 
    const serverChannelsArr = Object.assign([], serverChannels);
-   // const serverChannelsArrSorted = serverChannelsArr.sort((a,b) => {
-   //    if (b.owner_id === sessionUser.id) return -1
-   //    else return 1
-   // });
 
    const handleDelete = async (e) => {
       const data = await dispatch(deleteChannelThunk(e.target.value));

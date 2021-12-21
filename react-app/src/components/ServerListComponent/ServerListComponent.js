@@ -20,7 +20,8 @@ const ServerListComponent = () => {
    const [loaded, setLoaded] = useState(true);
 
    const serversArr = Object.values(servers).sort((a,b) => {
-      if (b.owner_id === sessionUser.id) return 
+      if (b.owner_id === sessionUser.id) return 1
+      else return -1
    })
 
    useEffect(() => {
