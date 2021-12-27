@@ -1,6 +1,8 @@
 // const declarations
 const GET_CHANNEL_MESSAGES = 'messages/GET_MESSAGES';
 const ADD_MESSAGE = 'messages/ADD_MESSAGE';
+const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
+const EDIT_MESSAGE = 'messages/EDIT_MESSAGES';
 
 
 // action creators
@@ -12,7 +14,17 @@ const getChannelMessages = (data) => ({
 const addMessage = (data) => ({
    type: ADD_MESSAGE,
    payload: data
-})
+});
+
+const deleteMessage = (data) => ({
+   type: DELETE_MESSAGE,
+   payload: data
+});
+
+const editMessage = (data) => ({
+   type: EDIT_MESSAGE,
+   payload: data
+});
 
 
 // thunk declarations
@@ -45,6 +57,44 @@ export const addChannelMessageThunk = (payload) => async (dispatch) => {
    }
 };
 
+export const deleteMessageThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`/api/messages/${payload.id}/delete`, {
+      method: "DELETE"
+   });
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(deleteMessage(data));
+      return
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
+
+export const editMessageThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`/api/messages/${payload.id}/edit`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+   });
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(editMessage(data));
+      return
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
+
 
 // reducer
 const inistialState = {}
@@ -52,21 +102,30 @@ const messagesReducer = (state = inistialState, action) => {
    switch (action.type) {
       case GET_CHANNEL_MESSAGES: {
          const channelId = action.payload.channel_id
-         const newState = {
-            ...state
-         }
+         const newState = { ...state }
          newState[channelId] = { ...action.payload.messages }
          return newState;
       }
       case ADD_MESSAGE: {
-         console.log(action.payload, '============ ACTION PAYLOAD')
          const message = action.payload;
-         const newState = {
-            ...state
-         }
-         newState[message.channel_id] = {...state[message.channel_id]}
-         newState[message.channel_id][message.id] = {...message}
-         return newState
+         const newState = { ...state }
+         newState[message.channel_id] = { ...state[message.channel_id] };
+         newState[message.channel_id][message.id] = { ...message };
+         return newState;
+      }
+      case DELETE_MESSAGE: {
+         const channelId = action.payload.channel_id;
+         const messageId = action.payload.message_id;
+         const newState = { ...state };
+         delete newState[channelId][messageId];
+         return newState;
+      }
+      case EDIT_MESSAGE: {
+         const message = action.payload;
+         const newState = { ...state }
+         newState[message.channel_id] = { ...state[message.channel_id] };
+         newState[message.channel_id][message.id] = { ...message };
+         return newState;
       }
       default:
          return state
