@@ -27,7 +27,8 @@ def deleteMessage(id):
       db.session.commit()
       return {
          'message': f'message deletion success',
-         'channel_id': channelId
+         'channel_id': channelId,
+         'message_id': message.id
       }
    else:
       return {'errors': [f'Not authorized to delete message {message.id}']}, 401

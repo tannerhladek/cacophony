@@ -8,6 +8,7 @@ import SingleMessageComponent from "./SingleMessageComponent";
 
 // thunk import
 import { getChannelMessagesThunk } from "../../store/messages";
+import { deleteMessageThunk } from "../../store/messages";
 
 // style import
 import './MessagesComponent.css';
@@ -16,9 +17,10 @@ import './MessagesComponent.css';
 const MessagesComponent = () => {
    const dispatch = useDispatch();
    const { channelId } = useParams();
-   const channelMessages = useSelector(state => state.messages[channelId]);
+   const messages = useSelector(state => state.messages);
    const [loaded, setLoaded] = useState(false);
 
+   const channelMessages = messages[channelId];
    const channelMessagesArr = Object.assign([], channelMessages);
    const channelMessagesArrsorted = channelMessagesArr.sort((a, b) => {
       return new Date(a.created_at) - new Date(b.created_at)
@@ -29,7 +31,10 @@ const MessagesComponent = () => {
          await dispatch(getChannelMessagesThunk(channelId));
          setLoaded(true)
       })()
-   }, [dispatch, channelId])
+   }, [dispatch, channelId]);
+
+   console.log(channelMessages, 'CHANNEL MESSAGES ===================>')
+
 
    if (!loaded) {
       return null

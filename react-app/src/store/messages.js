@@ -88,9 +88,11 @@ const messagesReducer = (state = inistialState, action) => {
          return newState
       }
       case DELETE_MESSAGE: {
-         console.log(action.payload, '============ ACTION PAYLOAD');
+         const channelId = action.payload.channel_id;
+         const messageId = action.payload.message_id;
          const newState = { ...state };
-         return newState
+         delete newState[channelId][messageId];
+         return newState;
       }
       default:
          return state
