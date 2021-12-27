@@ -11,3 +11,15 @@
    display: grid;
    grid-template-rows: 50px 20fr;
 }
+
+.server-info-container {
+   padding-top: 5px;
+   padding-right: 5px;
+   padding-left: 5px;
+}
+
+#header-right {
+   padding-top: 5px;
+   padding-right: 5px;
+   padding-left: 5px;
+}
