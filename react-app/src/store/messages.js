@@ -2,6 +2,7 @@
 const GET_CHANNEL_MESSAGES = 'messages/GET_MESSAGES';
 const ADD_MESSAGE = 'messages/ADD_MESSAGE';
 const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
+const EDIT_MESSAGE = 'messages/EDIT_MESSAGES';
 
 
 // action creators
@@ -18,7 +19,12 @@ const addMessage = (data) => ({
 const deleteMessage = (data) => ({
    type: DELETE_MESSAGE,
    payload: data
-})
+});
+
+const editMessage = (data) => ({
+   type: EDIT_MESSAGE,
+   payload: data
+});
 
 
 // thunk declarations
@@ -67,7 +73,27 @@ export const deleteMessageThunk = (payload) => async (dispatch) => {
    } else {
       return ['An error occurred. Please try again.']
    }
-}
+};
+
+export const editMessageThunk = (payload) => async (dispatch) => {
+   const res = await fetch(`/api/messages/${payload.id}/edit`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+   });
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(editMessage(data));
+      return
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
 
 
 // reducer
@@ -83,15 +109,22 @@ const messagesReducer = (state = inistialState, action) => {
       case ADD_MESSAGE: {
          const message = action.payload;
          const newState = { ...state }
-         newState[message.channel_id] = { ...state[message.channel_id] }
-         newState[message.channel_id][message.id] = { ...message }
-         return newState
+         newState[message.channel_id] = { ...state[message.channel_id] };
+         newState[message.channel_id][message.id] = { ...message };
+         return newState;
       }
       case DELETE_MESSAGE: {
          const channelId = action.payload.channel_id;
          const messageId = action.payload.message_id;
          const newState = { ...state };
          delete newState[channelId][messageId];
+         return newState;
+      }
+      case EDIT_MESSAGE: {
+         const message = action.payload;
+         const newState = { ...state }
+         newState[message.channel_id] = { ...state[message.channel_id] };
+         newState[message.channel_id][message.id] = { ...message };
          return newState;
       }
       default:

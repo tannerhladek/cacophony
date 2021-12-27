@@ -33,9 +33,6 @@ const MessagesComponent = () => {
       })()
    }, [dispatch, channelId]);
 
-   console.log(channelMessages, 'CHANNEL MESSAGES ===================>')
-
-
    if (!loaded) {
       return null
    } else {

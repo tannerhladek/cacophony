@@ -22,7 +22,7 @@ def validation_errors_to_error_messages(validation_errors):
 def deleteMessage(id):
    message = Message.query.get(id)
    channelId = message.channel_id
-   if int(message.user_id) ==int(current_user.get_id()):
+   if int(message.user_id) == int(current_user.get_id()):
       db.session.delete(message)
       db.session.commit()
       return {
@@ -32,3 +32,23 @@ def deleteMessage(id):
       }
    else:
       return {'errors': [f'Not authorized to delete message {message.id}']}, 401
+
+
+# edit a message route
+@message_routes.route('/<int:id>/edit', methods=["PUT"])
+@login_required
+def editMessage(id):
+   message = Message.query.get(id)
+   channelId = message.channel_id
+   if int(message.user_id) == int(current_user.get_id()):
+      form = EditMessageForm()
+      form['csrf_token'].data = request.cookies['csrf_token']
+      if form.validate_on_submit():
+         message.content = form.data['content']
+         db.session.commit()
+         return message.to_dict()
+      else:
+         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+   else:
+      return {'errors': [f'Not authorized to edit message {message.id}']}, 401
+
