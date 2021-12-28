@@ -1,5 +1,5 @@
 .channels-container {
-padding: 15px 3px;
+   padding: 15px 3px;
 }
 
 #channel-title-div {
@@ -30,7 +30,7 @@ padding: 15px 3px;
 }
 
 .single-channel-name-div:hover {
-   background-color: whitesmoke;
+   background-color: rgba(245, 245, 245, 0.1);
 }
 
 #settings-icon:hover {

@@ -19,26 +19,29 @@ const ServerChannelList = () => {
    const serverChannelsArr = Object.assign([], serverChannels);
 
    return (
-      <div className="channels-container">
-         <div id='channel-title-div'>
-            <span>CHANNELS</span>
-            {sessionUser?.id === servers[serverId]?.owner_id && (
-               <>
-                  <CreateChannelModal />
-               </>
-            )}
-         </div>
-         {serverChannelsArr.map(channel => (
-            <NavLink key={channel.id} className="single-channel-name-div" to={`/servers/${serverId}/channels/${channel.id}`}>
-               {channel.name}
+      <div className="channels-mega-container">
+         <div className="channels-container">
+            <div id='channel-title-div'>
+               <span>CHANNELS</span>
                {sessionUser?.id === servers[serverId]?.owner_id && (
                   <>
-                     <EditChannelModal channelId={channel?.id} />
+                     <CreateChannelModal />
                   </>
                )}
-            </NavLink>
-         ))}
+            </div>
+            {serverChannelsArr.map(channel => (
+               <NavLink key={channel.id} className="single-channel-name-div" to={`/servers/${serverId}/channels/${channel.id}`}>
+                  {channel.name}
+                  {sessionUser?.id === servers[serverId]?.owner_id && (
+                     <>
+                        <EditChannelModal channelId={channel?.id} />
+                     </>
+                  )}
+               </NavLink>
+            ))}
+         </div>
       </div>
+
    )
 
 };

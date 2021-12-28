@@ -1,16 +1,13 @@
-import { useState, useEffect } from 'react';
-import { Route, Switch, useHistory } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
 
 // component imports
-import LogoutButton from '../auth/LogoutButton'
+import UserDetails from '../UserDetailsComponent/UserDetailsComponent';
 import ServerListComponent from '../ServerListComponent/ServerListComponent';
 import ServerChannelList from '../ServerChannelListComponent/ServerChannelListComponent';
 import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComponent';
 import HeaderRightComponent from '../HeaderRightComponent/HeaderRightComponent';
 import MessagesComponent from '../MessagesComponent/MessagesComponent';
 
-// thunk import
 
 // import styles
 import './HomePage.css'
@@ -32,7 +29,7 @@ const HomePage = () => {
                   <ServerChannelList />
                </Route>
             </Switch>
-            <LogoutButton />
+            <UserDetails />
          </div>
          <div className='right-pane'>
             <Switch>
