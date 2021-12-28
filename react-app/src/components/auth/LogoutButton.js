@@ -5,6 +5,7 @@ import { logout } from '../../store/session';
 
 // thunk import
 import { removeServersThunk } from '../../store/servers';
+import { removeMessagesThunk } from '../../store/messages';
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ const LogoutButton = () => {
   const onLogout = async (e) => {
     await dispatch(logout());
     await dispatch(removeServersThunk());
+    await dispatch(removeMessagesThunk());
     return history.push('/')
   };
 

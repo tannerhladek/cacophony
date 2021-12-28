@@ -3,6 +3,7 @@ const GET_CHANNEL_MESSAGES = 'messages/GET_MESSAGES';
 const ADD_MESSAGE = 'messages/ADD_MESSAGE';
 const DELETE_MESSAGE = 'messages/DELETE_MESSAGE';
 const EDIT_MESSAGE = 'messages/EDIT_MESSAGES';
+const REMOVE_MESSAGES = 'messages/REMOVE_MESSAGES';
 
 
 // action creators
@@ -25,6 +26,10 @@ const editMessage = (data) => ({
    type: EDIT_MESSAGE,
    payload: data
 });
+
+const removeMessages = () => ({
+   type: REMOVE_MESSAGES
+})
 
 
 // thunk declarations
@@ -95,6 +100,11 @@ export const editMessageThunk = (payload) => async (dispatch) => {
    }
 };
 
+export const removeMessagesThunk = () => (dispatch) => {
+   dispatch(removeMessages());
+   return null
+};
+
 
 // reducer
 const inistialState = {}
@@ -126,6 +136,9 @@ const messagesReducer = (state = inistialState, action) => {
          newState[message.channel_id] = { ...state[message.channel_id] };
          newState[message.channel_id][message.id] = { ...message };
          return newState;
+      }
+      case REMOVE_MESSAGES: {
+         return {};
       }
       default:
          return state
