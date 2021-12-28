@@ -1,3 +1,7 @@
+.create-message-form-parent-container {
+   grid-row: 3;
+}
+
 .create-message-form-input {
    width: 100%;
 }

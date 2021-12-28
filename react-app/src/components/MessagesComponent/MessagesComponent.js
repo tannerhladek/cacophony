@@ -3,12 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 
 // component imports
-import CreateMessageForm from "../CreateMessageComponent/CreateMessageComponent";
 import SingleMessageComponent from "./SingleMessageComponent";
 
 // thunk import
 import { getChannelMessagesThunk } from "../../store/messages";
-import { deleteMessageThunk } from "../../store/messages";
 
 // style import
 import './MessagesComponent.css';
@@ -42,9 +40,6 @@ const MessagesComponent = () => {
                {channelMessagesArrsorted.map(message => (
                   <SingleMessageComponent message={message} key={message.id}/>
                ))}
-            </div>
-            <div>
-               <CreateMessageForm />
             </div>
          </div>
       )

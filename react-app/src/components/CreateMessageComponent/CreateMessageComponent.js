@@ -30,7 +30,7 @@ const CreateMessageForm = () => {
    };
 
    return (
-      <>
+      <div id='create-message-form-parent-container'>
          <form onSubmit={createMessage}>
             <div>
                {errors.map((error, ind) => (
@@ -46,7 +46,7 @@ const CreateMessageForm = () => {
                className='create-message-form-input'
             ></input>
          </form>
-      </>
+      </div>
    );
 
 };

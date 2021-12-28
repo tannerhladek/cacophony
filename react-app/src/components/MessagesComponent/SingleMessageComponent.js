@@ -23,10 +23,12 @@ const SingleMessageComponent = ({ message }) => {
       <div className="single-message-parent-container">
          {/* TO DO: insert profile image component */}
          <div className="message-user-profile-image">
-            <img src={message.user.profile_image_url}/>
+            <img src={message.user.profile_image_url} />
          </div>
          <div className="message-info">
-            <h4>{message.user.username}</h4>
+            <div>
+               {message.user.username}
+            </div>
             {!showMessageEditForm && (
                <>
                   <p>

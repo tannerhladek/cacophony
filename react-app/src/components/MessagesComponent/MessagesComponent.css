@@ -11,13 +11,14 @@
    grid-template-areas:
    "image name date options"
    "image text text text";
+   grid-column-gap: 10px;
 }
 
 .message-user-profile-image {
-   height: 50px;
-   width: 50px;
+   height: 35px;
+   width: 35px;
    grid-area: 'image';
-   margin-right: 10px;
+   align-self: center;
    object-fit: cover;
 }
 

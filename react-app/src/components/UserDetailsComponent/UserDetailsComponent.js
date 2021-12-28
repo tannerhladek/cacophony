@@ -17,8 +17,13 @@ const UserDetails = () => {
    return (
       <div id='user-details-parent-container'>
          <div id='user-details-container'>
-            User details comp.
-            <SettingsIcon onClick={handleVisibility} className='settings-icon' id='user-settings-icon'/>
+            <div className="user-profile-image">
+               <img src={sessionUser.profile_image_url} />
+            </div>
+            <div>
+               {sessionUser.username}
+            </div>
+            <SettingsIcon onClick={handleVisibility} className='settings-icon' id='user-settings-icon' />
          </div>
          {divVisibility && (
             <div id='logout-btn-container'>
