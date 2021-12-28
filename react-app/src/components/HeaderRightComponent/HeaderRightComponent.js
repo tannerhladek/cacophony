@@ -12,9 +12,8 @@ const HeaderRightComponent = () => {
    const channel = servers[serverId]?.channels[channelId]
 
    return (
-      <div id='header-right'>
-         {/* Header Right, serverId: {serverId}, channelId: {channelId} */}
-         <h1>{channel?.name}</h1>
+      <div id='header-right-parent-container'>
+         <div>{channel?.name}</div>
       </div>
    )
 };

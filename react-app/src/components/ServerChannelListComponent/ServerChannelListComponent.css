@@ -28,12 +28,12 @@
    align-items: center;
    height: 30px;
    border-radius: 3px;
-   transition-duration: .1s;
+   transition-duration: .05s;
 }
 
 .single-channel-name-div svg {
    visibility: hidden;
-   transition-duration: .1s;
+   transition-duration: .05s;
 }
 
 .single-channel-name-div:hover {
