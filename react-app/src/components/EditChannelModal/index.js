@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 // component import
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Modal } from '../../context/Modal';
 import EditChannelForm from './EditChannelForm';
 
@@ -9,14 +10,14 @@ function EditChannelModal({ channelId }) {
    const hideForm = () => setShowModal(false)
 
    return (
-      <span>
-         <button onClick={(e) => setShowModal(true)}>Edit</button>
+      <>
+         <SettingsIcon onClick={(e) => setShowModal(true)} id='settings-icon'/>
          {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                <EditChannelForm hideForm={hideForm} channelId={channelId} />
             </Modal>
          )}
-      </span>
+      </>
    );
 }
 

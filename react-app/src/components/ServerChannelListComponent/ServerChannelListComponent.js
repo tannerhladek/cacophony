@@ -6,8 +6,8 @@ import { useParams, NavLink } from "react-router-dom";
 import CreateChannelModal from "../CreateChannelModal";
 import EditChannelModal from "../EditChannelModal";
 
-// thunk import
-import { deleteChannelThunk } from "../../store/servers";
+// styles import
+import './ServerChannelListComponent.css'
 
 const ServerChannelList = () => {
    const dispatch = useDispatch();
@@ -15,43 +15,33 @@ const ServerChannelList = () => {
    const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
    const serverChannels = useSelector(state => state.servers[serverId]?.channels);
-   const [errors, setErrors] = useState([]);
 
    const serverChannelsArr = Object.assign([], serverChannels);
 
-   const handleDelete = async (e) => {
-      const data = await dispatch(deleteChannelThunk(e.target.value));
-      if (data) {
-         setErrors(data);
-      }
-   };
-
    return (
-      <div>
-         <h4>Channels...</h4>
-         {sessionUser?.id === servers[serverId]?.owner_id && (
-            <>
-               <CreateChannelModal />
-            </>
-         )}
-         {serverChannelsArr.map(channel => (
-            <div key={channel.id}>
-               <span>
-                  <NavLink to={`/servers/${serverId}/channels/${channel.id}`}>
-                     {channel.name}
-                  </NavLink>
-               </span>
+      <div className="channels-mega-container">
+         <div className="channels-container">
+            <div id='channel-title-div'>
+               <span>CHANNELS</span>
                {sessionUser?.id === servers[serverId]?.owner_id && (
                   <>
-                     <EditChannelModal channelId={channel?.id} />
-                     <button onClick={handleDelete} value={channel?.id}>
-                        Delete
-                     </button>
+                     <CreateChannelModal />
                   </>
                )}
             </div>
-         ))}
+            {serverChannelsArr.map(channel => (
+               <NavLink key={channel.id} className="single-channel-name-div" to={`/servers/${serverId}/channels/${channel.id}`}>
+                  {channel.name}
+                  {sessionUser?.id === servers[serverId]?.owner_id && (
+                     <>
+                        <EditChannelModal channelId={channel?.id} />
+                     </>
+                  )}
+               </NavLink>
+            ))}
+         </div>
       </div>
+
    )
 
 };

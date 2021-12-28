@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 // component import
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Modal } from '../../context/Modal';
 import EditServerForm from './EditServerForm';
 
@@ -9,14 +10,14 @@ function EditServerModal() {
    const hideForm = () => setShowModal(false)
 
    return (
-      <span>
-         <button onClick={(e) => setShowModal(true)}>Edit</button>
+      <>
+         <KeyboardArrowDownIcon onClick={(e) => setShowModal(true)} id='settings-icon'/>
          {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                <EditServerForm hideForm={hideForm} />
             </Modal>
          )}
-      </span>
+      </>
    );
 }
 

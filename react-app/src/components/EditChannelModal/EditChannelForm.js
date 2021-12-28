@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useParams } from 'react-router-dom';
 
 // thunk import
-import { editChannelThunk } from '../../store/servers';
+import { editChannelThunk, deleteChannelThunk } from '../../store/servers';
 
 // styles imports
 
@@ -30,6 +30,13 @@ const EditChannelForm = ({ hideForm, channelId }) => {
       }
    };
 
+   const handleDelete = async (e) => {
+      const data = await dispatch(deleteChannelThunk(e.target.value));
+      if (data) {
+         setErrors(data);
+      }
+   };
+
    return (
       <div className='channel-form-modal-container'>
          <div className='channel-form-container'>
@@ -51,6 +58,9 @@ const EditChannelForm = ({ hideForm, channelId }) => {
                </div>
                <button type='submit'>Submit Edits</button>
             </form>
+            <button onClick={handleDelete} value={channel?.id}>
+               Delete
+            </button>
             <button onClick={hideForm}>Cacnel</button>
          </div>
       </div>

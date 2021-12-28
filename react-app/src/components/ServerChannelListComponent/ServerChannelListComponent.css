@@ -1,0 +1,38 @@
+.channels-container {
+   padding: 15px 3px;
+}
+
+#channel-title-div {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 35px;
+}
+
+#channel-title-div span{
+   font-weight: bold;
+   color: white;
+}
+
+.AddIcon {
+   cursor: pointer;
+   color: white;
+}
+
+.single-channel-name-div {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 30px;
+   border-radius: 3px;
+   padding: 0px 2px;
+   transition-duration: .1s;
+}
+
+.single-channel-name-div:hover {
+   background-color: rgba(245, 245, 245, 0.1);
+}
+
+#settings-icon:hover {
+   fill: white;
+}

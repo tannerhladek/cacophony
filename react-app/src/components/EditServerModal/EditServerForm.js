@@ -1,15 +1,16 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 // thunk import
-import { editServerThunk } from '../../store/servers';
+import { editServerThunk, deleteServerThunk } from '../../store/servers';
 
 // styles imports
 
 const EditServerForm = ({ hideForm }) => {
    const { serverId } = useParams();
    const dispatch = useDispatch();
+   const history = useHistory();
    const servers = useSelector(state => state.servers);
    const [errors, setErrors] = useState([]);
 
@@ -35,6 +36,11 @@ const EditServerForm = ({ hideForm }) => {
       } else {
          setErrors(data)
       }
+   };
+
+   const handleServerDeletion = async () => {
+      const data = await dispatch(deleteServerThunk(serverId));
+      return history.push('/');
    };
 
    return (
@@ -67,6 +73,7 @@ const EditServerForm = ({ hideForm }) => {
                </div>
                <button type='submit'>Submit Edits</button>
             </form>
+            <button onClick={handleServerDeletion}>Delete</button>
             <button onClick={hideForm}>Cacnel</button>
          </div>
       </div>
