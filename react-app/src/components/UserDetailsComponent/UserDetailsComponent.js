@@ -18,7 +18,7 @@ const UserDetails = () => {
       <div id='user-details-parent-container'>
          <div id='user-details-container'>
             User details comp.
-            <SettingsIcon onClick={handleVisibility} />
+            <SettingsIcon onClick={handleVisibility} className='settings-icon' id='user-settings-icon'/>
          </div>
          {divVisibility && (
             <div id='logout-btn-container'>

@@ -45,6 +45,7 @@
    background-color: rgb(37, 38, 42);
 }
 
+
 #user-details-container {
    width: 100%;
    display: flex;
@@ -56,14 +57,18 @@
    position: absolute;
    z-index: 3;
    bottom: 60px;
-   /* width: 100%; */
+   height: auto;
+   width: 220px;
+   padding: 10px;
+   border-radius: 5px;
+   background-color: rgb(32, 34, 37);
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
 #logout-btn {
    height: 35px;
-   /* width: 80%; */
+   width: 100%;
    border: none;
-   margin-top: 25px;
    background-color: rgb(189, 69, 66);
    color: white;
    border-radius: 5px;

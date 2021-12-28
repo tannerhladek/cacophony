@@ -31,10 +31,25 @@
    transition-duration: .1s;
 }
 
+.single-channel-name-div svg {
+   visibility: hidden;
+   transition-duration: .1s;
+}
+
 .single-channel-name-div:hover {
    background-color: rgba(245, 245, 245, 0.1);
 }
 
-#settings-icon:hover {
+.single-channel-name-div:hover svg {
+   visibility: visible;
+}
+
+
+.single-channel-name-div:hover {
+   background-color: rgba(245, 245, 245, 0.1);
+}
+
+
+.settings-icon:hover {
    fill: white;
 }

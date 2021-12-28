@@ -11,7 +11,7 @@ function EditServerModal() {
 
    return (
       <>
-         <KeyboardArrowDownIcon onClick={(e) => setShowModal(true)} id='settings-icon'/>
+         <KeyboardArrowDownIcon onClick={(e) => setShowModal(true)} className='settings-icon'/>
          {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                <EditServerForm hideForm={hideForm} />

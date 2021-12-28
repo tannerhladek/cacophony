@@ -11,7 +11,7 @@ function EditChannelModal({ channelId }) {
 
    return (
       <>
-         <SettingsIcon onClick={(e) => setShowModal(true)} id='settings-icon'/>
+         <SettingsIcon onClick={(e) => setShowModal(true)} className='settings-icon'/>
          {showModal && (
             <Modal onClose={() => setShowModal(false)}>
                <EditChannelForm hideForm={hideForm} channelId={channelId} />
