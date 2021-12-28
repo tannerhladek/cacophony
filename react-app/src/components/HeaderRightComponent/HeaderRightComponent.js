@@ -7,7 +7,6 @@ import './HeaderRightComponent.css'
 
 const HeaderRightComponent = () => {
    const { serverId, channelId } = useParams();
-   const sessionUser = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
 
    const channel = servers[serverId]?.channels[channelId]
@@ -15,7 +14,7 @@ const HeaderRightComponent = () => {
    return (
       <div id='header-right'>
          {/* Header Right, serverId: {serverId}, channelId: {channelId} */}
-         <h1># {channel?.name}</h1>
+         <h1>{channel?.name}</h1>
       </div>
    )
 };

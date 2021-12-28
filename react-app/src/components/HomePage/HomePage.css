@@ -13,9 +13,9 @@
 }
 
 .server-info-container {
-   padding-top: 5px;
+   /* padding-top: 5px;
    padding-right: 5px;
-   padding-left: 5px;
+   padding-left: 5px; */
    background-color: rgb(47, 49, 53);
    display: flex;
    flex-direction: column;
@@ -23,27 +23,51 @@
 }
 
 #server-details {
-   height: 50px;
+   padding: 10px 10px;
    border-bottom: solid 2px rgb(32, 33, 37);
    display: flex;
    justify-content: space-between;
    align-items: center;
+   height: 60px;
 }
 
-.channels-mega-container {
+.channels-parent-container {
    display: flex;
    flex-direction: column;
    height: 100%;
    overflow-y: scroll;
+   position: relative;
 }
 
-#user-details-component {
+#user-details-parent-container {
    height: 50px;
+   padding: 10px;
+   background-color: rgb(37, 38, 42);
+}
+
+#user-details-container {
    width: 100%;
    display: flex;
    align-items: center;
    justify-content: space-between;
-   padding: 0px 3px;
+}
+
+#logout-btn-container {
+   position: absolute;
+   z-index: 3;
+   bottom: 60px;
+   /* width: 100%; */
+}
+
+#logout-btn {
+   height: 35px;
+   /* width: 80%; */
+   border: none;
+   margin-top: 25px;
+   background-color: rgb(189, 69, 66);
+   color: white;
+   border-radius: 5px;
+   cursor: pointer;
 }
 
 #header-right {

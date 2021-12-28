@@ -1,5 +1,5 @@
 .channels-container {
-   padding: 15px 3px;
+   padding: 15px 10px;
 }
 
 #channel-title-div {
@@ -16,7 +16,10 @@
 
 .AddIcon {
    cursor: pointer;
-   color: white;
+}
+
+.AddIcon:hover {
+   fill: white;
 }
 
 .single-channel-name-div {
@@ -25,7 +28,6 @@
    align-items: center;
    height: 30px;
    border-radius: 3px;
-   padding: 0px 2px;
    transition-duration: .1s;
 }
 
