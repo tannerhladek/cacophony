@@ -10,6 +10,10 @@
    height: 100vh;
    display: grid;
    grid-template-rows: 50px auto 50px;
+   grid-template-areas:
+   'header-right'
+   'messages'
+   'create-message';
 }
 
 .server-info-container {

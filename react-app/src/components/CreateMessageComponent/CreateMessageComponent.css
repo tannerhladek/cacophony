@@ -1,6 +1,7 @@
 #create-message-form-parent-container {
    padding-left: 10px;
    padding-right: 10px;
+   grid-area: create-message;
 }
 
 .create-message-form-input {
