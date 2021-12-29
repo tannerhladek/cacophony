@@ -27,6 +27,7 @@
 
 .splash-nav-bar ul {
    list-style: none;
+   justify-self: center;
    display: flex;
    justify-content: space-between;
    height: 60px;
@@ -85,7 +86,7 @@
    background-color: rgb(90, 100, 234);
    color: white;
    border-radius: 60px;
-   padding: 10px 12px;
+   padding: 8px 10px;
    cursor: pointer;
    justify-self: center;
    transition-duration: .25s;
@@ -134,4 +135,20 @@
    grid-area: external-links;
    width: 100%;
    align-self: center;
+}
+
+.splash-footer-li a {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   justify-self: center;
+}
+
+.splash-footer-container {
+   grid-area: external-links;
+   justify-self: center;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
