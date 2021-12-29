@@ -27,18 +27,18 @@ const SingleMessageComponent = ({ message }) => {
             <img src={message.user.profile_image_url} />
          </div>
          <div className="message-info">
-            <div>
+            <div id='msg-username-container'>
                {message.user.username}
             </div>
             {!showMessageEditForm && (
                <>
-                  <p>
+                  <div id='msg-content'>
                      {message.content}
-                  </p>
+                  </div>
                   {sessionUser.id === message.user.id && (
-                     <div>
-                        <DeleteForeverIcon onClick={handleMessageDelete} id='delete-msg-icon'/>
-                        <EditIcon onClick={() => setShowMessageEditForm(true)} id='edit-msg-icon'/>
+                     <div id='msg-editing-icon-container'>
+                        <DeleteForeverIcon onClick={handleMessageDelete} id='delete-msg-icon' />
+                        <EditIcon onClick={() => setShowMessageEditForm(true)} id='edit-msg-icon' />
                      </div>
                   )}
                </>
