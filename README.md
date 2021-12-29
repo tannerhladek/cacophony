@@ -17,7 +17,6 @@ The app includes the following four features: full CRUD for servers, full CRUD f
 * Create a message within a channel
 * Edit a message
 * Delete a message
-* Unfollow other users by clicking the unfollow button on their profile page
 
 ## Backend
 All backend routes were designed in Flask using Python coding language
