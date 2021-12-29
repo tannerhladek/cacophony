@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 // component import
 import EditSingleMessage from "./EditSingleMessageComponent";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 // thunk import
 import { deleteMessageThunk } from "../../store/messages";
@@ -21,7 +23,6 @@ const SingleMessageComponent = ({ message }) => {
 
    return (
       <div className="single-message-parent-container">
-         {/* TO DO: insert profile image component */}
          <div className="message-user-profile-image">
             <img src={message.user.profile_image_url} />
          </div>
@@ -35,10 +36,10 @@ const SingleMessageComponent = ({ message }) => {
                      {message.content}
                   </p>
                   {sessionUser.id === message.user.id && (
-                     <>
-                        <button onClick={handleMessageDelete}>Delete</button>
-                        <button onClick={() => setShowMessageEditForm(true)}>Edit</button>
-                     </>
+                     <div>
+                        <DeleteForeverIcon onClick={handleMessageDelete} id='delete-msg-icon'/>
+                        <EditIcon onClick={() => setShowMessageEditForm(true)} id='edit-msg-icon'/>
+                     </div>
                   )}
                </>
             )}

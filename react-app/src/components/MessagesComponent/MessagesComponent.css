@@ -7,11 +7,17 @@
 }
 
 .single-message-parent-container {
+   padding: 5px;
+   border-radius: 5px;
    display: grid;
    grid-template-areas:
    "image name date options"
    "image text text text";
    grid-column-gap: 10px;
+}
+
+.single-message-parent-container:hover {
+   background-color: rgb(47, 49, 53);
 }
 
 .message-user-profile-image {
@@ -23,5 +29,8 @@
 }
 
 .message-user-profile-image img{
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
    border-radius: 25px;
 }
