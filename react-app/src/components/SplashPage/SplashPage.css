@@ -1,7 +1,36 @@
+#splash-page-container {
+   height: 100vh;
+   background: linear-gradient(rgb(246, 199, 73) 60px, rgb(32, 33, 37));
+   display: grid;
+   grid-template-rows: 60px auto 60px;
+   grid-template-areas:
+   'nav-bar'
+   'splash-content'
+   'external-links';
+}
+
+.splash-nav-container {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.splash-nav-bar {
+   width: 80%;
+   max-width: 950px;
+}
+
 .splash-nav-bar ul {
    list-style: none;
    display: flex;
-   justify-content: space-evenly;
+   justify-content: space-between;
+   height: 60px;
+   align-items: center;
+}
+
+#splash-nav-right {
+   display: flex;
+   gap: 10px;
 }
 
 .login-form-page-container {
@@ -40,16 +69,33 @@
    border-radius: 5px;
 }
 
-#splash-nav-btn {
-   background-color: #fff;
-   border-radius: 50px;
+.splash-nav-btn {
+   background-color: rgb(90, 100, 234);
+   color: white;
+   border-radius: 60px;
    padding: 10px 12px;
    cursor: pointer;
    justify-self: center;
+   transition-duration: .25s;
 }
 
-#splash-nav-btn:hover{
+.splash-nav-btn:hover{
+   color: black;
    background-color: rgb(235, 235, 235);
-   transition-duration: .25s;
    box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
+
+#demo-btn {
+   background-color: rgb(217, 82, 157);
+}
+
+#demo-btn:hover {
+   background-color: rgb(235, 235, 235);
+}
+
+.splash-img-container {
+   height: 500px;
+   width: 500px;
+   grid-area: splash-content;
+   align-self: center;
 }
