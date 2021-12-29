@@ -163,13 +163,17 @@
 }
 
 #splash-tagline {
-   color: white;
+   color: rgb(90, 100, 234);
+   text-shadow: -1px 1px 0 rgb(32, 33, 37),
+   1px 1px 0 rgb(32, 33, 37),
+   1px -1px 0 rgb(32, 33, 37),
+   -1px -1px 0 rgb(32, 33, 37);
    font-size: 80px;
    font-weight: bold;
    line-height: 70px;
 }
 
 #splash-phrase {
-   color: white;
+   /* color: rgb(90, 100, 234); */
    font-weight: bold;
 }
