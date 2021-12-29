@@ -152,3 +152,24 @@
    justify-content: center;
    align-items: center;
 }
+
+.splash-content-container {
+   grid-area: splash-content;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   gap: 30px;
+   width: 80%;
+}
+
+#splash-tagline {
+   color: white;
+   font-size: 80px;
+   font-weight: bold;
+   line-height: 70px;
+}
+
+#splash-phrase {
+   color: white;
+   font-weight: bold;
+}
