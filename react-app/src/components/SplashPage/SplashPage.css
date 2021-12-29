@@ -1,7 +1,48 @@
+#splash-page-container {
+   height: 100vh;
+   min-height: 615px;
+   background: linear-gradient(rgb(246, 199, 73) 60px, rgb(32, 33, 37) 92vh);
+   display: grid;
+   grid-template-rows: 60px auto 60px;
+   grid-template-columns: 1fr 1fr;
+   grid-template-areas:
+   'nav-bar nav-bar'
+   'splash-image splash-content'
+   'external-links external-links';
+}
+
+.splash-nav-container {
+   grid-area: nav-bar;
+   justify-self: center;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}
+
+.splash-nav-bar {
+   width: 80%;
+   max-width: 950px;
+}
+
 .splash-nav-bar ul {
    list-style: none;
    display: flex;
-   justify-content: space-evenly;
+   justify-content: space-between;
+   height: 60px;
+   align-items: center;
+}
+
+#splash-nav-left {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+#splash-nav-right {
+   display: flex;
+   align-items: center;
+   gap: 10px;
 }
 
 .login-form-page-container {
@@ -40,16 +81,57 @@
    border-radius: 5px;
 }
 
-#splash-nav-btn {
-   background-color: #fff;
-   border-radius: 50px;
+.splash-nav-btn {
+   background-color: rgb(90, 100, 234);
+   color: white;
+   border-radius: 60px;
    padding: 10px 12px;
    cursor: pointer;
    justify-self: center;
+   transition-duration: .25s;
 }
 
-#splash-nav-btn:hover{
+.splash-nav-btn:hover{
+   color: black;
    background-color: rgb(235, 235, 235);
-   transition-duration: .25s;
    box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
+
+#demo-btn {
+   background-color: rgb(217, 82, 157);
+}
+
+#demo-btn:hover {
+   background-color: rgb(235, 235, 235);
+}
+
+.splash-img-container {
+   height: 500px;
+   width: 500px;
+   grid-area: splash-image;
+   align-self: center;
+   justify-self: center;
+}
+
+#splash-logo {
+   height: 50px;
+   width: 50px;
+   border: 1px rgb(32, 33, 37);
+}
+
+#logo-title {
+   color: rgb(90, 100, 234);
+   font-size: 35px;
+   font-style: oblique;
+   font-weight: bold;
+   text-shadow: -1px 1px 0 rgb(32, 33, 37),
+   1px 1px 0 rgb(32, 33, 37),
+   1px -1px 0 rgb(32, 33, 37),
+   -1px -1px 0 rgb(32, 33, 37);
+}
+
+#external-links-container {
+   grid-area: external-links;
+   width: 100%;
+   align-self: center;
 }

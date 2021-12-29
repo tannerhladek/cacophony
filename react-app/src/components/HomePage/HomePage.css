@@ -9,7 +9,12 @@
 .right-pane {
    height: 100vh;
    display: grid;
+   background-color: rgb(54, 57, 63);
    grid-template-rows: 50px auto 50px;
+   grid-template-areas:
+   'header-right'
+   'messages'
+   'create-message';
 }
 
 .server-info-container {
