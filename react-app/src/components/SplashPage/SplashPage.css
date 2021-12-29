@@ -1,15 +1,20 @@
 #splash-page-container {
    height: 100vh;
-   background: linear-gradient(rgb(246, 199, 73) 60px, rgb(32, 33, 37));
+   min-height: 615px;
+   background: linear-gradient(rgb(246, 199, 73) 60px, rgb(32, 33, 37) 92vh);
    display: grid;
    grid-template-rows: 60px auto 60px;
+   grid-template-columns: 1fr 1fr;
    grid-template-areas:
-   'nav-bar'
-   'splash-content'
-   'external-links';
+   'nav-bar nav-bar'
+   'splash-image splash-content'
+   'external-links external-links';
 }
 
 .splash-nav-container {
+   grid-area: nav-bar;
+   justify-self: center;
+   width: 100%;
    display: flex;
    justify-content: center;
    align-items: center;
@@ -28,8 +33,15 @@
    align-items: center;
 }
 
+#splash-nav-left {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
 #splash-nav-right {
    display: flex;
+   align-items: center;
    gap: 10px;
 }
 
@@ -96,6 +108,30 @@
 .splash-img-container {
    height: 500px;
    width: 500px;
-   grid-area: splash-content;
+   grid-area: splash-image;
+   align-self: center;
+   justify-self: center;
+}
+
+#splash-logo {
+   height: 50px;
+   width: 50px;
+   border: 1px rgb(32, 33, 37);
+}
+
+#logo-title {
+   color: rgb(90, 100, 234);
+   font-size: 35px;
+   font-style: oblique;
+   font-weight: bold;
+   text-shadow: -1px 1px 0 rgb(32, 33, 37),
+   1px 1px 0 rgb(32, 33, 37),
+   1px -1px 0 rgb(32, 33, 37),
+   -1px -1px 0 rgb(32, 33, 37);
+}
+
+#external-links-container {
+   grid-area: external-links;
+   width: 100%;
    align-self: center;
 }

@@ -1,6 +1,8 @@
-import React from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+
+//component import
+import logo from './assets/cacophony-logo.svg'
 
 // thunk import
 import { login } from '../../store/session';
@@ -24,8 +26,11 @@ const SplashNavBar = () => {
           <div id='splash-nav-left'>
             <li>
               <NavLink to='/' exact={true} activeClassName='active'>
-                Cacophony Logo
+                <img id='splash-logo' src={logo} alt='cacophony-logo'/>
               </NavLink>
+            </li>
+            <li id='logo-title'>
+              CACOPHONY
             </li>
           </div>
           <div id='splash-nav-right'>

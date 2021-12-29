@@ -12,6 +12,10 @@ const SplashPage = () => {
          <div className='splash-img-container'>
             <img className='splash-img' src={SplashImage} alt='splash' />
          </div>
+         <div id='external-links-container'>
+            {/* TO DO: insert external links */}
+            external links
+         </div>
       </div>
    );
 }
