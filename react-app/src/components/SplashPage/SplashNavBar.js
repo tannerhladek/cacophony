@@ -30,7 +30,7 @@ const SplashNavBar = () => {
               </NavLink>
             </li>
             <li id='logo-title'>
-              CACOPHONY
+              Cacophony
             </li>
           </div>
           <div id='splash-nav-right'>

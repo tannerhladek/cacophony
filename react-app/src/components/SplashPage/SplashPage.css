@@ -117,18 +117,18 @@
 #splash-logo {
    height: 50px;
    width: 50px;
-   border: 1px rgb(32, 33, 37);
+   /* border: 1px rgb(32, 33, 37); */
 }
 
 #logo-title {
    color: rgb(90, 100, 234);
-   font-size: 35px;
-   font-style: oblique;
+   font-size: 36px;
+   /* font-style: oblique; */
    font-weight: bold;
-   text-shadow: -1px 1px 0 rgb(32, 33, 37),
-   1px 1px 0 rgb(32, 33, 37),
-   1px -1px 0 rgb(32, 33, 37),
-   -1px -1px 0 rgb(32, 33, 37);
+   text-shadow: -1px 1px 0 rgb(53, 53, 53),
+   1px 1px 0 rgb(53, 53, 53),
+   1px -1px 0 rgb(53, 53, 53),
+   -1px -1px 0 rgb(53, 53, 53);
 }
 
 #external-links-container {
