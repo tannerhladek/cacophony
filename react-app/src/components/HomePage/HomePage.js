@@ -7,6 +7,7 @@ import ServerChannelList from '../ServerChannelListComponent/ServerChannelListCo
 import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComponent';
 import HeaderRightComponent from '../HeaderRightComponent/HeaderRightComponent';
 import MessagesComponent from '../MessagesComponent/MessagesComponent';
+import CreateMessageForm from '../CreateMessageComponent/CreateMessageComponent';
 
 
 // import styles
@@ -39,6 +40,7 @@ const HomePage = () => {
                <Route exact path={["/servers/:serverId/channels/:channelId", "/servers/:serverId/channels/:channelId"]}>
                   <HeaderRightComponent />
                   <MessagesComponent />
+                  <CreateMessageForm />
                </Route>
             </Switch>
          </div>

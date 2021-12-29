@@ -25,7 +25,7 @@ const ServerDetailsComponent = () => {
 
       return (
          <div id='server-details'>
-            <h4>{server.name}</h4>
+            <div id='server-name'>{server.name}</div>
             {buttons}
          </div>
       )

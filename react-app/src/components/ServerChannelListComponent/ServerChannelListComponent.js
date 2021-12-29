@@ -19,7 +19,7 @@ const ServerChannelList = () => {
    const serverChannelsArr = Object.assign([], serverChannels);
 
    return (
-      <div className="channels-mega-container">
+      <div className="channels-parent-container">
          <div className="channels-container">
             <div id='channel-title-div'>
                <span>CHANNELS</span>
@@ -31,7 +31,7 @@ const ServerChannelList = () => {
             </div>
             {serverChannelsArr.map(channel => (
                <NavLink key={channel.id} className="single-channel-name-div" to={`/servers/${serverId}/channels/${channel.id}`}>
-                  {channel.name}
+                  {`# ${channel.name}`}
                   {sessionUser?.id === servers[serverId]?.owner_id && (
                      <>
                         <EditChannelModal channelId={channel?.id} />

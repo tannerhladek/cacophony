@@ -1,5 +1,27 @@
-.messages-component-container {
+.messages-parent-container {
    display: flex;
    flex-direction: column;
    justify-content: space-between;
+   padding: 10px;
+   overflow-y: scroll;
+}
+
+.single-message-parent-container {
+   display: grid;
+   grid-template-areas:
+   "image name date options"
+   "image text text text";
+   grid-column-gap: 10px;
+}
+
+.message-user-profile-image {
+   height: 35px;
+   width: 35px;
+   grid-area: 'image';
+   align-self: center;
+   object-fit: cover;
+}
+
+.message-user-profile-image img{
+   border-radius: 25px;
 }
