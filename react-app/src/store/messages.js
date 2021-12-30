@@ -12,7 +12,7 @@ const getChannelMessages = (data) => ({
    payload: data
 });
 
-const addMessage = (data) => ({
+export const addMessage = (data) => ({
    type: ADD_MESSAGE,
    payload: data
 });

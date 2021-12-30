@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { io } from 'socket.io-client';
 
 // component imports
 import UserDetails from '../UserDetailsComponent/UserDetailsComponent';
@@ -8,15 +11,32 @@ import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComp
 import HeaderRightComponent from '../HeaderRightComponent/HeaderRightComponent';
 import MessagesComponent from '../MessagesComponent/MessagesComponent';
 import CreateMessageForm from '../CreateMessageComponent/CreateMessageComponent';
+// import UsersList from './components/UsersList';
+// import User from './components/User';
 
+// thunk imports
+import * as MessageActions from '../../store/messages';
 
 // import styles
 import './HomePage.css'
 
-// import UsersList from './components/UsersList';
-// import User from './components/User';
+let socket;
 
 const HomePage = () => {
+   const dispatch = useDispatch();
+
+   useEffect(() => {
+      // open socket connection
+      // create websocket
+      socket = io();
+      socket.on("add_message", (message) => {
+         dispatch(MessageActions.addMessage(message))
+      });
+      // when component unmounts, disconnect
+      return (() => {
+         socket.disconnect()
+      })
+   }, [])
 
    return (
       <div className='main-container'>

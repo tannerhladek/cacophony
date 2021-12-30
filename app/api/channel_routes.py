@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import EditChannelForm, CreateMessageForm
 from app.models import db, Server, members, Channel, Message, User
+from app.socket import handle_add_message
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -76,6 +77,7 @@ def createMessage(id):
       )
       db.session.add(message)
       db.session.commit()
+      handle_add_message(message.to_dict())
       return message.to_dict()
    else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
