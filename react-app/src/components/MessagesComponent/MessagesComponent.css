@@ -11,15 +11,17 @@
    border-radius: 5px;
    display: grid;
    grid-column-gap: 10px;
-   grid-template-columns: 40px auto auto 40px;
+   grid-template-columns: 40px auto auto 60px;
    grid-template-rows: 1fr auto;
    grid-template-areas:
    "image name date options"
-   "image content . . ";
+   "image content content content";
 }
 
 #msg-username-container {
    grid-area: name;
+   font-weight: bold;
+   color: white;
 }
 
 #msg-content {
@@ -32,9 +34,11 @@
 
 #msg-editing-icon-container {
    background-color: rgb(37, 38, 42);
+   width: 55px;
+   height: 30px;
    display: flex;
    align-items: center;
-   justify-content: center;
+   justify-content: space-evenly;
    border-radius: 5px;
    visibility: hidden;
 }
