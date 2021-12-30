@@ -31,7 +31,7 @@ const CreateMessageForm = () => {
    };
 
    const scrollToBottom = () => {
-      document.querySelector('.test-scroll').scrollIntoView({behavior: "auto"})
+      document.querySelector('.bottom-scroll').scrollIntoView({behavior: "auto"})
    };
 
    return (

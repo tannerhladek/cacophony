@@ -34,7 +34,7 @@ const MessagesComponent = () => {
    }, [dispatch, channelId]);
 
    const scrollToBottom = () => {
-      document.querySelector('.test-scroll').scrollIntoView({behavior: "auto"})
+      document.querySelector('.bottom-scroll').scrollIntoView({behavior: "auto"})
    };
 
 
@@ -48,7 +48,7 @@ const MessagesComponent = () => {
                   <SingleMessageComponent message={message} key={message.id} />
                ))}
             </div>
-            <div className="test-scroll"></div>
+            <div className="bottom-scroll"></div>
          </div>
       )
    }
