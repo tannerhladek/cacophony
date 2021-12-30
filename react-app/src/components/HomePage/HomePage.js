@@ -14,8 +14,9 @@ import CreateMessageForm from '../CreateMessageComponent/CreateMessageComponent'
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 
-// thunk imports
+// action imports
 import * as MessageActions from '../../store/messages';
+import * as ServerActions from '../../store/servers';
 
 // import styles
 import './HomePage.css'
@@ -37,6 +38,9 @@ const HomePage = () => {
       }));
       socket.on("edit_message", (data => {
          dispatch(MessageActions.editMessage(data))
+      }));
+      socket.on("add_channel", (data => {
+         dispatch(ServerActions.addChannel(data))
       }));
 
       // when component unmounts, disconnect

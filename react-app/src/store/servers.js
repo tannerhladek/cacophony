@@ -39,7 +39,7 @@ const removeServers = () => ({
 });
 
 // channel action creators
-const addChannel = (data) => ({
+export const addChannel = (data) => ({
    type: ADD_CHANNEL,
    payload: data
 });

@@ -13,15 +13,17 @@ else:
 # create your SocketIO instance
 socketio = SocketIO(cors_allowed_origins=origins)
 
+# handle new channels
+def handle_add_channel(data):
+   socketio.emit("add_channel", data, broadcast=True)
+
 # handle new messages
 def handle_add_message(data):
    socketio.emit("add_message", data, broadcast=True)
 
-
 # handle deleting messages
 def handle_delete_message(data):
    socketio.emit("delete_message", data, broadcast=True)
-
 
 # handle editing messages
 def handle_edit_message(data):
