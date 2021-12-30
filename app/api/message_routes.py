@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import EditMessageForm
 from app.models import db, Message, User
-from app.socket import handle_delete_message
+from app.socket import handle_delete_message, handle_edit_message
 
 message_routes = Blueprint('messages', __name__)
 
@@ -52,6 +52,7 @@ def editMessage(id):
       if form.validate_on_submit():
          message.content = form.data['content']
          db.session.commit()
+         handle_edit_message(message.to_dict())
          return message.to_dict()
       else:
          return {'errors': validation_errors_to_error_messages(form.errors)}, 401

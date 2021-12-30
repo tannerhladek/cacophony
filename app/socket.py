@@ -21,3 +21,8 @@ def handle_add_message(data):
 # handle deleting messages
 def handle_delete_message(data):
    socketio.emit("delete_message", data, broadcast=True)
+
+
+# handle editing messages
+def handle_edit_message(data):
+   socketio.emit("edit_message", data, broadcast=True)

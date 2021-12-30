@@ -22,7 +22,7 @@ export const deleteMessage = (data) => ({
    payload: data
 });
 
-const editMessage = (data) => ({
+export const editMessage = (data) => ({
    type: EDIT_MESSAGE,
    payload: data
 });

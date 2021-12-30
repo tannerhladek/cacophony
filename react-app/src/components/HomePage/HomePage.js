@@ -29,11 +29,14 @@ const HomePage = () => {
       // open socket connection
       // create websocket
       socket = io();
-      socket.on("add_message", (message) => {
-         dispatch(MessageActions.addMessage(message))
+      socket.on("add_message", (data) => {
+         dispatch(MessageActions.addMessage(data))
       });
       socket.on("delete_message", (data => {
          dispatch(MessageActions.deleteMessage(data))
+      }));
+      socket.on("edit_message", (data => {
+         dispatch(MessageActions.editMessage(data))
       }));
 
       // when component unmounts, disconnect
