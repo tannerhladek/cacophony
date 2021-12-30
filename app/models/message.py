@@ -21,6 +21,6 @@ class Message(db.Model):
          'id': self.id,
          'channel_id': self.channel_id,
          'content': self.content,
-         'created_at': self.created_at,
+         # 'created_at': self.created_at,
          'user': self.user.to_dict()
       }

@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import EditMessageForm
 from app.models import db, Message, User
+from app.socket import handle_delete_message, handle_edit_message
 
 message_routes = Blueprint('messages', __name__)
 
@@ -25,6 +26,11 @@ def deleteMessage(id):
    if int(message.user_id) == int(current_user.get_id()):
       db.session.delete(message)
       db.session.commit()
+      handle_delete_message({
+         'message': f'message deletion success',
+         'channel_id': channelId,
+         'message_id': message.id
+      })
       return {
          'message': f'message deletion success',
          'channel_id': channelId,
@@ -46,9 +52,9 @@ def editMessage(id):
       if form.validate_on_submit():
          message.content = form.data['content']
          db.session.commit()
+         handle_edit_message(message.to_dict())
          return message.to_dict()
       else:
          return {'errors': validation_errors_to_error_messages(form.errors)}, 401
    else:
       return {'errors': [f'Not authorized to edit message {message.id}']}, 401
-

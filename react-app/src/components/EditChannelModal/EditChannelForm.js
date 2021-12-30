@@ -14,10 +14,11 @@ const EditChannelForm = ({ hideForm, channelId }) => {
    const [errors, setErrors] = useState([]);
 
    const channel = servers[serverId].channels[channelId]
-   const [channelName, setChannelName] = useState(channel?.name);
+   const [channelName, setChannelName] = useState(channel['name']);
 
    const editChannel = async (e) => {
       e.preventDefault();
+      console.log('HERE EDIT CHANNEL')
       const payload = {
          id: channelId,
          name: channelName,
@@ -31,6 +32,7 @@ const EditChannelForm = ({ hideForm, channelId }) => {
    };
 
    const handleDelete = async (e) => {
+      console.log('HERE DELETE')
       const data = await dispatch(deleteChannelThunk(e.target.value));
       if (data) {
          setErrors(data);
@@ -41,7 +43,7 @@ const EditChannelForm = ({ hideForm, channelId }) => {
       <div className='channel-form-modal-container'>
          <div className='channel-form-container'>
             <div>Edit this channel</div>
-            <form onSubmit={editChannel}>
+            <form>
                <div>
                   {errors.map((error, ind) => (
                      <div key={ind}>{error}</div>
@@ -54,14 +56,12 @@ const EditChannelForm = ({ hideForm, channelId }) => {
                      name='channelName'
                      onChange={(e) => setChannelName(e.target.value)}
                      value={channelName}
-                  ></input>
+                  />
                </div>
-               <button type='submit'>Submit Edits</button>
+               <button onClick={editChannel}>Submit Edits</button>
             </form>
-            <button onClick={handleDelete} value={channel?.id}>
-               Delete
-            </button>
-            <button onClick={hideForm}>Cacnel</button>
+            <button onClick={handleDelete} value={channel?.id}>Delete</button>
+            <button onClick={hideForm}>Cancel</button>
          </div>
       </div>
    );

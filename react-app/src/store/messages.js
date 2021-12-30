@@ -12,17 +12,17 @@ const getChannelMessages = (data) => ({
    payload: data
 });
 
-const addMessage = (data) => ({
+export const addMessage = (data) => ({
    type: ADD_MESSAGE,
    payload: data
 });
 
-const deleteMessage = (data) => ({
+export const deleteMessage = (data) => ({
    type: DELETE_MESSAGE,
    payload: data
 });
 
-const editMessage = (data) => ({
+export const editMessage = (data) => ({
    type: EDIT_MESSAGE,
    payload: data
 });

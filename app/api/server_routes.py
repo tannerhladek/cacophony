@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from sqlalchemy.sql.schema import ColumnDefault
 from app.models import db, Server, members, Channel, User
 from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
+from app.socket import handle_add_channel
 
 server_routes = Blueprint('servers', __name__)
 
@@ -108,6 +109,7 @@ def addServerChannel(id):
       )
       db.session.add(channel)
       db.session.commit()
+      handle_add_channel(channel.to_dict())
       return channel.to_dict()
    else:
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
