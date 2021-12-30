@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 // component imports
 import SingleMessageComponent from "./SingleMessageComponent";
@@ -13,6 +13,7 @@ import './MessagesComponent.css';
 
 
 const MessagesComponent = () => {
+   const history = useHistory();
    const dispatch = useDispatch();
    const { channelId } = useParams();
    const messages = useSelector(state => state.messages);
@@ -28,8 +29,14 @@ const MessagesComponent = () => {
       (async () => {
          await dispatch(getChannelMessagesThunk(channelId));
          setLoaded(true)
+         scrollToBottom();
       })()
    }, [dispatch, channelId]);
+
+   const scrollToBottom = () => {
+      document.querySelector('.test-scroll').scrollIntoView({behavior: "auto"})
+   };
+
 
    if (!loaded) {
       return null
@@ -38,9 +45,10 @@ const MessagesComponent = () => {
          <div className="messages-parent-container">
             <div className='messages-container'>
                {channelMessagesArrsorted.map(message => (
-                  <SingleMessageComponent message={message} key={message.id}/>
+                  <SingleMessageComponent message={message} key={message.id} />
                ))}
             </div>
+            <div className="test-scroll"></div>
          </div>
       )
    }

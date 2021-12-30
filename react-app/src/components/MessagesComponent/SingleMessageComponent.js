@@ -26,27 +26,25 @@ const SingleMessageComponent = ({ message }) => {
          <div className="message-user-profile-image">
             <img src={message.user.profile_image_url} />
          </div>
-         <div className="message-info">
-            <div id='msg-username-container'>
-               {message.user.username}
-            </div>
-            {!showMessageEditForm && (
-               <>
-                  <div id='msg-content'>
-                     {message.content}
-                  </div>
-                  {sessionUser.id === message.user.id && (
-                     <div id='msg-editing-icon-container'>
-                        <DeleteForeverIcon onClick={handleMessageDelete} id='delete-msg-icon' />
-                        <EditIcon onClick={() => setShowMessageEditForm(true)} id='edit-msg-icon' />
-                     </div>
-                  )}
-               </>
-            )}
-            {showMessageEditForm && (
-               <EditSingleMessage message={message} setShowMessageEditForm={setShowMessageEditForm} />
-            )}
+         <div id='msg-username-container'>
+            {message.user.username}
          </div>
+         {!showMessageEditForm && (
+            <>
+               <div id='msg-content'>
+                  {message.content}
+               </div>
+               {sessionUser.id === message.user.id && (
+                  <div id='msg-editing-icon-container'>
+                     <DeleteForeverIcon onClick={handleMessageDelete} id='delete-msg-icon' />
+                     <EditIcon onClick={() => setShowMessageEditForm(true)} id='edit-msg-icon' />
+                  </div>
+               )}
+            </>
+         )}
+         {showMessageEditForm && (
+            <EditSingleMessage message={message} setShowMessageEditForm={setShowMessageEditForm} />
+         )}
       </div>
    )
 };
