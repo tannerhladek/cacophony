@@ -17,7 +17,7 @@ export const addMessage = (data) => ({
    payload: data
 });
 
-const deleteMessage = (data) => ({
+export const deleteMessage = (data) => ({
    type: DELETE_MESSAGE,
    payload: data
 });

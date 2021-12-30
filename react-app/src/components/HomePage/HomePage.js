@@ -32,10 +32,14 @@ const HomePage = () => {
       socket.on("add_message", (message) => {
          dispatch(MessageActions.addMessage(message))
       });
+      socket.on("delete_message", (data => {
+         dispatch(MessageActions.deleteMessage(data))
+      }));
+
       // when component unmounts, disconnect
       return (() => {
          socket.disconnect()
-      })
+      });
    }, [])
 
    return (
