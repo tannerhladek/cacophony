@@ -26,7 +26,12 @@ const CreateMessageForm = () => {
          setErrors(data);
       } else {
          setMessageContent('')
+         scrollToBottom();
       }
+   };
+
+   const scrollToBottom = () => {
+      document.querySelector('.bottom-scroll').scrollIntoView({behavior: "auto"})
    };
 
    return (

@@ -3,10 +3,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+// style import
+import './UserAuth.css'
+
 const SignUpForm = () => {
   const [errors, setErrors] = useState([]);
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
+  const [profile_image_url, setProfile_image_url] = useState('');
   const [password, setPassword] = useState('');
   const [repeatPassword, setRepeatPassword] = useState('');
   const sessionUser = useSelector(state => state.session.user);
@@ -15,7 +19,7 @@ const SignUpForm = () => {
   const onSignUp = async (e) => {
     e.preventDefault();
     if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
+      const data = await dispatch(signUp(username, email, profile_image_url, password));
       if (data) {
         setErrors(data)
       }
@@ -28,6 +32,10 @@ const SignUpForm = () => {
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
+  };
+
+  const updateProfileImageUrl = (e) => {
+    setProfile_image_url(e.target.value);
   };
 
   const updatePassword = (e) => {
@@ -68,6 +76,15 @@ const SignUpForm = () => {
                 name='email'
                 onChange={updateEmail}
                 value={email}
+              ></input>
+            </div>
+            <div>
+              <div>PROFILE IMAGE URL</div>
+              <input
+                type='text'
+                name='profile_image_url'
+                onChange={updateProfileImageUrl}
+                value={profile_image_url}
               ></input>
             </div>
             <div>
