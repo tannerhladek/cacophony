@@ -44,12 +44,12 @@ export const addChannel = (data) => ({
    payload: data
 });
 
-const editChannel = (data) => ({
+export const editChannel = (data) => ({
    type: EDIT_CHANNEL,
    payload: data
 });
 
-const deleteChannel = (data) => ({
+export const deleteChannel = (data) => ({
    type: DELETE_CHANNEL,
    payload: data
 });

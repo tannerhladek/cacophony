@@ -42,6 +42,9 @@ const HomePage = () => {
       socket.on("add_channel", (data => {
          dispatch(ServerActions.addChannel(data))
       }));
+      socket.on("delete_channel", (data => {
+         dispatch(ServerActions.deleteChannel(data))
+      }));
 
       // when component unmounts, disconnect
       return (() => {

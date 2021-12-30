@@ -17,6 +17,10 @@ socketio = SocketIO(cors_allowed_origins=origins)
 def handle_add_channel(data):
    socketio.emit("add_channel", data, broadcast=True)
 
+# handle delete channels
+def handle_delete_channel(data):
+   socketio.emit("delete_channel", data, broadcast=True)
+
 # handle new messages
 def handle_add_message(data):
    socketio.emit("add_message", data, broadcast=True)

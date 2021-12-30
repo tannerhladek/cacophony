@@ -25,6 +25,7 @@ const EditServerForm = ({ hideForm }) => {
 
    const editServer = async (e) => {
       e.preventDefault();
+      console.log('HERE EDIT SERVER')
       const payload = {
          id: serverId,
          name: serverName,
@@ -69,12 +70,12 @@ const EditServerForm = ({ hideForm }) => {
                      name='serverImageUrl'
                      onChange={(e) => setServerImageUrl(e.target.value)}
                      value={serverImageUrl}
-                  ></input>
+                  />
                </div>
                <button type='submit'>Submit Edits</button>
             </form>
             <button onClick={handleServerDeletion}>Delete</button>
-            <button onClick={hideForm}>Cacnel</button>
+            <button onClick={hideForm}>Cancel</button>
          </div>
       </div>
    );

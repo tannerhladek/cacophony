@@ -2,7 +2,7 @@ from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.forms import EditChannelForm, CreateMessageForm
 from app.models import db, Server, members, Channel, Message, User
-from app.socket import handle_add_message
+from app.socket import handle_add_message, handle_delete_channel
 
 channel_routes = Blueprint('channels', __name__)
 
@@ -28,6 +28,11 @@ def deleteChannel(id):
       channelId = channel.id
       db.session.delete(channel)
       db.session.commit()
+      handle_delete_channel({
+         'message': f'channel deletion success',
+         'channel_id': channelId,
+         'server_id': serverId
+      })
       return {
          'message': f'channel deletion success',
          'channel_id': channelId,
