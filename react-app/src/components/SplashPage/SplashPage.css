@@ -46,24 +46,6 @@
    gap: 10px;
 }
 
-.login-form-page-container {
-   display: flex;
-   justify-content: center;
-}
-
-.login-form-container {
-   position: fixed;
-   top: 200px;
-   height: 250px;
-   width: 600px;
-   background-color: rgb(55, 56, 62);
-   display: flex;
-   flex-direction: column;
-   justify-content: center;
-   align-items: left;
-   border-radius: 5px;
-}
-
 .splash-nav-btn {
    background-color: rgb(90, 100, 234);
    border: 1px solid rgb(90, 100, 234);
