@@ -46,16 +46,16 @@ const EditServerForm = ({ hideForm }) => {
 
    return (
       <div className='server-form-modal-container'>
-         <div className='server-form-container'>
-            <div>Edit this server</div>
+         <div className='server-channel-form-container'>
+            <div className='form-title'>Edit this server</div>
             <form onSubmit={editServer}>
                <div>
                   {errors.map((error, ind) => (
                      <div key={ind}>{error}</div>
                   ))}
                </div>
-               <div>
-                  <div>NAME</div>
+               <div className='form-box'>
+                  <div className='form-label'>NAME</div>
                   <input
                      type='text'
                      name='serverName'
@@ -63,8 +63,8 @@ const EditServerForm = ({ hideForm }) => {
                      value={serverName}
                   ></input>
                </div>
-               <div>
-                  <div>SERVER_IMAGE_URL</div>
+               <div className='form-box'>
+                  <div className='form-label'>SERVER_IMAGE_URL</div>
                   <input
                      type='text'
                      name='serverImageUrl'
@@ -72,10 +72,16 @@ const EditServerForm = ({ hideForm }) => {
                      value={serverImageUrl}
                   />
                </div>
-               <button type='submit'>Submit Edits</button>
+               <button type='submit' className='submit-btn'>Submit Edits</button>
             </form>
-            <button onClick={handleServerDeletion}>Delete</button>
-            <button onClick={hideForm}>Cancel</button>
+            <div className='form-alt-links'>
+               <div>
+                  <a onClick={hideForm}>Cancel</a>
+               </div>
+               <div>
+                  <a onClick={handleServerDeletion} id='delete-link'>Delete Server</a>
+               </div>
+            </div>
          </div>
       </div>
    );
