@@ -3,6 +3,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { NavLink, Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
 
+// component imports
+import SplashImage from '../SplashPage/assets/Chat_12.png';
+
+
 // style import
 import './UserAuth.css'
 
@@ -52,6 +56,7 @@ const SignUpForm = () => {
 
     return (
       <div className='signup-form-page-container'>
+        {/* <img className='signup-splash-img' src={SplashImage} alt='splash' /> */}
         <div className='signup-form-container'>
           <div className='auth-form-title'>Create an account</div>
           <form onSubmit={onSignUp}>
@@ -106,15 +111,12 @@ const SignUpForm = () => {
                 required={true}
               ></input>
             </div>
-            <button type='submit'>Sign Up</button>
+            <button type='submit' className='signup-btn'>Sign Up</button>
           </form>
-          <div>
-            <span>Already han an account? </span>
+          <div className='signup-redirect'>
             <NavLink to='/login' exact={true} activeClassName='active'>
-              Login
+              Already have an account?
             </NavLink>
-          </div>
-          <div>
             <NavLink to='/' exact={true} activeClassName='active'>
               Cancel
             </NavLink>
