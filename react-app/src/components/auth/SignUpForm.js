@@ -53,15 +53,15 @@ const SignUpForm = () => {
     return (
       <div className='signup-form-page-container'>
         <div className='signup-form-container'>
-          <div>Create an account</div>
+          <div className='auth-form-title'>Create an account</div>
           <form onSubmit={onSignUp}>
             <div>
               {errors.map((error, ind) => (
                 <div key={ind}>{error}</div>
               ))}
             </div>
-            <div>
-              <div>USERNAME</div>
+            <div className='auth-form-box'>
+              <div className='auth-form-label'>USERNAME</div>
               <input
                 type='text'
                 name='username'
@@ -69,8 +69,8 @@ const SignUpForm = () => {
                 value={username}
               ></input>
             </div>
-            <div>
-              <div>EMAIL</div>
+            <div className='auth-form-box'>
+              <div className='auth-form-label'>EMAIL</div>
               <input
                 type='text'
                 name='email'
@@ -78,8 +78,8 @@ const SignUpForm = () => {
                 value={email}
               ></input>
             </div>
-            <div>
-              <div>PROFILE IMAGE URL</div>
+            <div className='auth-form-box'>
+              <div className='auth-form-label'>PROFILE IMAGE URL</div>
               <input
                 type='text'
                 name='profile_image_url'
@@ -87,8 +87,8 @@ const SignUpForm = () => {
                 value={profile_image_url}
               ></input>
             </div>
-            <div>
-              <div>PASSWORD</div>
+            <div className='auth-form-box'>
+              <div className='auth-form-label'>PASSWORD</div>
               <input
                 type='password'
                 name='password'
@@ -96,8 +96,8 @@ const SignUpForm = () => {
                 value={password}
               ></input>
             </div>
-            <div>
-              <div>REPEAT PASSWORD</div>
+            <div className='auth-form-box'>
+              <div className='auth-form-label'>REPEAT PASSWORD</div>
               <input
                 type='password'
                 name='repeat_password'
@@ -109,7 +109,7 @@ const SignUpForm = () => {
             <button type='submit'>Sign Up</button>
           </form>
           <div>
-            <span>Already han an account?</span>
+            <span>Already han an account? </span>
             <NavLink to='/login' exact={true} activeClassName='active'>
               Login
             </NavLink>

@@ -1,4 +1,52 @@
 .signup-form-page-container {
+   display: flex;
+   justify-content: center;
    height: 100vh;
-   background: linear-gradient(rgb(246, 199, 73) 60px, rgb(32, 33, 37) );
+   background-color: rgb(90, 100, 234);
+}
+
+.signup-form-container {
+   position: fixed;
+   top: 100px;
+   height: 550px;
+   width: 480px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: space-evenly;
+   align-items: left;
+   border-radius: 10px;
+   padding: 32px;
+   font-size: 18px;
+}
+
+.auth-form-title {
+   align-self: center;
+   font-size: 25px;
+   font-weight: bold;
+   color: white;
+}
+
+.auth-form-box {
+   margin: 0 0 10px;
+}
+
+.auth-form-box > input{
+   width: 100%;
+   border: 1px solid rgb(41, 42, 44) ;
+   ;
+}
+
+.auth-form-box > input:hover{
+   width: 100%;
+   border: 1px solid rgb(32, 33, 37) ;
+}
+
+.auth-form-box > input:focus{
+   outline: none;
+}
+
+.auth-form-label {
+   font-size: 12px;
+   margin: 0 0 8px;
 }
