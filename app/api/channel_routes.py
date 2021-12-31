@@ -22,10 +22,12 @@ def validation_errors_to_error_messages(validation_errors):
 @login_required
 def deleteChannel(id):
    channel = Channel.query.get(id)
-   serverId = channel.server_id
-   user = User.query.get(int(current_user.get_id()))
-   if channel.server in user.servers:
+   # # serverId = channel.server_id
+   # # user = User.query.get(int(current_user.get_id()))
+   server = Server.query.get(channel.server_id)
+   if int(server.owner_id) == int(current_user.get_id()):
       channelId = channel.id
+      serverId = channel.server_id
       db.session.delete(channel)
       db.session.commit()
       handle_delete_channel({
