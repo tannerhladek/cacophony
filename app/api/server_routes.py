@@ -44,7 +44,7 @@ def createServer():
             name = form.data['name'],
             owner_id = current_user.get_id()
          )
-      user = User.query.get(1)
+      user = User.query.get(int(current_user.get_id()))
       new_server.users.append(user)
       db.session.add(new_server)
       db.session.commit()

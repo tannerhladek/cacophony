@@ -18,7 +18,6 @@ const EditChannelForm = ({ hideForm, channelId }) => {
 
    const editChannel = async (e) => {
       e.preventDefault();
-      console.log('HERE EDIT CHANNEL')
       const payload = {
          id: channelId,
          name: channelName,
@@ -33,7 +32,7 @@ const EditChannelForm = ({ hideForm, channelId }) => {
 
    const handleDelete = async (e) => {
       console.log('HERE DELETE')
-      const data = await dispatch(deleteChannelThunk(e.target.value));
+      const data = await dispatch(deleteChannelThunk(channel.id));
       if (data) {
          setErrors(data);
       }
