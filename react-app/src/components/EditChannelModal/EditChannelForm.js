@@ -41,16 +41,16 @@ const EditChannelForm = ({ hideForm, channelId }) => {
 
    return (
       <div className='channel-form-modal-container'>
-         <div className='channel-form-container'>
-            <div>Edit this channel</div>
+         <div className='server-channel-form-container'>
+            <div className='form-title'>Edit this channel</div>
             <form>
                <div>
                   {errors.map((error, ind) => (
                      <div key={ind}>{error}</div>
                   ))}
                </div>
-               <div>
-                  <div>NAME</div>
+               <div className='form-box'>
+                  <div className='form-label'>NAME</div>
                   <input
                      type='text'
                      name='channelName'
@@ -58,10 +58,16 @@ const EditChannelForm = ({ hideForm, channelId }) => {
                      value={channelName}
                   />
                </div>
-               <button onClick={editChannel}>Submit Edits</button>
+               <button onClick={editChannel} className='submit-btn'>Submit Edits</button>
             </form>
-            <button onClick={handleDelete} value={channel?.id}>Delete</button>
-            <button onClick={hideForm}>Cancel</button>
+            <div className='form-alt-links'>
+               <div>
+                  <a onClick={hideForm}>Cancel</a>
+               </div>
+               <div>
+                  <a onClick={handleDelete} id='delete-link'>Delete Channel</a>
+               </div>
+            </div>
          </div>
       </div>
    );

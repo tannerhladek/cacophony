@@ -128,3 +128,88 @@
 a:active {
    color: white;
 }
+
+.server-channel-form-container {
+   height: auto;
+   gap: 10px;
+   width: 480px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: left;
+   border-radius: 10px;
+   padding: 32px;
+   font-size: 18px;
+}
+
+.form-title {
+   align-self: center;
+   font-size: 25px;
+   font-weight: bold;
+   color: white;
+}
+
+.form-box {
+   margin: 0 0 10px;
+}
+
+.form-box > input{
+   width: 100%;
+   border: 1px solid rgb(41, 42, 44);
+   height: 40px;
+   padding: 10px;
+}
+
+.form-box > input:hover{
+   width: 100%;
+   border: 1px solid rgb(32, 33, 37) ;
+}
+
+.form-box > input:focus{
+   outline: none;
+   border: 1px solid rgb(60, 167, 233);
+}
+
+.form-label {
+   font-size: 12px;
+   margin: 0 0 8px;
+}
+
+.submit-btn {
+   background-color: rgb(90, 100, 234);
+   border: none;
+   color: white;
+   width: 100%;
+   border-radius: 5px;
+   padding: 5px 8px;
+   cursor: pointer;
+   justify-self: center;
+   transition-duration: .25s;
+}
+
+.submit-btn:hover {
+   background-color: rgba(90, 100, 234, .7);
+   /* color: inherit; */
+   box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
+
+.server-channel-form-container a {
+   color: rgb(60, 167, 233);
+   font-size: 14px;
+   padding: 8px;
+   border-radius: 5px;
+}
+
+.server-channel-form-container a:hover {
+   background-color: rgb(64, 68, 74);
+}
+
+.form-alt-links {
+   display: flex;
+   justify-content: space-between;
+}
+
+#delete-link {
+   color: rgb(192, 49, 46);
+}

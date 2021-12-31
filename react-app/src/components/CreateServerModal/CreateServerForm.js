@@ -22,7 +22,7 @@ const CreateServerForm = ({ hideForm }) => {
          server_image_url: serverImageUrl
       }
       const data = await dispatch(addServerThunk(new_server));
-      if (typeof(data) === 'number') {
+      if (typeof (data) === 'number') {
          hideForm()
          return history.push(`/servers/${data}`)
       } else {
@@ -32,16 +32,16 @@ const CreateServerForm = ({ hideForm }) => {
 
    return (
       <div className='server-form-modal-container'>
-         <div className='server-form-container'>
-            <div>Create a Server</div>
+         <div className='server-channel-form-container'>
+            <div className='form-title'>Create a Server</div>
             <form onSubmit={createServer}>
                <div>
                   {errors.map((error, ind) => (
                      <div key={ind}>{error}</div>
                   ))}
                </div>
-               <div>
-                  <div>NAME</div>
+               <div className='form-box'>
+                  <div className='form-label'>NAME</div>
                   <input
                      type='text'
                      name='serverName'
@@ -49,8 +49,8 @@ const CreateServerForm = ({ hideForm }) => {
                      value={serverName}
                   ></input>
                </div>
-               <div>
-                  <div>SERVER_IMAGE_URL</div>
+               <div className='form-box'>
+                  <div className='form-label'>SERVER_IMAGE_URL</div>
                   <input
                      type='text'
                      name='serverImageUrl'
@@ -58,9 +58,11 @@ const CreateServerForm = ({ hideForm }) => {
                      value={serverImageUrl}
                   ></input>
                </div>
-               <button type='submit'>Create</button>
+               <button type='submit' className='submit-btn'>Create</button>
             </form>
-            <button onClick={hideForm}>Cancel</button>
+            <div>
+               <a onClick={hideForm}>Cancel</a>
+            </div>
          </div>
       </div>
    );
