@@ -50,7 +50,7 @@ const CreateChannelForm = ({ hideForm }) => {
                <button type='submit' className='submit-btn'>Create Channel</button>
             </form>
             <div>
-               <a onClick={hideForm}>Cacnel</a>
+               <a onClick={hideForm}>Cancel</a>
             </div>
          </div>
       </div>

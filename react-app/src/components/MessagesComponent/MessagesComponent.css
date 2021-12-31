@@ -77,3 +77,58 @@
    object-fit: cover;
    border-radius: 25px;
 }
+
+.edit-msg-form-container {
+   width: 100%;
+   grid-area: content;
+   display: flex;
+   flex-direction: column;
+   gap: 2px;
+}
+
+.edit-msg-input {
+   width: 100%;
+   border: none;
+   padding: 5px;
+   border-radius: 5px;
+   background-color: rgb(64, 68, 74);
+}
+
+.edit-msg-input:focus {
+   outline: none;
+}
+
+.edit-msg-link-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   font-size: 12px;
+}
+
+.edit-msg-link-container a {
+   color: rgb(60, 167, 233);
+   padding: 5px;
+   border-radius: 3px;
+}
+
+.edit-msg-link-container a:hover {
+   background-color: rgb(64, 68, 74);
+}
+
+.edit-msg-submit-btn {
+   background-color: rgb(90, 100, 234);
+   border: none;
+   color: white;
+   /* width: 100%; */
+   border-radius: 5px;
+   padding: 3px 5px;
+   cursor: pointer;
+   justify-self: center;
+   transition-duration: .25s;
+}
+
+.edit-msg-submit-btn:hover {
+   background-color: rgba(90, 100, 234, .7);
+   /* color: inherit; */
+   box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
