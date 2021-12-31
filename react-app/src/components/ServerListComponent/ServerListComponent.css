@@ -34,3 +34,26 @@
    object-fit: fill;
    border-radius: 25px;
 }
+
+.new-server-btn {
+   height: 45px;
+   width: 45px;
+   border-radius: 50%;
+   background-color: rgb(46, 49, 54);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-decoration: none;
+   border: none;
+
+}
+
+.add-server-btn-text {
+   font-size: 40px;
+   line-height: 0px;
+   color: rgb(59, 165, 93);
+   text-align: justify;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+}

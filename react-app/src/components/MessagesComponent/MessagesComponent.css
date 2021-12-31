@@ -28,12 +28,12 @@
    grid-area: content;
 }
 
-#msg-editing-icon-container {
-   grid-area: options;
-}
+
 
 #msg-editing-icon-container {
+   grid-area: options;
    background-color: rgb(37, 38, 42);
+   box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
    width: 55px;
    height: 30px;
    display: flex;
