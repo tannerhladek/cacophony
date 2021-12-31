@@ -1,4 +1,106 @@
-.signup-form-page-container {
+.auth-form-page-container {
+   display: flex;
+   justify-content: center;
    height: 100vh;
-   background: linear-gradient(rgb(246, 199, 73) 60px, rgb(32, 33, 37) );
+   background-color: rgb(90, 100, 234);
+}
+
+.signup-form-container {
+   position: fixed;
+   top: 100px;
+   height: auto;
+   gap: 10px;
+   width: 480px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: left;
+   border-radius: 10px;
+   padding: 32px;
+   font-size: 18px;
+}
+
+.login-form-container {
+   position: fixed;
+   top: 100px;
+   height: auto;
+   gap: 10px;
+   width: 480px;
+   background-color: rgb(55, 56, 62);
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   align-items: left;
+   border-radius: 10px;
+   padding: 32px;
+   font-size: 18px;
+}
+
+.auth-title-container {
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+
+.auth-form-title {
+   align-self: center;
+   font-size: 25px;
+   font-weight: bold;
+   color: white;
+}
+
+.auth-form-box {
+   margin: 0 0 10px;
+}
+
+.auth-form-box > input{
+   width: 100%;
+   border: 1px solid rgb(41, 42, 44);
+   height: 40px;
+   padding: 10px;
+}
+
+.auth-form-box > input:hover{
+   width: 100%;
+   border: 1px solid rgb(32, 33, 37) ;
+}
+
+.auth-form-box > input:focus{
+   outline: none;
+   border: 1px solid rgb(60, 167, 233);
+}
+
+.auth-form-label {
+   font-size: 12px;
+   margin: 0 0 8px;
+}
+
+.signup-login-btn {
+   background-color: rgb(90, 100, 234);
+   border: none;
+   color: white;
+   width: 100%;
+   border-radius: 5px;
+   padding: 5px 8px;
+   cursor: pointer;
+   justify-self: center;
+   transition-duration: .25s;
+}
+
+.signup-login-btn:hover {
+   background-color: rgba(90, 100, 234, .7);
+   color: inherit;
+   box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
+
+.signup-login-redirect {
+   display: flex;
+   justify-content: space-between;
+}
+
+.signup-login-redirect a {
+   color: rgb(60, 167, 233);
+   font-size: 14px;
 }

@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import { login } from '../../store/session';
 
+// style import
+import './UserAuth.css'
+
 const LoginForm = () => {
   const [errors, setErrors] = useState([]);
   const [email, setEmail] = useState('');
@@ -31,18 +34,20 @@ const LoginForm = () => {
   }
 
   return (
-    <div className='login-form-page-container'>
+    <div className='auth-form-page-container'>
       <div className='login-form-container'>
-        <div>Welcome Back</div>
-        <div>We're so excited to see you again :)</div>
+        <div className='auth-title-container'>
+          <div className='auth-form-title'>Welcome Back!</div>
+          <div>We're so excited to see you again!</div>
+        </div>
         <form onSubmit={onLogin}>
           <div>
             {errors.map((error, ind) => (
               <div key={ind}>{error}</div>
             ))}
           </div>
-          <div>
-            <div>EMAIL</div>
+          <div className='auth-form-box'>
+            <div className='auth-form-label'>EMAIL</div>
             <input
               name='email'
               type='text'
@@ -50,8 +55,8 @@ const LoginForm = () => {
               onChange={updateEmail}
             />
           </div>
-          <div>
-            <div>PASSWORD</div>
+          <div className='auth-form-box'>
+            <div className='auth-form-label'>PASSWORD</div>
             <input
               name='password'
               type='password'
@@ -60,16 +65,13 @@ const LoginForm = () => {
             />
           </div>
           <div>
-            <button type='submit'>Login</button>
+            <button type='submit' className='signup-login-btn'>Login</button>
           </div>
         </form>
-        <div>
-          <span>Need an account?</span>
-          <span>
-            <NavLink to='/signup' exact={true} activeClassName='active'>Register</NavLink>
-          </span>
-        </div>
-        <div>
+        <div className='signup-login-redirect'>
+          <NavLink to='/signup' exact={true} activeClassName='active'>
+            Need an account?
+          </NavLink>
           <NavLink to='/' exact={true} activeClassName='active'>
             Cancel
           </NavLink>

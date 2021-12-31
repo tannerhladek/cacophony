@@ -3,7 +3,6 @@ import { useState } from 'react';
 // component import
 import { Modal } from '../../context/Modal';
 import AddIcon from '@mui/icons-material/Add';
-import white from "@material-ui/core/colors/green";
 import CreateChannelForm from './CreateChannelForm';
 
 function CreateChannelModal() {
