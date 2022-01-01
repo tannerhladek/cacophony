@@ -18,7 +18,7 @@ const EditServerForm = ({ hideForm }) => {
    const [serverName, setServerName] = useState(server['name']);
    let server_image_url = server.server_image_url;
    let url;
-   if (server_image_url === 'https://cdn.discordapp.com/attachments/920424165415223356/920525286800490546/default_server_image.png') url = ''
+   if (server_image_url === 'https://cdn.discordapp.com/attachments/920424165415223356/926879518906548324/default_server_image.png') url = ''
    else url = server_image_url
    const [serverImageUrl, setServerImageUrl] = useState(url);
 

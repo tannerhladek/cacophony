@@ -3,6 +3,7 @@
 
 ## Overall Structure
 The app includes the following four features: full CRUD for servers, full CRUD for channels, and full CRUD for messages.
+Also, Cacophony uses websockets to broadcast updates to all connected users.
 
 ### List of features
 * Create an account
@@ -17,8 +18,45 @@ The app includes the following four features: full CRUD for servers, full CRUD f
 * Create a message within a channel
 * Edit a message
 * Delete a message
+* Web sockets
 
 ## Backend
 All backend routes were designed in Flask using Python coding language
+
 ## Frontend
 All frontend routes and components were designed in React using Javascript coding language
+
+## Dependencies
+* alembic
+* bidict
+* click
+* dnspython
+* email-validator
+* eventlet
+* faker
+* flask-cors
+* flask-login
+* flask-migrate
+* flask-socketio
+* flask-sqlalchemy
+* flask-wtf
+* flask
+* greenlet
+* gunicorn
+* idna
+* itsdangerous
+* jinja2
+* mako
+* markupsafe
+* python-dateutil
+* python-dotenv
+* python-editor
+* python-engineio
+* python-socketio
+* randomuser
+* setuptools
+* six
+* sqlalchemy
+* text-unidecode
+* werkzeug
+* wtforms
