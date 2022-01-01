@@ -21,6 +21,9 @@
 .server-btn {
    height: 45px;
    width: 45px;
+   border-radius: 50%;
+   overflow: hidden;
+   transition: ease 0.2s;
 }
 
 .server-image-container {
@@ -32,5 +35,44 @@
    height: 45px;
    width: 45px;
    object-fit: fill;
-   border-radius: 25px;
+   /* border-radius: 25px; */
+}
+
+.server-btn:hover {
+   border-radius: 25%;
+}
+
+.new-server-btn {
+   height: 45px;
+   width: 45px;
+   border-radius: 50%;
+   background-color: rgb(46, 49, 54);
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-decoration: none;
+   border: none;
+   transition: ease 0.2s;
+}
+
+.add-server-btn-text {
+   font-size: 40px;
+   line-height: 40px;
+   color: rgb(59, 165, 93);
+   text-align: justify;
+   vertical-align: middle;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-bottom: 5px;
+   transition: ease 0.2s;
+}
+
+.new-server-btn:hover {
+   background-color: rgb(59, 165, 93);
+   border-radius: 25%;
+}
+
+.new-server-btn:hover > * {
+   color: white;
 }
