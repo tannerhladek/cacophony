@@ -72,7 +72,7 @@ def editServer(id):
       else:
          server.name = form.data['name']
          # TO DO: FIX THIS to insert default value from model file
-         server.server_image_url = 'https://cdn.discordapp.com/attachments/920424165415223356/920525286800490546/default_server_image.png'
+         server.server_image_url = 'https://cdn.discordapp.com/attachments/920424165415223356/926879518906548324/default_server_image.png'
       db.session.commit()
       return server.to_dict()
    else:
