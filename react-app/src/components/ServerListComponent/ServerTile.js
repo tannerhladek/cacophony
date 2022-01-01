@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 
-function ServerLinkTile({server}) {
+function ServerLinkTile({ server }) {
 
    return (
       <div className='server-btn'>
