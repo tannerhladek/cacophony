@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Server
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -76,6 +76,9 @@ def sign_up():
                 password=form.data['password']
             )
         db.session.add(user)
+        # TO DO: remove later - adding all new users to demo server
+        demoServer = Server.query.get(1)
+        demoServer.users.append(user)
         db.session.commit()
         login_user(user)
         return user.to_dict()

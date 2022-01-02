@@ -25,7 +25,6 @@ const EditServerForm = ({ hideForm }) => {
 
    const editServer = async (e) => {
       e.preventDefault();
-      console.log('HERE EDIT SERVER')
       const payload = {
          id: serverId,
          name: serverName,

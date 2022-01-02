@@ -105,7 +105,8 @@ export const editServerThunk = (payload) => async (dispatch) => {
          return data.errors;
       }
    } else {
-      return ['An error occurred. Please try again.']
+      // return ['An error occurred. Please try again.']
+      return ['This server name already exists.']
    }
 };
 
