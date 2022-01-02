@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // component imports
 import SettingsIcon from '@mui/icons-material/Settings';
@@ -7,12 +7,24 @@ import LogoutButton from '../auth/LogoutButton'
 
 const UserDetails = () => {
    const sessionUser = useSelector(state => state.session.user);
-   const [divVisibility, setVisibility] = useState(false)
+   const [showMenu, setShowMenu] = useState(false);
 
-   const handleVisibility = () => {
-      if (!divVisibility) setVisibility(true);
-      else setVisibility(false);
+   const openMenu = () => {
+      if (showMenu) return;
+      setShowMenu(true);
    };
+
+   useEffect(() => {
+      if (!showMenu) return;
+
+      const closeMenu = () => {
+         setShowMenu(false);
+      };
+      document.addEventListener('click', closeMenu);
+      return () => document.removeEventListener("click", closeMenu);
+
+   }, [showMenu]);
+
 
    return (
       <div id='user-details-parent-container'>
@@ -23,9 +35,9 @@ const UserDetails = () => {
             <div>
                {sessionUser.username}
             </div>
-            <SettingsIcon onClick={handleVisibility} className='settings-icon' id='user-settings-icon' />
+            <SettingsIcon onClick={openMenu} className='settings-icon' id='user-settings-icon' />
          </div>
-         {divVisibility && (
+         {showMenu && (
             <div id='logout-btn-container'>
                <LogoutButton />
             </div>
