@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 // component imports
 import SingleMessageComponent from "./SingleMessageComponent";
@@ -13,7 +13,6 @@ import './MessagesComponent.css';
 
 
 const MessagesComponent = () => {
-   const history = useHistory();
    const dispatch = useDispatch();
    const { channelId } = useParams();
    const messages = useSelector(state => state.messages);

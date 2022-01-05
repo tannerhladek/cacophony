@@ -49,8 +49,9 @@ export const addChannelMessageThunk = (payload) => async (dispatch) => {
       body: JSON.stringify(payload)
    })
    if (res.ok) {
-      const data = await res.json();
-      dispatch(addMessage(data));
+      // commented out due to web socket dispatching actions
+      // const data = await res.json();
+      // dispatch(addMessage(data));
       return
    } else if (res.status < 500) {
       const data = await res.json();
@@ -67,8 +68,9 @@ export const deleteMessageThunk = (payload) => async (dispatch) => {
       method: "DELETE"
    });
    if (res.ok) {
-      const data = await res.json();
-      dispatch(deleteMessage(data));
+      // commented out due to web socket dispatching actions
+      // const data = await res.json();
+      // dispatch(deleteMessage(data));
       return
    } else if (res.status < 500) {
       const data = await res.json();
@@ -87,8 +89,9 @@ export const editMessageThunk = (payload) => async (dispatch) => {
       body: JSON.stringify(payload)
    });
    if (res.ok) {
-      const data = await res.json();
-      dispatch(editMessage(data));
+      // commented out due to web socket dispatching actions
+      // const data = await res.json();
+      // dispatch(editMessage(data));
       return
    } else if (res.status < 500) {
       const data = await res.json();
