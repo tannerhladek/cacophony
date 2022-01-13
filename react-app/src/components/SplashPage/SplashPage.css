@@ -78,7 +78,7 @@
    width: 500px;
    grid-area: splash-image;
    align-self: center;
-   justify-self: center;
+   justify-self: end;
 }
 
 #splash-logo {
@@ -122,6 +122,7 @@
 
 .splash-content-container {
    grid-area: splash-content;
+   margin-left: 45px;
    display: flex;
    flex-direction: column;
    justify-content: center;
