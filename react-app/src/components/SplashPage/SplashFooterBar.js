@@ -1,5 +1,3 @@
-import { NavLink } from 'react-router-dom';
-
 //component import
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';

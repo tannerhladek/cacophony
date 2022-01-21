@@ -20,7 +20,9 @@ def validation_errors_to_error_messages(validation_errors):
 
 # get all servers route
 #  TO DO: DELETE THIS ROUTE ---- FOR TESTING ONLY
-@server_routes.route('/')
+# @server_routes.route('/discover')
+# @logi
+
 def getAllServers():
    servers = Server.query.all()
    return {server.to_dict()['id']: server.to_dict() for server in servers}
