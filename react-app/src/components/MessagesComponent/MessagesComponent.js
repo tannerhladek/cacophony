@@ -13,6 +13,7 @@ import './MessagesComponent.css';
 
 
 const MessagesComponent = () => {
+
    const dispatch = useDispatch();
    const { channelId } = useParams();
    const messages = useSelector(state => state.messages);
@@ -24,17 +25,21 @@ const MessagesComponent = () => {
       return new Date(a.created_at) - new Date(b.created_at)
    });
 
-   useEffect(() => {
-      (async () => {
-         await dispatch(getChannelMessagesThunk(channelId));
-         setLoaded(true)
-         scrollToBottom();
-      })()
-   }, [dispatch, channelId]);
-
    const scrollToBottom = () => {
-      document.querySelector('.bottom-scroll').scrollIntoView({behavior: "auto"})
+      document.querySelector('.bottom-scroll')?.scrollIntoView({ behavior: "auto" })
    };
+
+   useEffect(() => {
+      if (!loaded) {
+         (async () => {
+            await dispatch(getChannelMessagesThunk(channelId));
+            setLoaded(true)
+         })()
+      }
+      scrollToBottom();
+   }, [dispatch, channelMessagesArr]);
+
+
 
 
    if (!loaded) {
