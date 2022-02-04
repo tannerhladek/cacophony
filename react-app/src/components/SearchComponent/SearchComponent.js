@@ -11,6 +11,7 @@ import { useParams } from "react-router-dom";
 const SearchComponent = () => {
 
    // const [loaded, setLoaded] = useState(false);
+   const [results, setResults] = useState(null)
    const [showResults, setShowResults] = useState(false);
 
    const debounce = (func, wait) => {
@@ -26,18 +27,30 @@ const SearchComponent = () => {
    };
 
    const search = async (e) => {
-      const { value } = e.target
-      if (value.length < 2) {
+      const name = e.target.value
+      if (name.length < 2) {
          setShowResults(false);
          return;
       }
-      // const response = await fetch(`/api/activities/search/${value}`)
-      // if (response.ok) {
-      //    const results = await response.json();
-      //    setResults(results);
-      //    setShowResults(true);
-      //    return
-      // }
+      // const response = await fetch(`/api/servers/discover`, {
+      //    method: "POST",
+      //    headers: { "Content-Type": "application/json" },
+      //    body: JSON.stringify(value)
+      // });
+      const payload = { 'name': name };
+      const response = await fetch(`/api/servers/discover`, {
+         method: "POST",
+         headers: { "Content-Type": "application/json" },
+         body: JSON.stringify(payload)
+      });
+      console.log('YOU ARE HERE')
+      if (response.ok) {
+         const results = await response.json();
+         console.log(results)
+         setResults(results);
+         setShowResults(true);
+         return
+      }
    };
 
    const debouncedSearch = useCallback(debounce(search, 1000));

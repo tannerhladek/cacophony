@@ -1,9 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from sqlalchemy.sql.schema import ColumnDefault
-from app.forms.server_forms import SearchServerForm
 from app.models import db, Server, members, Channel, User
-from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
+from app.forms import CreateServerForm, EditServerForm, CreateChannelForm, SearchServerForm
 from app.socket import handle_add_channel
 
 server_routes = Blueprint('servers', __name__)
@@ -21,7 +19,7 @@ def validation_errors_to_error_messages(validation_errors):
 
 # get all servers route
 #  TO DO: DELETE THIS ROUTE ---- FOR TESTING ONLY
-# @server_routes.route('/')
+@server_routes.route('/')
 # @login_required
 def getAllServers():
    servers = Server.query.all()
@@ -37,7 +35,7 @@ def findServers():
    if form.validate_on_submit():
       name = form.data['name']
       servers = Server.query.filter(
-         Server.name.iLike(f'%{name}%')
+         Server.name.ilike(f'%{name}%')
       ).all()
       return {server.to_dict()['id']: server.to_dict() for server in servers}
    else:
