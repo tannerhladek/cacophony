@@ -45,3 +45,7 @@ class CreateServerForm(FlaskForm):
 class EditServerForm(FlaskForm):
    name = StringField('name', validators=[DataRequired('The name field is required.')])
    server_image_url = StringField('server_image_url', validators=[URL(require_tld=True, message='Please provide a valid image URL'), Optional()])
+
+
+class SearchServerForm(FlaskForm):
+   name = StringField('name', validators=[DataRequired('The name field is required.')])

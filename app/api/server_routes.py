@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from sqlalchemy.sql.schema import ColumnDefault
+from app.forms.server_forms import SearchServerForm
 from app.models import db, Server, members, Channel, User
 from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
 from app.socket import handle_add_channel
@@ -20,12 +21,27 @@ def validation_errors_to_error_messages(validation_errors):
 
 # get all servers route
 #  TO DO: DELETE THIS ROUTE ---- FOR TESTING ONLY
-# @server_routes.route('/discover')
-# @logi
-
+# @server_routes.route('/')
+# @login_required
 def getAllServers():
    servers = Server.query.all()
    return {server.to_dict()['id']: server.to_dict() for server in servers}
+
+
+# search for server route
+@server_routes.route('/discover', methods=['POST'])
+@login_required
+def findServers():
+   form = SearchServerForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      name = form.data['name']
+      servers = Server.query.filter(
+         Server.name.iLike(f'%{name}%')
+      ).all()
+      return {server.to_dict()['id']: server.to_dict() for server in servers}
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 # create new server route
