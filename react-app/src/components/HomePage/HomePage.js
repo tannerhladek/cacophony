@@ -11,6 +11,7 @@ import ServerDetailsComponent from '../ServerDetailsComponents/ServerDetailsComp
 import HeaderRightComponent from '../HeaderRightComponent/HeaderRightComponent';
 import MessagesComponent from '../MessagesComponent/MessagesComponent';
 import CreateMessageForm from '../CreateMessageComponent/CreateMessageComponent';
+import SearchComponent from '../SearchComponent/SearchComponent';
 // import UsersList from './components/UsersList';
 // import User from './components/User';
 
@@ -66,6 +67,11 @@ const HomePage = () => {
                   <ServerDetailsComponent />
                   <ServerChannelList />
                </Route>
+               <Route exact path={"/discover"}>
+                  <div>
+                     Search...
+                  </div>
+               </Route>
             </Switch>
             <UserDetails />
          </div>
@@ -78,6 +84,9 @@ const HomePage = () => {
                   <HeaderRightComponent />
                   <MessagesComponent />
                   <CreateMessageForm />
+               </Route>
+               <Route exact path={"/discover"}>
+                  <SearchComponent />
                </Route>
             </Switch>
          </div>
