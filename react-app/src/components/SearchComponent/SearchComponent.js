@@ -2,16 +2,18 @@ import { useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 
 // component imports
-
-// thunk import
+import Card from '@mui/material/Card';
+import CardMedia from '@mui/material/CardMedia';
+import CardContent from '@mui/material/CardContent';
+import CardActions from '@mui/material/CardActions';
 
 // style import
-
+import "./SearchComponent.css"
 
 const SearchComponent = () => {
 
    // const [loaded, setLoaded] = useState(false);
-   const [results, setResults] = useState(null)
+   const [results, setResults] = useState([])
    const [showResults, setShowResults] = useState(false);
 
    const debounce = (func, wait) => {
@@ -32,22 +34,17 @@ const SearchComponent = () => {
          setShowResults(false);
          return;
       }
-      // const response = await fetch(`/api/servers/discover`, {
-      //    method: "POST",
-      //    headers: { "Content-Type": "application/json" },
-      //    body: JSON.stringify(value)
-      // });
       const payload = { 'name': name };
       const response = await fetch(`/api/servers/discover`, {
          method: "POST",
          headers: { "Content-Type": "application/json" },
          body: JSON.stringify(payload)
       });
-      console.log('YOU ARE HERE')
       if (response.ok) {
          const results = await response.json();
-         console.log(results)
-         setResults(results);
+         const resArr = Object.values(results);
+         console.log(resArr[0]);
+         setResults(resArr);
          setShowResults(true);
          return
       }
@@ -65,6 +62,33 @@ const SearchComponent = () => {
                onChange={debouncedSearch}
             />
          </div>
+         {results.length > 0 && showResults && (
+            <div className="server-search-results-container">
+               {results.map(server => (
+                  <Card key={server.id} sx={{ maxWidth: 300 }}>
+                     <CardMedia
+                        component="img"
+                        height="100"
+                        image={server.server_image_url}
+                        alt="green iguana"
+                     />
+                     <CardContent className="server-card-content-container">
+                        <div>
+                           {server.name}
+                        </div>
+                        <div>
+                           {`${Object.keys(server.members).length} members`}
+                        </div>
+                        <CardActions>
+                           <button>
+                              Join
+                           </button>
+                        </CardActions>
+                     </CardContent>
+                  </Card>
+               ))}
+            </div>
+         )}
       </div>
    )
 
