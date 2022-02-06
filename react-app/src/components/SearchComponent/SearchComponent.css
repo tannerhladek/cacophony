@@ -1,3 +1,7 @@
 .server-card-content-container {
    background-color: #40444a;
 }
+
+#search-card-image {
+   background-color: rgb(32, 34, 37)
+}
