@@ -1,7 +1,39 @@
+.search-input-container {
+   display: flex;
+   height: 175px;
+   background-color: rgb(90, 100, 234);
+   /* background: linear-gradient(rgb(90, 100, 234) 25%, rgb(54, 57, 63)); */
+   justify-content: center;
+   align-items: center;
+}
+
+.search-input-container > input{
+   width: 60%;
+   border: 1px solid rgb(41, 42, 44);
+   height: 40px;
+   padding: 10px;
+}
+
+.search-input-container > input:hover{
+   border: 1px solid rgba(255, 255, 255, .5) ;
+}
+
+.search-input-container > input:focus{
+   outline: none;
+   border: 1px solid rgba(255, 255, 255, .5);
+}
+
 .server-card-content-container {
    background-color: #40444a;
 }
 
 #search-card-image {
    background-color: rgb(32, 34, 37)
+}
+
+.server-search-results-container {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 15px;
+   padding: 25px;
 }

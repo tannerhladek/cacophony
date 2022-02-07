@@ -213,3 +213,14 @@ a:active {
 #delete-link {
    color: rgb(192, 49, 46);
 }
+
+.discover-title {
+   grid-area: server-info;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   font-size: 25px;
+   font-weight: bold;
+   color: white;
+}

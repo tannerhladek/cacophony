@@ -68,8 +68,8 @@ const HomePage = () => {
                   <ServerChannelList />
                </Route>
                <Route exact path={"/discover"}>
-                  <div>
-                     Search...
+                  <div className='discover-title'>
+                     DISCOVER.
                   </div>
                </Route>
             </Switch>

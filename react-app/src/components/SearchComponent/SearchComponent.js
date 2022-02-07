@@ -118,12 +118,12 @@ const SearchComponent = () => {
          {resultsArr.length > 0 && showResults && (
             <div className="server-search-results-container">
                {resultsArr.map(server => (
-                  <Card key={server.id} sx={{ maxWidth: 250 }}>
+                  <Card key={server.id} sx={{ width: 225 }}>
                      <CardMedia
                         component="img"
                         height="100"
                         image={server.server_image_url}
-                        alt="green iguana"
+                        alt="server"
                         id='search-card-image'
                      />
                      <CardContent className="server-card-content-container">
