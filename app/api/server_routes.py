@@ -55,6 +55,18 @@ def findServers():
       return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
+# join a server route
+@server_routes.route('/<int:id>/join')
+@login_required
+def joinServer(id):
+   server = Server.query.get(id)
+   if current_user not in server.users:
+      server.users.append(current_user)
+      db.session.commit()
+      return server.to_dict()
+
+
+
 # create new server route
 @server_routes.route('/new', methods =['POST'])
 @ login_required

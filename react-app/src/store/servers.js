@@ -129,6 +129,22 @@ export const deleteServerThunk = (serverId) => async (dispatch) => {
    }
 };
 
+export const joinServerThunk = (serverId) => async (dispatch) => {
+   const res = await fetch(`/api/servers/${serverId}/join`);
+   if (res.ok) {
+      const data = await res.json();
+      dispatch(addServer(data));
+      return null
+   } else if (res.status < 500) {
+      const data = await res.json();
+      if (data.errors) {
+         return data.errors;
+      }
+   } else {
+      return ['An error occurred. Please try again.']
+   }
+};
+
 export const removeServersThunk = () => (dispatch) => {
    dispatch(removeServers());
    return null

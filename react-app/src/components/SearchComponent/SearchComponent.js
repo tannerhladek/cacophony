@@ -1,6 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
-import { useSelector } from 'react-redux';
+import { useState, useCallback } from "react";
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from "react-router-dom";
+
+// thunk import
+import { joinServerThunk } from "../../store/servers";
 
 // component imports
 import Card from '@mui/material/Card';
@@ -13,12 +16,15 @@ import "./SearchComponent.css"
 
 const SearchComponent = () => {
    const history = useHistory();
+   const dispatch = useDispatch();
+
    const user = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
    // const [loaded, setLoaded] = useState(false);
    const [results, setResults] = useState(null);
    const [resultsArr, setResultsArr] = useState([])
    const [showResults, setShowResults] = useState(false);
+   const [errors, setErrors] = useState([]);
 
    // TO DO: implement default search page content
    // useEffect(() => {
@@ -69,7 +75,18 @@ const SearchComponent = () => {
    const handleRedirect = (e) => {
       const serverId = e.target.value
       return history.push(`/servers/${serverId}`)
-   }
+   };
+
+   const joinServer = async (e) => {
+      const serverId = e.target.value;
+      const data = await dispatch(joinServerThunk(serverId));
+      if (!data) {
+         setErrors([])
+         return history.push(`/servers/${serverId}`);
+      } else {
+         setErrors(data)
+      }
+   };
 
    let button;
    for (let key in results) {
@@ -81,7 +98,7 @@ const SearchComponent = () => {
          )
       } else {
          button = (
-            <button>
+            <button onClick={joinServer} value={key}>
                Join
             </button>
          )
