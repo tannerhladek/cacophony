@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { useSelector } from 'react-redux';
-import { useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 // component imports
 import Card from '@mui/material/Card';
@@ -12,19 +12,23 @@ import CardActions from '@mui/material/CardActions';
 import "./SearchComponent.css"
 
 const SearchComponent = () => {
-   // const [loaded, setLoaded] = useState(false);
+   const history = useHistory();
+   const user = useSelector(state => state.session.user);
    const servers = useSelector(state => state.servers);
-   const [results, setResults] = useState([])
+   // const [loaded, setLoaded] = useState(false);
+   const [results, setResults] = useState(null);
+   const [resultsArr, setResultsArr] = useState([])
    const [showResults, setShowResults] = useState(false);
 
-   useEffect(() => {
-      (async () => {
-         const res = await fetch('/api/servers/discover')
-         if (res.ok) {
-            const servers = await res.json();
-         }
-      })()
-   })
+   // TO DO: implement default search page content
+   // useEffect(() => {
+   //    (async () => {
+   //       const res = await fetch('/api/servers/discover')
+   //       if (res.ok) {
+   //          const servers = await res.json();
+   //       }
+   //    })()
+   // })
 
    const debounce = (func, wait) => {
       let timeout;
@@ -52,9 +56,9 @@ const SearchComponent = () => {
       });
       if (response.ok) {
          const results = await response.json();
+         setResults(results);
          const resArr = Object.values(results);
-         console.log(resArr[0]);
-         setResults(resArr);
+         setResultsArr(resArr);
          setShowResults(true);
          return
       }
@@ -62,49 +66,66 @@ const SearchComponent = () => {
 
    const debouncedSearch = useCallback(debounce(search, 1000));
 
+   const handleRedirect = (e) => {
+      const serverId = e.target.value
+      return history.push(`/servers/${serverId}`)
+   }
+
    let button;
-   // if
+   for (let key in results) {
+      if (user.id in results[key].members) {
+         button = (
+            <button onClick={handleRedirect} value={key}>
+               Already a member.
+            </button>
+         )
+      } else {
+         button = (
+            <button>
+               Join
+            </button>
+         )
+      }
+   };
 
    return (
-         <div className="search-container">
-            <div className="search-input-container">
-               <input
-                  placeholder="Search for Communities."
-                  id='search-input'
-                  type='text'
-                  onChange={debouncedSearch}
-               />
-            </div>
-            {results.length > 0 && showResults && (
-               <div className="server-search-results-container">
-                  {results.map(server => (
-                     <Card key={server.id} sx={{ maxWidth: 250 }}>
-                        <CardMedia
-                           component="img"
-                           height="100"
-                           image={server.server_image_url}
-                           alt="green iguana"
-                           id='search-card-image'
-                        />
-                        <CardContent className="server-card-content-container">
-                           <div>
-                              {server.name}
-                           </div>
-                           <div>
-                              {`${Object.keys(server.members).length} members`}
-                           </div>
-                           <CardActions>
-                              <button>
-                                 Join
-                              </button>
-                           </CardActions>
-                        </CardContent>
-                     </Card>
-                  ))}
-               </div>
-            )}
+      <div className="search-container">
+         <div className="search-input-container">
+            <input
+               placeholder="Search for Communities."
+               id='search-input'
+               type='text'
+               onChange={debouncedSearch}
+            />
          </div>
-      )
+         {resultsArr.length > 0 && showResults && (
+            <div className="server-search-results-container">
+               {resultsArr.map(server => (
+                  <Card key={server.id} sx={{ maxWidth: 250 }}>
+                     <CardMedia
+                        component="img"
+                        height="100"
+                        image={server.server_image_url}
+                        alt="green iguana"
+                        id='search-card-image'
+                     />
+                     <CardContent className="server-card-content-container">
+                        <div>
+                           {server.name}
+                        </div>
+                        <div>
+                           {`${Object.keys(server.members).length} members`}
+                        </div>
+                        <CardActions>
+                           {button}
+                        </CardActions>
+                     </CardContent>
+                  </Card>
+               ))}
+            </div>
+         )}
+      </div>
+   )
 
 };
 
