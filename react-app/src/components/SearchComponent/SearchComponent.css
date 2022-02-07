@@ -1,6 +1,14 @@
+.search-container {
+   height: 100vh;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+
 .search-input-container {
    display: flex;
    height: 175px;
+   width: 100%;
    background-color: rgb(90, 100, 234);
    /* background: linear-gradient(rgb(90, 100, 234) 25%, rgb(54, 57, 63)); */
    justify-content: center;
@@ -24,6 +32,9 @@
 }
 
 .server-card-content-container {
+   height: 100%;
+   display: flex;
+   flex-direction: column;
    background-color: #40444a;
 }
 
@@ -33,7 +44,9 @@
 
 .server-search-results-container {
    display: flex;
+   justify-content: center;
    flex-wrap: wrap;
    gap: 15px;
    padding: 25px;
+   width: 755px;
 }
