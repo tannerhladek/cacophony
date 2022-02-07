@@ -88,23 +88,6 @@ const SearchComponent = () => {
       }
    };
 
-   let button;
-   for (let key in results) {
-      if (user.id in results[key].members) {
-         button = (
-            <button onClick={handleRedirect} value={key}>
-               Already a member.
-            </button>
-         )
-      } else {
-         button = (
-            <button onClick={joinServer} value={key}>
-               Join
-            </button>
-         )
-      }
-   };
-
    return (
       <div className="search-container">
          <div className="search-input-container">
@@ -117,28 +100,59 @@ const SearchComponent = () => {
          </div>
          {resultsArr.length > 0 && showResults && (
             <div className="server-search-results-container">
-               {resultsArr.map(server => (
-                  <Card key={server.id} sx={{ width: 225 }}>
-                     <CardMedia
-                        component="img"
-                        height="100"
-                        image={server.server_image_url}
-                        alt="server"
-                        id='search-card-image'
-                     />
-                     <CardContent className="server-card-content-container">
-                        <div>
-                           {server.name}
-                        </div>
-                        <div>
-                           {`${Object.keys(server.members).length} members`}
-                        </div>
-                        <CardActions>
-                           {button}
-                        </CardActions>
-                     </CardContent>
-                  </Card>
-               ))}
+               {resultsArr.map(server => {
+                  if (server.id in servers) {
+                     return (
+                        <Card key={server.id} sx={{ width: 225 }}>
+                           <CardMedia
+                              component="img"
+                              height="100"
+                              image={server.server_image_url}
+                              alt="server"
+                              id='search-card-image'
+                           />
+                           <CardContent className="server-card-content-container">
+                              <div>
+                                 {server.name}
+                              </div>
+                              <div>
+                                 {`${Object.keys(server.members).length} members`}
+                              </div>
+                              <CardActions id="search-card-actions">
+                                 <button onClick={handleRedirect} value={server?.id} id='redirect-server-btn'>
+                                    Already a member.
+                                 </button>
+                              </CardActions>
+                           </CardContent>
+                        </Card>
+                     )
+                  } else {
+                     return (
+                        <Card key={server.id} sx={{ width: 225 }}>
+                           <CardMedia
+                              component="img"
+                              height="100"
+                              image={server.server_image_url}
+                              alt="server"
+                              id='search-card-image'
+                           />
+                           <CardContent className="server-card-content-container">
+                              <div>
+                                 {server.name}
+                              </div>
+                              <div>
+                                 {`${Object.keys(server.members).length} members`}
+                              </div>
+                              <CardActions id="search-card-actions">
+                                 <button onClick={joinServer} value={server?.id} id='join-server-btn'>
+                                    Join
+                                 </button>
+                              </CardActions>
+                           </CardContent>
+                        </Card>
+                     )
+                  }
+               })}
             </div>
          )}
       </div>

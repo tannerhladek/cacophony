@@ -32,10 +32,11 @@
 }
 
 .server-card-content-container {
-   height: 100%;
    display: flex;
    flex-direction: column;
    background-color: #40444a;
+   gap: 10px;
+   height: 166px;
 }
 
 #search-card-image {
@@ -44,9 +45,32 @@
 
 .server-search-results-container {
    display: flex;
-   justify-content: center;
    flex-wrap: wrap;
    gap: 15px;
    padding: 25px;
    width: 755px;
+   overflow-y: scroll;
+}
+
+#search-card-actions {
+   padding: 0;
+   width: 100%;
+   align-self: flex-end;
+}
+
+#redirect-server-btn {
+   background-color: rgb(90, 100, 234);
+   border: none;
+   color: white;
+   width: 100%;
+   border-radius: 5px;
+   padding: 5px 8px;
+   cursor: pointer;
+   justify-self: center;
+   transition-duration: .25s;
+}
+
+#redirect-server-btn:hover {
+   background-color: rgba(90, 100, 234, .7);
+   box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
 }
