@@ -3,6 +3,8 @@ from flask_login import login_required, current_user
 from app.models import db, Server, members, Channel, User
 from app.forms import CreateServerForm, EditServerForm, CreateChannelForm, SearchServerForm
 from app.socket import handle_add_channel
+from sqlalchemy import func
+
 
 server_routes = Blueprint('servers', __name__)
 
@@ -24,6 +26,17 @@ def validation_errors_to_error_messages(validation_errors):
 def getAllServers():
    servers = Server.query.all()
    return {server.to_dict()['id']: server.to_dict() for server in servers}
+
+
+# TO DO: implement this route for the default search page
+# # get the top 5 servers (most members)
+# @server_routes.route('/discover')
+# # @login_required
+# def topFiveServers():
+#    servers = Server.query.join(User).order_by(\
+
+#       ).limit(5).all()
+#    return {server.to_dict()['id']: server.to_dict() for server in servers}
 
 
 # search for server route

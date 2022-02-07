@@ -1,4 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
+import { useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
 // component imports
@@ -11,10 +12,19 @@ import CardActions from '@mui/material/CardActions';
 import "./SearchComponent.css"
 
 const SearchComponent = () => {
-
    // const [loaded, setLoaded] = useState(false);
+   const servers = useSelector(state => state.servers);
    const [results, setResults] = useState([])
    const [showResults, setShowResults] = useState(false);
+
+   useEffect(() => {
+      (async () => {
+         const res = await fetch('/api/servers/discover')
+         if (res.ok) {
+            const servers = await res.json();
+         }
+      })()
+   })
 
    const debounce = (func, wait) => {
       let timeout;
@@ -52,46 +62,49 @@ const SearchComponent = () => {
 
    const debouncedSearch = useCallback(debounce(search, 1000));
 
+   let button;
+   // if
+
    return (
-      <div className="search-container">
-         <div className="search-input-container">
-            <input
-               placeholder="Search for Communities."
-               id='search-input'
-               type='text'
-               onChange={debouncedSearch}
-            />
-         </div>
-         {results.length > 0 && showResults && (
-            <div className="server-search-results-container">
-               {results.map(server => (
-                  <Card key={server.id} sx={{ maxWidth: 250 }}>
-                     <CardMedia
-                        component="img"
-                        height="100"
-                        image={server.server_image_url}
-                        alt="green iguana"
-                        id='search-card-image'
-                     />
-                     <CardContent className="server-card-content-container">
-                        <div>
-                           {server.name}
-                        </div>
-                        <div>
-                           {`${Object.keys(server.members).length} members`}
-                        </div>
-                        <CardActions>
-                           <button>
-                              Join
-                           </button>
-                        </CardActions>
-                     </CardContent>
-                  </Card>
-               ))}
+         <div className="search-container">
+            <div className="search-input-container">
+               <input
+                  placeholder="Search for Communities."
+                  id='search-input'
+                  type='text'
+                  onChange={debouncedSearch}
+               />
             </div>
-         )}
-      </div>
-   )
+            {results.length > 0 && showResults && (
+               <div className="server-search-results-container">
+                  {results.map(server => (
+                     <Card key={server.id} sx={{ maxWidth: 250 }}>
+                        <CardMedia
+                           component="img"
+                           height="100"
+                           image={server.server_image_url}
+                           alt="green iguana"
+                           id='search-card-image'
+                        />
+                        <CardContent className="server-card-content-container">
+                           <div>
+                              {server.name}
+                           </div>
+                           <div>
+                              {`${Object.keys(server.members).length} members`}
+                           </div>
+                           <CardActions>
+                              <button>
+                                 Join
+                              </button>
+                           </CardActions>
+                        </CardContent>
+                     </Card>
+                  ))}
+               </div>
+            )}
+         </div>
+      )
 
 };
 
