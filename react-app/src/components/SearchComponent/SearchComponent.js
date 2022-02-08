@@ -13,6 +13,7 @@ import CardActions from '@mui/material/CardActions';
 
 // style import
 import "./SearchComponent.css"
+import { height } from "@mui/system";
 
 const SearchComponent = () => {
    const history = useHistory();
@@ -103,7 +104,7 @@ const SearchComponent = () => {
                {resultsArr.map(server => {
                   if (server.id in servers) {
                      return (
-                        <Card key={server.id} sx={{ width: 225 }}>
+                        <Card key={server.id} sx={{ width: 225, height: 266 }}>
                            <CardMedia
                               component="img"
                               height="100"
@@ -112,14 +113,14 @@ const SearchComponent = () => {
                               id='search-card-image'
                            />
                            <CardContent className="server-card-content-container">
-                              <div>
+                              <div className="search-card-title">
                                  {server.name}
                               </div>
                               <div>
                                  {`${Object.keys(server.members).length} members`}
                               </div>
                               <CardActions id="search-card-actions">
-                                 <button onClick={handleRedirect} value={server?.id} id='redirect-server-btn'>
+                                 <button onClick={handleRedirect} value={server?.id} className='search-server-btn'>
                                     Already a member.
                                  </button>
                               </CardActions>
@@ -128,7 +129,7 @@ const SearchComponent = () => {
                      )
                   } else {
                      return (
-                        <Card key={server.id} sx={{ width: 225 }}>
+                        <Card key={server.id} sx={{ width: 225, height: 266 }}>
                            <CardMedia
                               component="img"
                               height="100"
@@ -137,14 +138,14 @@ const SearchComponent = () => {
                               id='search-card-image'
                            />
                            <CardContent className="server-card-content-container">
-                              <div>
+                              <div className="search-card-title">
                                  {server.name}
                               </div>
                               <div>
                                  {`${Object.keys(server.members).length} members`}
                               </div>
                               <CardActions id="search-card-actions">
-                                 <button onClick={joinServer} value={server?.id} id='join-server-btn'>
+                                 <button onClick={joinServer} value={server?.id} className='search-server-btn' id='join-server-btn'>
                                     Join
                                  </button>
                               </CardActions>

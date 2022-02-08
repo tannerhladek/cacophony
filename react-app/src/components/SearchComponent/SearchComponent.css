@@ -9,8 +9,9 @@
    display: flex;
    height: 175px;
    width: 100%;
-   background-color: rgb(90, 100, 234);
-   /* background: linear-gradient(rgb(90, 100, 234) 25%, rgb(54, 57, 63)); */
+   min-width: 755px;
+   /* background-color: rgb(90, 100, 234); */
+   background: linear-gradient(rgb(90, 100, 234) 25%, rgb(54, 57, 63));
    justify-content: center;
    align-items: center;
 }
@@ -48,6 +49,7 @@
    flex-wrap: wrap;
    gap: 15px;
    padding: 25px;
+   height: calc(100vh - 175px);
    width: 755px;
    overflow-y: scroll;
 }
@@ -55,10 +57,10 @@
 #search-card-actions {
    padding: 0;
    width: 100%;
-   align-self: flex-end;
+   justify-self: flex-end;
 }
 
-#redirect-server-btn {
+.search-server-btn {
    background-color: rgb(90, 100, 234);
    border: none;
    color: white;
@@ -70,7 +72,23 @@
    transition-duration: .25s;
 }
 
-#redirect-server-btn:hover {
+.search-server-btn:hover {
    background-color: rgba(90, 100, 234, .7);
    box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
+
+#join-server-btn {
+   background-color: rgb(95, 193, 124);
+}
+
+#join-server-btn:hover {
+   background-color: rgba(95, 193, 124, .65);
+   box-shadow:0 3px 3px 1px rgba(0,0,0,0.1);
+}
+
+.search-card-title {
+   font-weight: bold;
+   color: white;
+   height: 50%;
+   overflow-y: scroll;
 }

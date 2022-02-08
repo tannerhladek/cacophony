@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 
 // component imports
 import SingleMessageComponent from "./SingleMessageComponent";
@@ -13,11 +13,10 @@ import './MessagesComponent.css';
 
 
 const MessagesComponent = () => {
-
    const dispatch = useDispatch();
    const { channelId } = useParams();
+   const location = useLocation();
    const messages = useSelector(state => state.messages);
-   const [loaded, setLoaded] = useState(false);
 
    const channelMessages = messages[channelId];
    const channelMessagesArr = Object.assign([], channelMessages);
@@ -30,32 +29,26 @@ const MessagesComponent = () => {
    };
 
    useEffect(() => {
-      if (!loaded) {
+      if (!(channelId in messages)) {
          (async () => {
             await dispatch(getChannelMessagesThunk(channelId));
-            setLoaded(true)
          })()
       }
       scrollToBottom();
-   }, [dispatch, channelMessagesArr]);
+
+   }, [dispatch, location, channelMessagesArr.length]);
 
 
-
-
-   if (!loaded) {
-      return null
-   } else {
-      return (
-         <div className="messages-parent-container">
-            <div className='messages-container'>
-               {channelMessagesArrsorted.map(message => (
-                  <SingleMessageComponent message={message} key={message.id} />
-               ))}
-            </div>
-            <div className="bottom-scroll"></div>
+   return (
+      <div className="messages-parent-container">
+         <div className='messages-container'>
+            {channelMessagesArrsorted.map(message => (
+               <SingleMessageComponent message={message} key={message.id} />
+            ))}
          </div>
-      )
-   }
+         <div className="bottom-scroll"></div>
+      </div>
+   )
 };
 
 export default MessagesComponent;
