@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 // component imports
 import CreateServerModal from '../CreateServerModal';
 import ServerLinkTile from './ServerTile';
+import DiscoverServersBtn from './DiscoverServersBtn';
 
 // thunk imports
 import { getServersThunk } from '../../store/servers';
@@ -43,6 +44,9 @@ const ServerListComponent = () => {
             </div>
             <div>
                <CreateServerModal />
+            </div>
+            <div>
+               <DiscoverServersBtn />
             </div>
          </div>
       )

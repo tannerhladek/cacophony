@@ -1,9 +1,10 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from sqlalchemy.sql.schema import ColumnDefault
 from app.models import db, Server, members, Channel, User
-from app.forms import CreateServerForm, EditServerForm, CreateChannelForm
+from app.forms import CreateServerForm, EditServerForm, CreateChannelForm, SearchServerForm
 from app.socket import handle_add_channel
+from sqlalchemy import func
+
 
 server_routes = Blueprint('servers', __name__)
 
@@ -21,9 +22,49 @@ def validation_errors_to_error_messages(validation_errors):
 # get all servers route
 #  TO DO: DELETE THIS ROUTE ---- FOR TESTING ONLY
 @server_routes.route('/')
+# @login_required
 def getAllServers():
    servers = Server.query.all()
    return {server.to_dict()['id']: server.to_dict() for server in servers}
+
+
+# TO DO: implement this route for the default search page
+# # get the top 5 servers (most members)
+# @server_routes.route('/discover')
+# # @login_required
+# def topFiveServers():
+#    servers = Server.query.join(User).order_by(\
+
+#       ).limit(5).all()
+#    return {server.to_dict()['id']: server.to_dict() for server in servers}
+
+
+# search for server route
+@server_routes.route('/discover', methods=['POST'])
+@login_required
+def findServers():
+   form = SearchServerForm()
+   form['csrf_token'].data = request.cookies['csrf_token']
+   if form.validate_on_submit():
+      name = form.data['name']
+      servers = Server.query.filter(
+         Server.name.ilike(f'%{name}%')
+      ).all()
+      return {server.to_dict()['id']: server.to_dict() for server in servers}
+   else:
+      return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# join a server route
+@server_routes.route('/<int:id>/join')
+@login_required
+def joinServer(id):
+   server = Server.query.get(id)
+   if current_user not in server.users:
+      server.users.append(current_user)
+      db.session.commit()
+      return server.to_dict()
+
 
 
 # create new server route

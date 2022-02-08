@@ -76,3 +76,11 @@
 .new-server-btn:hover > * {
    color: white;
 }
+
+#discover-server-icon svg {
+   fill: rgb(59, 165, 93);
+}
+
+#discover-server-icon:hover svg {
+   fill: white;
+}
